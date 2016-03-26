@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<body><!-- APPUID: 28b06d4a-4875-45bb-bde3-fbd0fbbfbf7f -->
+<style>
+body,input,select{font:normal 14pt Helvetica}
+th,td{padding:0.4em 0.2em; text-align:left}
+tr:not(:first-child)>th{padding-top:1em}
+table{margin:0 0 1em 0}
+input[type=text],input[type=number]{text-align:center}
+input[type=number]{max-width:5em}
+table {border-collapse:collapse}
+#log td {border:1px solid}
+#gmap {width:100%; height:250px}
+</style>
+<script>
+var hours = [];
+for(var i=0; i<24; i++) hours.push("<option value="+i+">"+i+":00");
+hours = hours.join("");
+function wr(s){
+  document.write(s);
+}
+</script>
+<form name=fm action="#" methd=get onsubmit="return doSubmit();">
+<table cellspacing=0 border=0>
+<tr><th colspan=2>Use this location for weather info:
+<tr><td>Latitude:<td><input type=text name=lat size=10 min="-90" max=90>
+<tr><td>Longitude:<td><input type=text name=lon size=10 min="-180" max=180>
+<tr><td colspan=2>Use <i>[0,0]</i> for auto-detect or <a href="javascript:void(0);" onclick="showMap(this);">select using Google Maps...</a>
+<tr><th colspan=2>Only fetch data between the hours of:
+<tr><td>Begin fetch:<td><select name=updBegin><script>wr(hours);</script></select>
+<tr><td>End fetch:<td><select name=updEnd><script>wr(hours);</script></select>
+<tr><td>Fetch every:<td><input type=number name=updEvery size=2 value=2> hours
+<tr><td colspan=2><small>(To disable fetching, set begin = end)</small>
+<tr><th colspan=2>Appearance:
+<tr><td>Tomorrow:<td>After <select name=showTmr><script>wr(hours);</script></select> show tomorrow's weather
+<tr><td>Background:<td><input type=checkbox name=theme> White colour
+<tr><td>&deg;C/&deg;F:<td><input type=checkbox name=celsius> Celsius
+<tr id=theme_digit style="display:none"><td>Show digits:<td><select><option value=0 selected>none<option value=2>12<option value=4>6 and 12<option value=6>3, 6, 9 and 12</select>
+<tr><th colspan=2><input type=submit value=Save>
+<tr><td colspan=2><small>Weather data provided by openweathermap.org</small>
+</table>
+
+<hr>
+<p>Server health: <input type=text name=fail size=2>
+<br><small>Health starts at 10 and each error reduces it by 1.</small></p>
+</form>
+
+<script>
+function $(s){return document.getElementById(s)}
+var obj = {}, canDigit;
+location.search.replace(/\b(\w+)=([^&]*)/g, function(s,n,v) {obj[n] = v});
+if(obj.d) {
+  canDigit=$("theme_digit");
+  canDigit.style.display="";
+  canDigit=canDigit.getElementsByTagName("select")[0];
+  if(obj.d*1==2) {
+    var opt=canDigit.appendChild(document.createElement("option"));
+    opt.appendChild(document.createTextNode("classic"));
+    opt.value=8;
+  }
+  canDigit.value=obj.theme-(obj.theme%2);
+  obj.theme=obj.theme%2;
+}
+var fm=document.fm, el;
+for(var i=0;i<fm.elements.length; i++) {
+  el = fm.elements[i];
+  if(el.name) el[el.type=="checkbox"?"checked":"value"] = obj[el.name]*1;
+}
+fm = ["<table cellspacing=0 border=0 id=log><tr><th colspan=2>Server log"];
+for(var i=0; el=obj["lg"+i]; i++) {
+  fm.push(el.replace(/^(.+)-(\d\d)(\d\d)(\d\d)$/, "<tr><td>$2 $3:$4<td>$1").replace(/\+/g," "));
+}
+fm.push("<tr><td colspan=2><input type=checkbox name=clearLog>Delete log");
+document.fm.appendChild(document.createElement("div")).innerHTML=fm.join("")+"<\/table>";
+
+function doSubmit() {
+  obj = {};
+  fm=document.fm;
+  fm.updEvery.value=Math.max(Math.min(fm.updEvery.value,Math.abs(fm.updBegin.value*1-fm.updEnd.value*1)),1)||1;
+  fm.fail.value=Math.max(Math.min(fm.fail.value,10),1)||1;
+  for(var i=0;i<fm.elements.length; i++) {
+    el = fm.elements[i];
+    if(el.name) obj[el.name]=(el.type!="checkbox")?el.value*1:el.checked?1:0;
+  }
+  if(canDigit)obj.theme+=canDigit.value*1;
+  var url=/\breturn_to=(https%3A\/\/[a-z]+pebble.[c-t]+\/[a-z\/]+%3F)/.exec(location)||[1,"pebblejs://close#"];
+  location=decodeURIComponent(url[1])+encodeURIComponent(JSON.stringify(obj));
+  return false;
+}
+
+function showMap(a) {
+  var s=document.createElement("script");
+  s.type="text/javascript";
+  s.src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCHmDLIKQL8lMFOM6EERM-WNMMMCM6kcmc&signed_in=true&callback=initMap";
+  document.body.appendChild(s);
+
+  var d=a.parentNode.insertBefore(document.createElement("div"), a);
+  d.id="gmap";
+  a.parentNode.removeChild(a);
+}
+var gMap;
+function initMap() {
+  if(gMap) return;
+  gMap=new google.maps.Map($("gmap"), {zoom:10, center:new google.maps.LatLng(obj.lat||37.333, obj.lon||-122)});
+  google.maps.event.addListener(gMap, "center_changed", function(lat,lng) {
+    var c=gMap.getCenter();
+    if(c.lat&&c.lng){
+      lat=c.lat();while(lat>90)lat-=180;while(lat<-90)lat+=180;
+      lng=c.lng();while(lng>180)lng-=360;while(lng<-180)lng+=360;
+      document.fm.lat.value=Math.round(lat*1000)/1000;
+      document.fm.lon.value=Math.round(lng*1000)/1000;
+    }
+  });
+}
+</script>
+</body>
+</html>
