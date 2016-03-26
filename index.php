@@ -5,7 +5,7 @@ include('funcs.php');
 $fatfree = 'app/fatfree/lib/base.php';
 if(!is_file($fatfree))
 {
-	echo 'Missing fatfree directory. Please copy the fatfree library to the app/libs folder. ( $ cd app/libs/ && git clone https://github.com/bcosca/fatfree.git )';
+	echo 'Missing fatfree directory.<br> Please copy the fatfree library to the app/libs folder.<br><br> $ cd app/libs/ && git clone https://github.com/bcosca/fatfree.git ';
 	die(1);
 }
 
