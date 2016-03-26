@@ -1,0 +1,35 @@
+
+<br>
+{~ foreach( @actions.results as @key => @item): ~}
+
+	
+			
+			
+			<div
+				{~ if(@item.published != 1): ~}
+					class="item_inactive"
+				{~ endif ~}
+				>
+        				
+        				<h2>{{ \App\Plugins\html::link('actions/view/'.@item.slug,@item.name) }}</h2>
+        				<h2>{{ fdate(@item.when) }} {{ @item.until > 0 ? "- ".fdate(@item.until) : '' }}</h2>
+        				<div class="article-html">
+        					{{@item.details | raw}}
+        				</div>
+        				{{ \App\Plugins\html::link('actions/view/'.@item.slug,"> Read more")}}&nbsp;&nbsp;&nbsp;
+        				<a href="/expando/add/index.htm?u={{'actions/view/'.@item.id}}&t={{@item.name | raw}}" target='blank'> > Share</a>
+        					{~ if( empty(@hideshare) ): ~}
+        							<iframe src="/expando/add/index.htm?u={{'actions/view/'.@item.id}}&t={{@item.name | raw}}" frameborder=0 frametransparency=1 scrolling=no height=30 width=100%></iframe>
+        							
+        					{~ else: ~}
+        						
+        					{~ endif ~}
+        			
+        	</div>
+        	
+        	
+	<hr>
+{~ endforeach ~}
+
+        		
+        		

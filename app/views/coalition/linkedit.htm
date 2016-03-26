@@ -1,0 +1,18 @@
+<div class="containing">
+{{Template::render("elements/section-title.htm")}}
+
+{{ App\Plugins\html::startForm(array("method" => "POST","class" =>"form-horizontal")) }}
+	
+	{{ App\Plugins\html::combo("original_language",@available_langs,array("label" => "Original language","class" => "span12"))}}<br>
+	{{ App\Plugins\html::combo("type",@types,array("label" => "Type","class" => "span12"))}}<br>
+	
+	{{ App\Plugins\html::text("url",array("placeholder" => "URL","label" => "URL","class" => "span12","minlength" => 2)) }}<br/>
+	
+	
+	{{ App\Plugins\html::submit("Save modifications",array("class" => "btn btn-primary")) }}
+	
+{{ App\Plugins\html::endForm() }}
+
+
+
+</div>

@@ -1,0 +1,64 @@
+
+      <div class="row">
+
+        <div class="col-md-12 blog-main">
+        	<div class="containing">
+        	
+        		{{Template::render("elements/section-title.htm")}}
+        		
+        		<table class="table table-striped table-condensed table-hover" totalpages="{{@members.total_pages}}">
+        			<thead>
+        			<tr class='table-title'>
+        				<th>Avatar</th>
+        				<th>Name</th>
+        				<th>Email</th>
+        				<th>Created</th>
+        				
+        				<th></th>
+        				
+        			</tr>
+        			</thead>
+        		<tbody>
+	
+        		<repeat group="{{ @members.results }}" value="{{ @member }}">
+        		<tr>
+        		
+        			<td>
+        			<check if="{{ !empty(@member.avatar)}}">
+        				<true>{{ App\Plugins\html::img(@member.avatar,array("class" => 'img-thumbnail img-thumbnail-table'))}}</true>
+        			</check>
+        			</td>
+        			<td>{{@member.email}}</td>
+        			<td>{{@member.name}}</td>
+        			<td>{{ date("Y-m-d",strtotime(@member.created)) }}</td>
+        			
+        				
+        			
+        			<td>
+        				{{ App\Plugins\html::link("/@controller/edit/".@member.id,"edit",array('title' => "editar",'class' => 'colorbox')) }} | 
+        				{~ if (@member.published == 0): ~}
+        					{{ App\Plugins\html::link("/@controller/publish/".@member.id,"publish",array('title' => "publish",'class' => 'colorbox')) }}
+        				{~ else: ~}
+        					{{ App\Plugins\html::link("/@controller/hide/".@member.id,"hide",array('title' => "hide",'class' => 'colorbox')) }}
+        				{~ endif ~}
+        			</td>
+        			
+			
+        		</tr>
+        		</repeat>
+	
+        	</tbody>
+        </table>
+        
+        {{ App\Plugins\html::pagination2(@members.total_pages,@members.page,'/'.@controller.'/'.@action.'/',10) }}
+        
+        </div>
+
+           </div>
+        
+
+        
+
+      </div><!-- /.row -->
+
+    

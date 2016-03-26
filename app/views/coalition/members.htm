@@ -1,0 +1,42 @@
+
+{~ foreach( @members.results as @item): ~}
+
+			
+			{~ if(@item.activated == 0): ~}
+				<div class="article members row item_inactive">
+			{~ elseif(@item.published == 0): ~}
+				<div class="article members row item_hidden">
+			{~ else: ~}
+				<div class="article members row">
+			{~ endif ~}
+			
+        				<div class="col-md-2 article-member">
+        					{{ Template::render('elements/member.htm','text/html',array('member' => @item))}}
+        				</div>
+        				
+        					<div class="col-md-10">
+        				
+        					
+        					<div class="article-body">
+        					
+        						{{ @item.summary | raw }}
+        					</div>
+        					<!--<p>
+        						{{ \App\Plugins\html::link('coalition/member/'.@item.slug,'> Read more') }}
+        					</p>-->
+        					<p>
+        						{~ if(@item.activated == 0): ~}
+        							This member account is not <u>active</u>, please click 
+        							{{ App\Plugins\html::adminlink("/@controller/activate/".@item.id,"here",array('title' => "here")) }} to activate (and send the confirmation e-mail)!
+        						{~ elseif(@item.published == 0): ~}
+        							This member is <u>hidden</u> from the the public, please click 
+        							{{ App\Plugins\html::adminlink("/@controller/publish/".@item.id,"here",array('title' => "here")) }} to make it visible!
+        						{~ endif ~}
+        					</p>
+        				</div>
+        				
+					</div>
+        		{~ endforeach ~}
+        		
+        		
+        		

@@ -1,0 +1,46 @@
+
+<div class="containing">
+
+        			{{Template::render("elements/section-title.htm")}}
+
+AQUI UM TEXTO A EXPLICAR TUDO!!!<br><br>
+{{ App\Plugins\html::startForm(array("method" => "POST","class" =>"form-horizontal","enctype" => "multipart/form-data")) }}
+	
+	
+	<br/>
+	
+	
+	{{ App\Plugins\html::text("name",array("placeholder" => "Name","label" => "Name","class" => "span12","minlength" => 2)) }}<br/>
+	{{ App\Plugins\html::textArea("summary",array("placeholder" => "Summary","label" => "Summary","class" => "span12","minlength" => 2)) }}<br/>
+	
+	{~ if(!empty(@POST.avatar)): ~}
+		<img src='/{{@POST.avatar}}'>
+		{{ App\Plugins\html::hidden("avatar") }}<br/>
+	{~ endif ~}
+	
+	{{ App\Plugins\html::file("avatar",array("label" => "Avatar","class" => "imageupload")) }}<br/>
+	
+	
+	{{ App\Plugins\html::text("website",array("placeholder" => "Website","label" => "Website","class" => "span12","minlength" => 2)) }}<br/>
+	
+	{{ App\Plugins\html::text("start_date",array("placeholder" => "","label" => "Starting date","class" => "span12 datepicker-ui","minlength" => 2)) }}<br/>
+	
+	{{ App\Plugins\html::text("final_date",array("placeholder" => "","label" => "End date","class" => "span12 datepicker-ui","minlength" => 2)) }}<br/>
+
+	{{ App\Plugins\html::text("location",array("placeholder" => "Lisbon, Portugal","label" => "Location","class" => "span12","minlength" => 2)) }}<br/>
+	
+	{{ App\Plugins\html::text("twitter_hashtag",array("placeholder" => "#hashtag","label" => "Twitter hashtag","class" => "span12","minlength" => 2)) }}<br/>
+	
+	
+	{{ App\Plugins\html::text("gps_coords",array("placeholder" => "","label" => "Please click somewhere on the map!","class" => "span12","minlength" => 2,"readonly" => true)) }}<br/>
+	<div id="join_leafletmap">
+		
+	</div>
+	
+	
+	
+	{{ App\Plugins\html::submit("Submit...",array("class" => "btn btn-primary")) }}
+	
+{{ App\Plugins\html::endForm() }}
+
+</div>

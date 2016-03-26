@@ -1,0 +1,10 @@
+ {~ if(!empty(@SESSION.user)): ~}
+Publishing as: {~ if(!empty(@SESSION.user.avatar)): ~}
+					
+						{{ \App\Plugins\html::link('coalition/member/'.@SESSION.user.slug,'<img src="/'.@SESSION.user.avatar.'" alt="'.@SESSION.user.name.'" class="icon">') }}
+					
+					
+						{~ endif ~}
+					{{ \App\Plugins\html::link('coalition/member/'.@SESSION.user.slug,@SESSION.user.name) }}
+					<br/>
+{~ endif ~}

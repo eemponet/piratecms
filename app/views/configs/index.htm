@@ -1,0 +1,20 @@
+
+      <div class="row">
+
+        <div class="col-md-12 blog-main">
+        	<div id='members' class="containing">
+        		{{Template::render("elements/section-title.htm")}}
+        		
+        		<div id='members_content'>
+        		Edit pages:
+        		
+        		{~ foreach(@pages as @page): ~}
+        			{{@page.value}}
+        		{~ endforeach ~}
+        		</div>
+        		
+          	 </div>
+           </div>
+      </div><!-- /.row -->
+
+    

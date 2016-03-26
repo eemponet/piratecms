@@ -1,0 +1,68 @@
+
+
+ <div class="row">
+
+         <div class="col-md-12 blog-main">
+         	<div id="resources" class="containing">
+         		
+         		{{ \Template::render('elements/editable.htm','text/html',array('page' => @page)) }}
+         		
+         	</div>
+         </div>
+</div>
+
+<div class="containing">
+
+{~ if(empty(@SESSION.user)): ~}
+        			<p>If you want to join the coalition, please fill up the form {{ \App\Plugins\html::link('/coalition/join','here')}}</p> 
+        			<!--<p>If you are already registered and want to update your information {{ \App\Plugins\html::link('/coalition/login','login here')}}</p>-->
+        	
+        		
+{{ App\Plugins\html::startForm(array("method" => "POST","class" =>"form-horizontal","enctype" => "multipart/form-data")) }}
+	
+	
+	<translate msg="cenas"/>
+	<br/>
+	
+	
+	{{ App\Plugins\html::text("name",array("placeholder" => "Name","label" => "Name","class" => "span12","minlength" => 2)) }}<br/>
+	{{ App\Plugins\html::textArea("summary",array("placeholder" => "Summary","label" => "Summary","class" => "span12","minlength" => 2)) }}<br/>
+	
+	{~ if(!empty(@POST.avatar)): ~}
+		<img src='/{{@POST.avatar}}'>
+		{{ App\Plugins\html::hidden("avatar") }}<br/>
+	{~ endif ~}
+	
+	{{ App\Plugins\html::file("avatar",array("label" => "Avatar","class" => "imageupload")) }}<br/>
+	
+	
+	{{ App\Plugins\html::text("website",array("placeholder" => "Website","label" => "Website","class" => "span12","minlength" => 2)) }}<br/>
+	
+	<!--{{ App\Plugins\html::combo("original_language",@available_langs,array("label" => "Original language","class" => "span12"))}}<br>-->
+	
+	{{ App\Plugins\html::text("founddate",array("placeholder" => "","label" => "Date of foundation","class" => "span12 datepicker-ui","minlength" => 2)) }}<br/>
+
+	
+	{{ App\Plugins\html::text("email",array("placeholder" => "Email","label" => "Email","class" => "span12","minlength" => 2)) }}<br/>
+	{{ App\Plugins\html::password("password",array("placeholder" => "Password","label" => "Password","class" => "span12","minlength" => 2)) }}<br/>
+	{{ App\Plugins\html::password("password_confirmation",array("placeholder" => "Password confirmation","label" => "Password confirmation","class" => "span12","minlength" => 2)) }}<br/>
+	
+	{{ App\Plugins\html::text("location",array("placeholder" => "Lisbon, Portugal","label" => "Location","class" => "span12","minlength" => 2)) }}<br/>
+	<label>RSS/Atom <a href="https://en.wikipedia.org/wiki/RSS" target="_blank"><img src="/images/rss.png" height="15"/></a>: </label>
+	<input type="text" minlength="2" class="span12 form-control" placeholder="RSS" name="rss_url">
+	<br>
+	{{ App\Plugins\html::text("twitter_account",array("placeholder" => "&commat;Account","label" => "Twitter account","class" => "span12","minlength" => 2)) }}<br/>
+	
+	
+	{{ App\Plugins\html::text("gps_coords",array("placeholder" => "","label" => "Please click somewhere on the map!","class" => "span12","minlength" => 2,"readonly" => true)) }}<br/>
+	<div id="join_leafletmap">
+		
+	</div>
+	
+	
+	
+	{{ App\Plugins\html::submit("Join...",array("class" => "btn btn-primary")) }}
+	
+{{ App\Plugins\html::endForm() }}
+{~ endif ~}
+</div>

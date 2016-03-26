@@ -1,0 +1,19 @@
+{~ if (isset(@msg)): ~}
+	
+		{~ foreach (@msg as @msg_p): ~}
+			<div class="alert alert-success" role="alert">
+				{{@msg_p | raw }}
+			</div>
+		{~ endforeach ~}
+	
+{~ endif ~}
+
+{~ if (isset(@error_msg)): ~}
+	
+		{~ foreach (@error_msg as @msg): ~}
+			<div class="alert alert-danger" role="alert">
+				{{@msg| raw}}
+			</div>
+		{~ endforeach ~}
+	
+{~ endif ~}

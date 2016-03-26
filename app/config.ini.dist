@@ -1,0 +1,13 @@
+[globals]
+db_dns=mysql:host=localhost;port=3306;dbname=
+db_name=db
+db_user=db_usr
+db_pass=dasd12321
+uri=/
+url=http://localhost
+salt=h7sye21
+DEBUG=3
+#LANG=pt
+#LANGS="en","fr","es"
+UPLOAD_DIR=files/
+LAYOUT=default

@@ -1,0 +1,33 @@
+
+      <div class="row">
+
+        <div class="col-md-12 blog-main">
+        	<div id="articles" class="containing">
+        	 
+        	<div id="articles_content">
+        	
+        		{{Template::render("elements/section-title.htm",'text/html',array('section_image' => 'menu_articles.png','section_title' => 'Articles'))}}
+        		<div class="button_publish">
+        		{{ App\Plugins\html::link("articles/publish/new",'<button class="btn btn-primary btn-lg" type="button">Submit a new article</button>')}}
+        		</div>
+        		<div style="clear:both;"></div>
+        			{{ Template::render('articles/articles.htm') }}
+        		
+        	</div>
+        	
+        	{~ if(@articles.total_pages > 1): ~}
+        		<div class="more loadmore">
+        			<input type="hidden" name="page" value="1">
+        			<input type="hidden" name="div" value="#articles">
+        			<input type="hidden" name="total_pages" value="{{@articles.total_pages}}">
+        			<input type="hidden" name="url" value="articles/articles">
+        			<a href="#">Load more...</a>
+        		</div>
+        		{~ endif ~}
+        		
+        	</div>
+        </div>
+      </div>
+        	
+
+    

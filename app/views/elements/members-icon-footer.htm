@@ -1,0 +1,8 @@
+<div class="members-icon-footer">
+    			 	{~ foreach( @members_icon_bar as @key => @member): ~}
+    			 		
+    			 		<a href="/{{@lang_set}}/coalition/member/{{@member.slug}}"><img src="/{{@member.avatar}}" title="{{@member.name}}" alt="{{@member.name}}"></a>
+    			 		
+    			 		
+    			 	{~ endforeach ~}
+    			 	</div>

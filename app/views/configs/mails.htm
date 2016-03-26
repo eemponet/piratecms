@@ -1,0 +1,9 @@
+{{ App\Plugins\html::startForm(array("method" => "POST")) }}
+
+	{{ App\Plugins\html::hidden("id")}}
+	{{ App\Plugins\html::text("tipo","mail_incidencia")}}
+	{{ App\Plugins\html::textArea("value") }}
+    
+	{{ App\Plugins\html::submit("Gravar altera&ccedil;&otilde;es") }}
+{{ App\Plugins\html::endForm() }}
+

@@ -1,0 +1,12 @@
+
+<div class="containing">
+
+{{ App\Plugins\html::startForm(array("method" => "POST","class" =>"form-horizontal","enctype" => "multipart/form-data")) }}
+	
+	{{ App\Plugins\html::text("email",array("placeholder" => "Email","label" => "Email","class" => "span12","minlength" => 2)) }}
+	
+	{{ App\Plugins\html::submit("Recover account",array("class" => "btn btn-primary")) }}
+	
+{{ App\Plugins\html::endForm() }}
+
+</div>

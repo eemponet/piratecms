@@ -1,0 +1,59 @@
+{~ foreach( @aggregations.results as @item): ~}
+<div class="article row newpage">
+
+
+				{~ if(!isset(@hidememberinfo)): ~}
+        				<div class="col-md-2 article-member">
+        					{{ Template::render('elements/member.htm','text/html',array('member' => @item.Members))}}
+        				</div>
+        				{~ if(!empty(@item.featured_image) && false): ~}
+        						<div class="col-md-5">
+        				{~ else: ~}
+        						<div class="col-md-9">
+        				{~ endif ~}
+        		{~ else: ~}
+        			{~ if(!empty(@item.featured_image)  && false): ~}
+        						<div class="col-md-7">
+        			{~ else: ~}
+        						<div class="col-md-12">
+        			{~ endif ~}
+        		{~ endif ~}
+        				<a href="{{@item.link}}">
+        					<h3>{{@item.title | raw}}</h3>
+        					</a>
+        					<div class="article-body">
+        						{~ if(!empty(@item.featured_image)): ~}
+        					<!--<div class="col-md-4">-->
+        						<img class="img-responsive" src="{{@item.featured_image}}">
+        					<!--</div>-->
+        				{~ endif ~}
+        					{{ @item.description | raw }} 
+        					
+        				
+        					</div>
+        					
+        					<div class="article-date">
+        						{{fdate(@item.date) }}
+        					</div>
+        					<a href="{{@item.link}}"> > Read more </a>&nbsp;&nbsp;&nbsp;&nbsp;
+        					<a href="/expando/add/index.htm?u={{@item.link}}&t={{@item.enctitle | raw}}" target='blank'> > Share</a>
+        					{~ if( empty(@hideshare) ): ~}
+        							<iframe src="/expando/add/index.htm?u={{@item.link}}&{{urlencode(@item.title)}}" frameborder=0 frametransparency=1 scrolling=no height=30 width=100%></iframe>
+        							<hr>
+        					{~ else: ~}
+        						<br><br>
+        					{~ endif ~}
+        				</div>
+        				
+        				
+        						<div class="article-options">
+        							{~ if(!empty(@SESSION.user) && (@SESSION.user.id == @item.member_id || @SESSION.user.is_admin == 1) ): ~}
+        							{{ \App\Plugins\html::link('/live/delete/'.@item.id,'hide') }}
+        						{~ endif ~}
+        						</div>
+        						
+					</div>
+					
+        		{~ endforeach ~}
+        		
+        		

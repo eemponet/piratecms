@@ -1,0 +1,10 @@
+{~ if(!empty(@member.avatar)): ~}
+
+<p>{{ \App\Plugins\html::link('coalition/member/'.@member.slug,'<img src="/'.@member.avatar.'" title="'.@member.name.'" alt="'.@member.name.'">') }}</p>
+<!--<p>{{ \App\Plugins\html::link('coalition/member/'.@member.slug,@member.name) }}</p>-->
+
+
+{~ else: ~}
+
+<p>{{ \App\Plugins\html::link('coalition/member/'.@member.slug,@member.name) }}</p>
+{~ endif ~}

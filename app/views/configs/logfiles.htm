@@ -1,0 +1,23 @@
+
+<table class="table table-striped itens">
+	<thead>
+		<tr class='table-title'>
+			
+			<th>Nome ficheiro</th>
+		</tr>
+	</thead>
+	<tbody>
+	<repeat group="{{ @files }}" value="{{ @filename }}">
+	
+		<tr>
+			<td>{{@filename}}</td>
+			
+			<td>
+				 {{ App\Plugins\html::link("/@controller/verlog/".@filename,"<span class='glyphicon glyphicon-eye-open'></span>",array('title' => "editar")) }}
+			</td>
+			
+		</tr>
+	</repeat>
+	
+	</tbody>
+</table>

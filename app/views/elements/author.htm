@@ -1,0 +1,27 @@
+
+	{~ if(!empty(@item.author_img)): ~}
+		{~ if(!empty(@icon)): ~}
+			<img src="/{{@item.author_img}}" class="icon">
+		{~ else: ~}
+			<img src="/{{@item.author_img}}" class="img-responsive">
+		{~ endif ~}
+	{~ else: ~}	
+		{~ if(!empty(@item.Members.avatar)): ~}
+
+			{~ if(!empty(@icon)): ~}
+				<p>{{ \App\Plugins\html::link('coalition/member/'.@item.Members.slug,'<img src="/'.@item.Members.avatar.'" alt="'.@item.Members.name.'" class="icon">') }}</p>
+			{~ else: ~}
+				<p>{{ \App\Plugins\html::link('coalition/member/'.@item.Members.slug,'<img src="/'.@item.Members.avatar.'" alt="'.@item.Members.name.'" class="img-responsive">') }}</p>
+			{~ endif ~}
+			
+			<p>{{ \App\Plugins\html::link('coalition/member/'.@item.Members.slug,@item.Members.name) }}</p>
+		{~ else: ~}
+			<p>{{ \App\Plugins\html::link('coalition/member/'.@item.Members.slug,@item.Members.name) }}</p>
+		{~ endif ~}
+	{~ endif ~}
+	
+	{~ if(!empty(@show_name) ): ~}
+		<h2>
+			<a href='mailto:{{@item.author_email}}'>{{@item.author_name}}</a>
+		</h2>
+	{~ endif ~}

@@ -1,0 +1,47 @@
+
+<div class="row">
+
+        <div class="col-md-7 blog-main">
+        	<div class="containing">
+        	
+        		
+        		{{Template::render("elements/section-title.htm",'text/html',array('section_image' => 'menu_actions.png','section_title' => 'News/RSS'))}}
+        	 	
+        		{~ foreach( @aggregations.results as @item): ~}
+        			<div class="article">
+        			<h3><a href="{{@item.link}}" title="{{@item.title | raw}}">{{@item.title | raw}}</a></h3>
+        				<div class="article-body">{{ @item.description | raw }} </div>
+					
+        				<div class="article-options">
+        					<div class="article-member-avatar">
+        						{~ if(!empty(@item.Members.avatar)): ~}<img src="/{{@item.Members.avatar}}" alt="{{@item.Members.name}}">{~ endif ~}
+        					</div>
+        					<div class="article-member-name">
+        						{{ \App\Plugins\html::link(@item.Members.rss_url,@item.Members.name)}} (RSS)
+        					</div>
+        					<div class="article-date">
+        						{{date('l, F d, Y', strtotime(@item.date)) }}
+        					</div>
+						</div>
+					</div>
+        		{~ endforeach ~}
+        		
+        	</div>
+        </div>
+        <div class="col-md-5 blog-main">
+        	<div id="social_networks" class="containing">
+        		<div class='social_networks_content'>
+        			{{Template::render("elements/section-title.htm",'text/html',array('section_image' => 'menu_actions.png','section_title' => 'Social networks'))}}
+        		
+        			{{ Template::render('actions/social.htm') }}
+        		</div>
+        		{~ if(@aggregations_social.total_pages > 1): ~}
+        		<div id="more">
+        			<input type="hidden" name="page" value="1">
+        			<input type="hidden" name="total_pages" value="{{@aggregations_social.total_pages}}">
+        			<a>Load more...</a>
+        		</div>
+        		{~ endif ~}
+        	</div>
+        </div>
+</div>

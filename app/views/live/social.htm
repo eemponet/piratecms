@@ -1,0 +1,49 @@
+{~ foreach( @aggregations_social.results as @item): ~}
+
+			<div class="status article row newpage">
+			
+			{~ if(!isset(@hidememberinfo)): ~}
+					<div class="col-md-2 article-member">
+        					
+        					{{ Template::render('elements/member.htm','text/html',array('member' => @item.Members))}}
+        					
+        				</div>
+        				
+        					<div class="col-md-10">
+        	{~ else: ~}
+        		<div class="col-md-12">
+			{~ endif ~}
+        				
+        				
+        					
+        					<div class="article-body">
+        						<img class="article-source" src="/images/{{ @item.type }}.png">
+        					
+        						<a href="{{@item.link}}"  target="_blank">{{ @item.description | raw }}</a> </div>
+        						<div class="article-date">
+        						
+        							{{fdate(@item.date) }}
+        						</div>
+        					
+        					{{ \App\Plugins\html::link(@item.link,"> Read more",array('target' => "_blank"))}}&nbsp;&nbsp;&nbsp;
+        					<a href="/expando/add/index.htm?u={{@item.link}}&t={{urlencode(@item.title)}}" target='blank'> > Share</a>
+        					{~ if( empty(@hideshare) ): ~}
+        							<iframe src="/expando/add/index.htm?u={{@item.link}}&{{urlencode(@item.title)}}" frameborder=0 frametransparency=1 scrolling=no height=30 width=100%></iframe>
+        					{~ else: ~}
+        						<br><br>
+        					{~ endif ~}
+        					
+        						{~ if(!empty(@SESSION.user) && (@SESSION.user.id == @item.member_id || @SESSION.user.is_admin == 1) ): ~}
+        						<div class="article-options">
+        							{{ \App\Plugins\html::link('/live/delete/'.@item.id,'hide') }}
+        							
+        						</div>
+        						{~ endif ~}
+        					
+        				</div>
+        				
+					</div>
+					
+        		{~ endforeach ~}
+        		
+        		

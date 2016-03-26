@@ -1,0 +1,27 @@
+<div class="containing">
+
+{{ App\Plugins\html::startForm(array("method" => "POST","class" =>"form-horizontal","enctype" => "multipart/form-data")) }}
+	
+	{{ App\Plugins\html::combo("original_language",@available_langs,array("label" => "New translation language (from ".@all_langs[@event.original_language].")","class" => "span12"))}}<br>
+	<br>
+	
+	{{ App\Plugins\html::text("name",array("placeholder" => "Name","label" => "Name","class" => "span6","minlength" => 2)) }}
+	<br>
+	{{@event.name}}
+	<br>
+	{{ App\Plugins\html::hidden("original_article",@event.id) }}
+	
+	{{ App\Plugins\html::textArea("details",array("placeholder" => "Details","label" => "Details","class" => "span12 tinymce","minlength" => 2)) }}
+	<br/>
+	{{@event.details | raw }}
+	<br/>
+	
+	
+	{{ App\Plugins\html::submit("Submit translation",array("class" => "btn btn-primary")) }}
+	
+{{ App\Plugins\html::endForm() }}
+
+</false>
+</check>
+
+</div>

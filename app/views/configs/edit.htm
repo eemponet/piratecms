@@ -1,0 +1,16 @@
+{{ App\Plugins\html::startForm(array("method" => "POST","class" => "rapidix_form")) }}
+
+	{{ App\Plugins\html::hidden("id")}}
+	{{ App\Plugins\html::hidden("tipo")}}
+	<p>{{ App\Plugins\html::text("value_3",array("label" => 'Nome From')) }}</p>
+	<p>{{ App\Plugins\html::text("value_2",array("label" => 'E-mail de origem')) }}</p>
+	<p>{{ App\Plugins\html::text("value_1",array("label" => 'Assunto')) }}</p>
+	<p>{{ App\Plugins\html::textArea("value",array("label" => 'Corpo da mensagem')) }}</p>
+	<br><br>
+	%moradas_entrega_nome%<br>
+	%pedido_id%<br>
+	%nome_colaborador%<br>
+	
+	{{ App\Plugins\html::submit("Gravar altera&ccedil;&otilde;es") }}
+{{ App\Plugins\html::endForm() }}
+

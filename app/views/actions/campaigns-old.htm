@@ -1,0 +1,80 @@
+
+{~ foreach( @campaigns.results as @item): ~}
+<div class="article row newpage">
+
+				
+				
+        				
+        				<div class="col-md-2 article-member">
+        					{{ Template::render('elements/author.htm','text/html',array('item' => @item,'hideemail' => true))}}
+        				</div>
+        				
+        				
+        					{~ if(!empty(@item.img)): ~}
+        						<div class="col-md-6">
+        					{~ else: ~}
+        						<div class="col-md-10">
+        					{~ endif ~}
+        				
+        					
+        					<h3>{{ \App\Plugins\html::link('campaigns/view/'.@item.id,@item.name) }}</h3>
+        					<div class="article-date">
+        						<h3>{{ \App\Plugins\html::link('campaigns/view/'.@item.id,fdate(@item.when)) }}</h3>
+        					</div>
+        					<div class="article-body">{{ @item.summary | raw }} </div>
+        					
+        					<a href="{{@item.share_url}}" target='blank'> > Share</a>
+        							<iframe src="{{@item.share_url}}" frameborder=0 frametransparency=1 scrolling=no height=30 width=100%></iframe>
+        				</div>
+        				
+        				{~ if(!empty(@item.img)): ~}
+        					<div class="col-md-4">
+        						{{ \App\Plugins\html::link('campaigns/view/'.@item.id,'<img class="img-responsive" src="/'.@item.img.'">') }}
+        						
+        					</div>
+        				{~ endif ~}
+					</div>
+					
+        		{~ endforeach ~}
+
+{~ if(false): ~}
+{~ foreach( @campaigns.results as @key => @item): ~}
+
+	
+			<div class="article members row">
+			<div class="col-md-12">
+				{~ if(@item.published != 1): ~}
+					<article class="item_inactive">
+				{~ else: ~}
+					<article>
+				{~ endif ~}
+					{~ if(!empty(@item.img)): ~}
+					<div class="col-md-2">
+        				<img src="/{{ @item.img}}" class="img-responsive">
+        			</div>
+        			<div class="col-md-10">
+        			{~ else: ~}
+        				<div class="col-md-12">
+        			{~ endif ~}
+        			
+        				<div class="article-title">
+        					{{ \App\Plugins\html::link('campaigns/view/'.@item.id,@item.name) }}
+        				</div>
+        				<div class="article-date">
+        					{{ fdate(@item.when) }}
+        				</div>
+        				<div class="article-body">
+        					{{ @item.summary | raw}}
+        				</div>
+        					
+        				
+        				</div>
+        				</article>
+        				
+	
+		</div></div>
+	
+{~ endforeach ~}
+{~ endif ~}
+        		
+        		

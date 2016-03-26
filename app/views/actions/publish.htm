@@ -1,0 +1,62 @@
+
+
+<div class="containing">
+{~ if(empty(@SESSION.user.id)): ~}
+		{{Template::render("elements/guest_nopost.htm",'text/html') }}
+{~ else: ~}
+
+{{ App\Plugins\html::startForm(array("method" => "POST","class" =>"form-horizontal","enctype" => "multipart/form-data")) }}
+	
+	
+	{{ App\Plugins\html::hidden("member_id",@SESSION.user.id) }}
+	
+		{{ App\Plugins\html::text("author_name",array("placeholder" => "Author name","label" => "Author name","class" => "span12 checkvisibility","minlength" => 2)) }}<br/>
+		{{ App\Plugins\html::text("author_email",array("placeholder" => "Author email","label" => "Author email","class" => "span12","minlength" => 2)) }}<br/>
+		<label>Author image: </label><br/>
+		{~ if(!empty(@POST.author_img)): ~}
+			{{ App\Plugins\html::hidden("author_img") }}
+			<span class="btn btn-default btn-file"> 
+			<img src='/{{@POST.author_img}}' class='thumbnail' style='float:left;'>
+			Replace author image <input type="file" name="author_img" value="{{@POST.author_img}}"></span>
+			
+		{~ else: ~}
+			<span class="btn btn-default btn-file"> Upload author image <input type="file" name="author_img"></span>
+		{~ endif ~}
+		
+    <br/><br/>
+
+		
+		
+	{{ App\Plugins\html::text("name",array("placeholder" => "Action name","label" => "Action name","class" => "span12","minlength" => 2)) }}<br/>
+	
+	{{ App\Plugins\html::text("when",array("placeholder" => "","label" => "When","class" => "datepicker-ui","minlength" => 2)) }}<br/>
+	{{ App\Plugins\html::text("until",array("placeholder" => "","label" => "Until","class" => "datepicker-ui","minlength" => 2)) }}
+	
+	<!--Hour: {{ App\Plugins\html::comboHour("when_hour",array()) }}
+	 Minutes: {{ App\Plugins\html::comboMinute("when_min",array()) }}<br/>-->
+	
+	
+	{{ App\Plugins\html::text("link",array("placeholder" => @url,"label" => "Source","class" => "span12","minlength" => 2)) }}<br/>
+	
+	
+	{{ App\Plugins\html::hidden("original_language",@LANG) }}
+	
+	{{ App\Plugins\html::textArea("details",array("placeholder" => "Details","label" => "Details","class" => "span12 tinymce","minlength" => 2)) }}<br/>
+	
+	{{ App\Plugins\html::text("twitter_hashtags",array("placeholder" => "#housingnotprofit #socialhousing","label" => "Hashtags","class" => "span12","minlength" => 2)) }}<br/>
+	
+	<br/>
+	{{ App\Plugins\html::text("gps_coords",array("placeholder" => "","label" => "Please click somewhere on the map, to choose a location","class" => "span12","minlength" => 2,"readonly" => true)) }}<br/>
+	{{ App\Plugins\html::text("where",array("placeholder" => "Somewhere in Lisbon","label" => "Where","class" => "span12","minlength" => 2)) }}<br/>
+	<div id="join_leafletmap">
+		
+	</div>
+	<br>
+	
+	{{ App\Plugins\html::submit("Save action",array("class" => "btn btn-primary")) }}
+	
+{{ App\Plugins\html::endForm() }}
+{~ endif ~}
+
+
+</div>

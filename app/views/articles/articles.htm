@@ -1,0 +1,118 @@
+<br>
+{~ foreach( @articles.results as @item): ~}
+
+{~ if(@item.published != 1): ~}
+					<article class="item_inactive">
+				{~ else: ~}
+					<article>
+				{~ endif ~}
+<div class=" row newpage">
+
+				
+				
+        				
+        					
+        				
+        					<div class="col-md-2 article-member">
+        						{{ Template::render('elements/author.htm','text/html',array('item' => @item))}}
+        					</div>
+        				
+        					<div class="col-md-10">
+        				
+        				
+        					
+        					<h3>{{ \App\Plugins\html::link('articles/view/'.@item.slug,@item.title) }}</h3>
+        					<div class="article-date">
+        						{{fdate(@item.created) }}
+        					</div>
+        					<div class="article-body">{{ @item.summary | raw }} </div>
+        					
+        					{{ \App\Plugins\html::link('articles/view/'.@item.slug,"> Read more",array("target" => "_blank")) }}
+        					&nbsp;&nbsp;&nbsp;&nbsp;
+        					</a>
+        					<a href="{{@item.share_url}}" target='blank'> > Share</a>
+        					<br>
+        					{~ if( empty(@hideshare) ): ~}
+        							<iframe src="{{@item.share_url}}" frameborder=0 frametransparency=1 scrolling=no height=30 width=100%></iframe>
+        							
+        					{~ endif ~}
+        					
+        				</div>
+        				
+					</div>
+					</article>
+					<hr>
+        		{~ endforeach ~}
+        		
+        		
+
+{~ if(false): ~}
+{~ foreach( @articles.results as @key => @item): ~}
+
+	{~ if(@key % 2 == 0 || true): ~}
+			<div class="article members row">
+	{~ endif ~}
+				{~ if(@item.published != 1): ~}
+					<article class="item_inactive">
+				{~ else: ~}
+					<article>
+				{~ endif ~}
+				<div class="col-md-12">
+					{~ if(!empty(@item.img)): ~}
+					<div class="col-md-4">
+        				<img src="/{{ @item.img}}" class="img-responsive">
+        			</div>
+        			<div class="col-md-8">
+        			{~ else: ~}
+        				<div class="col-md-12">
+        			{~ endif ~}
+        				<div class="row">
+        					<div class="col-md-6">
+        						<div class="article-title">
+        							{{ \App\Plugins\html::link('articles/view/'.@item.slug,@item.title) }}
+        						</div>
+        						<div class="article-date">
+        							{{fdate(@item.created)}}
+        						</div>
+        					</div>
+        					<div class="col-md-6">
+        						<p>
+					{~ if(!empty(@item.Members.id)): ~}
+						{~ if(!empty(@item.Members.avatar)): ~}
+					
+						{{ \App\Plugins\html::link('coalition/member/'.@item.Members.slug,'<img src="/'.@item.Members.avatar.'" alt="'.@item.Members.name.'" class="icon">') }}
+					
+					
+						{~ endif ~}
+					{{ \App\Plugins\html::link('coalition/member/'.@item.Members.slug,@item.Members.name) }}
+					{~ else: ~}
+						{~ if(!empty(@item.author_img)): ~}
+							<img src="/{{@item.author_img}}" class="icon">
+						{~ endif ~}
+						{{@item.author_name}} - {{@item.author_email}}
+					{~ endif ~}
+					
+					</p>
+        					</div>
+        				</div>
+        				<div class="article-body">
+        					
+        						{{ @item.summary | raw }}
+        				</div>
+        				
+        				
+        				
+        				
+        				
+        				</div>
+        				</article>
+        				
+	{~ if(@key % 2 != 0 || true): ~}
+		</div>
+	{~ endif ~}
+{~ endforeach ~}
+{~ if( count(@articles.results) % 2 != 0 && false): ~}
+		</div>
+{~ endif ~}
+        		
+{~ endif ~}

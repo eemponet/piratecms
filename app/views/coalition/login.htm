@@ -1,0 +1,19 @@
+
+<div class="containing">
+
+{{ App\Plugins\html::startForm(array("method" => "POST","class" =>"form-horizontal","enctype" => "multipart/form-data","action" => "@url/@LANG/coalition/login")) }}
+	
+	{{ App\Plugins\html::text("email",array("placeholder" => "Email","label" => "Email","class" => "span12","minlength" => 2)) }}<br/>
+	{{ App\Plugins\html::password("password",array("placeholder" => "Password","label" => "Password","class" => "span12","minlength" => 2)) }}
+	
+	{{ App\Plugins\html::submit("Login",array("class" => "btn btn-primary")) }}
+	
+	<br>
+	
+	{~ if(!empty(@SESSION.error_login) && !empty(@email)): ~}
+	If you forgot your password, please click {{ App\Plugins\html::link("/coalition/onelinkrecovery?email=@email","here")}} to receive a one link login! .
+	<!-- If you forgot your password, please click {{ App\Plugins\html::link("/coalition/recover","here")}}.-->
+	{~ endif ~}
+{{ App\Plugins\html::endForm() }}
+
+</div>

@@ -1,0 +1,20 @@
+ <div class="row">
+
+        <div class="col-md-8 blog-main">
+        	<div id="resources" class="containing">
+        		{{Template::render("elements/section-title.htm",'text/html',array('section_image' => 'menu_resources.png','section_title' => 'Resources'))}}
+        		
+        		Wiki
+        		Multimedia
+        		Research
+        		Forum
+        	</div>
+        </div>
+         <div class="col-md-4 blog-main">
+         	<div id="resources" class="containing">
+         		{{Template::render("elements/section-title.htm",'text/html',array('section_image' => 'menu_resources.png','section_title' => 'Other tools'))}}
+         		
+         		{{ \Template::render('elements/editable.htm','text/html',array('page' => @other_tools))}}
+         	</div>
+         </div>
+</div>

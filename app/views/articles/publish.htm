@@ -1,0 +1,61 @@
+<div class="containing">
+{~ if(empty(@SESSION.user.id)): ~}
+		{{Template::render("elements/guest_nopost.htm",'text/html') }}
+{~ else: ~}
+{{ App\Plugins\html::startForm(array("method" => "POST","class" =>"form-horizontal","enctype" => "multipart/form-data")) }}
+	
+	
+	{~ if(!empty(@SESSION.user.id) && false): ~}
+		{{ App\Plugins\html::hidden("member_id",@SESSION.user.id) }}<br/>
+		{{ App\Plugins\html::hidden("author_name") }}
+		{{ App\Plugins\html::hidden("author_email") }}
+		{{ App\Plugins\html::hidden("author_img") }}
+		
+	{~ else: ~}
+		{{ App\Plugins\html::text("author_name",array("placeholder" => "Author name","label" => "Author name","class" => "span12","minlength" => 2)) }}<br/>
+		{{ App\Plugins\html::text("author_email",array("placeholder" => "Author email","label" => "Author email  (not public)","class" => "span12","minlength" => 2)) }}<b></b><br/>
+		<!-- missing button to be published or not -->
+		
+		
+		{~ if(!empty(@POST.author_img)): ~}
+			
+			{{ App\Plugins\html::hidden("author_img") }}
+			<label>Author image: </label>
+			<img src="/{{@POST.author_img}}" class="icon">
+			{{ App\Plugins\html::file("author_img") }}
+			
+		{~ else: ~}
+			{{ App\Plugins\html::file("author_img",array("label" => "Author image")) }}
+		{~ endif ~}
+		<br/>
+	{~ endif ~}
+	
+	{{ App\Plugins\html::text("title",array("placeholder" => "Title","label" => "Title","class" => "span12","minlength" => 2)) }}<br/>
+	<!--
+	{~ if(!empty(@POST.img)): ~}
+		<img src='/{{@POST.img}}'>
+		{{ App\Plugins\html::hidden("img") }}<br/>
+	{~ endif ~}
+	
+	<br/>
+	{{ App\Plugins\html::file("img",array("label" => "Attached image")) }}<br/>
+	{{ App\Plugins\html::hidden("img") }}<br/>-->
+	
+	{{ App\Plugins\html::hidden("type") }}
+	{{ App\Plugins\html::combo("original_language",@available_langs,array("label" => "Original language","class" => "span12"))}}<br>
+	
+	{{ App\Plugins\html::textArea("text",array("placeholder" => "Text","label" => "Text","class" => "span12 tinymce","minlength" => 2)) }}
+	
+	{{ App\Plugins\html::text("link",array("placeholder" => @url,"label" => "Source","class" => "span12","minlength" => 2)) }}<br/>
+	
+	
+	<br/>
+	{{ App\Plugins\html::text("twitter_hashtags",array("placeholder" => "#housingnotprofit #socialhousing","label" => "Hashtags","class" => "span12","minlength" => 2)) }}<br/>
+	<!--{{ \Template::render('elements\publishing_as.htm')}}-->
+	
+	{{ App\Plugins\html::submit("Submit article to review",array("class" => "btn btn-primary")) }}
+	
+{{ App\Plugins\html::endForm() }}
+{~ endif ~}
+
+</div>

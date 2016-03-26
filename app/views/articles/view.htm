@@ -1,0 +1,295 @@
+
+<div class="row centercontent">
+	
+	<div class="col-md-6">
+		<div class="containing">
+		
+		
+		
+		<div class="row">
+				<div class="col-md-1"></div>
+				<div class="col-md-10">
+				<br><br>
+				<div class="row">
+					
+					<div class="col-md-10">
+					
+					
+						<h2>{{@article.title}}</h2>
+				
+						<div class="article-date">
+						
+						<h2>{{  fdate(@article.created)  }}</h2>
+						</div> 
+						<h4>
+						{~ if(!empty(@article.twitter_hashtags)): ~}
+							{{ App\Plugins\html::hashtagify(@article.twitter_hashtags)}}
+						{~ endif ~}
+						</h4>
+					</div>
+						<div class="col-md-2">
+						
+						{{ Template::render('elements/author.htm','text/html',array('item' => @article,'show_name' => true)) }}
+						</div>
+				</div>
+		
+				<br/>
+				{~ if(!empty(@article.img)): ~}
+				
+					<div class="article-img">
+					<img src="/{{ @article.img}}" class="img-responsive">
+					</div>
+				
+				{~ endif ~}
+				
+				<p>{{@article.text | raw}}</p>
+				
+				
+				
+				<h2>
+				{{\App\Plugins\html::link('page/lang/'.@article.original_language,'> '.@available_langs[@article.original_language].' (Original)')}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</h2>
+				
+				<a href="{{@article.link}}" target='blank'> > Link</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="{{@article.share_url}}" target='blank'> > Share</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<iframe src="{{@article.share_url}}" frameborder=0 frametransparency=1 scrolling=no height=30 width=100%></iframe>
+				
+				
+				{~ if(!empty(@SESSION.user) && @SESSION.user.is_admin == 1): ~}
+      	<div class="containing">
+      	<h2>Moderator options</h2>
+      		<p>
+      		{~ if(@article.published != 1): ~}
+				
+				{{ \App\Plugins\html::adminlink('articles/publishit/'.@article.id,'> Publish this article') }}
+			{~ else: ~}
+				{{ \App\Plugins\html::adminlink('articles/hide/'.@article.id,'> Hide this article') }}
+				
+			{~ endif ~}
+			<br>
+			
+			{{\App\Plugins\html::adminlink('articles/edit/'.@article.id,'> Edit content') }}<br>
+			<!--{{\App\Plugins\html::adminlink('actions/delete/'.@article.id,'> Delete.') }}-->
+			
+      		</div>
+      		<br/>
+      	{~ elseif (!empty(@SESSION.user) && @SESSION.user.id == @member.id): ~}
+      		<div class="containing">
+      			
+      		</div>
+      	{~ endif ~}
+	
+      	
+      	
+      	<div class="containing">
+      		<h2>Translations</h2>
+      	<p>
+				
+				{{\App\Plugins\html::link('page/lang/'.@article.original_language,'> '.@available_langs[@article.original_language].' (Original)')}}
+				
+				{~ if(!empty(@article.translated) ): ~}
+				
+				{~ foreach(@article.translated as @lang): ~}<br/>
+					{{\App\Plugins\html::link('page/lang/'.@lang,'> '.@available_langs[@lang])}}
+					{{\App\Plugins\html::adminlink('articles/deletetranslation/'.@article.id.'/'.@lang,'x')}}
+				{~ endforeach ~}
+				
+				{~ endif ~}
+				<br/>
+				{{\App\Plugins\html::link('articles/addtranslation/'.@article.id,'> Add translation')}}<br>
+				
+				</p>
+				
+				
+				<p>
+					{~ foreach(@pending_translations as @pending): ~}
+						<br>{{\App\Plugins\html::adminlink('articles/publishtranslation/'.@pending.id,'> Approve translation for '.@available_langs[@pending.original_language])}} 
+					{~ endforeach ~}
+				</p>
+				</div>
+				
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+			
+		
+		</div>
+	</div>
+	
+	<div class="col-md-6">
+		<div  class="containing">
+		
+		{~ if(!empty(@article.twitter_hashtags) && false): ~}
+				{{ App\Plugins\html::hashtagtwittify(@article.twitter_hashtags)}}
+		<ignore>			
+				{{\Template::render('live\social.htm','text/html',array('aggregations_social' => @aggregations_action,'hidememberinfo' => true))}}
+		</ignore>
+		{~ endif ~}
+		{~ if(!empty(@article.twitter_hashtags)): ~}
+			{{ App\Plugins\html::hashtagify(@article.twitter_hashtags)}}
+			
+			
+		<div id="twit-hash">
+		</div>
+		{~ endif ~}
+		{{ Template::render('elements/disqus.htm')}}
+		
+		</div>
+		
+	</div>
+	
+</div>
+
+<ignore>			
+
+
+
+
+
+
+<!--
+
+
+
+
+
+
+
+<div class="row">
+	<div class="col-md-2"> 
+	{~ if(!empty(@SESSION.user) && @SESSION.user.is_admin == 1): ~}
+      	<div class="containing">
+      	<h2>Moderator options</h2>
+      		<p>
+      		{~ if(@article.published != 1): ~}
+			
+				{{\App\Plugins\html::adminlink('articles/publishit/'.@article.id,'Publish this article',array('class' => 'btn btn-warning'))}}
+				
+			{~ else: ~}
+				{{ \App\Plugins\html::adminlink('articles/hide/'.@article.id,'> Hide this article') }}
+				
+			{~ endif ~}
+			<br>
+			
+			{{\App\Plugins\html::adminlink('articles/edit/'.@article.id,'> Edit content') }}<br>
+			
+      		</div>
+      		<br/>
+      		</p>
+      	{~ elseif (!empty(@SESSION.user) && @SESSION.user.id == @member.id): ~}
+      		<div class="containing">
+      			<p>
+      			<{{\App\Plugins\html::adminlink('articles/edit/'.@article.id,'> Edit content') }}<br>
+      			</p>
+      		</div>
+      	{~ endif ~}
+	
+      	
+      	
+      	<div class="containing">
+      		<h2>Translations</h2>
+      	<p>
+				
+				{{\App\Plugins\html::link('page/lang/'.@article.original_language,'> '.@available_langs[@article.original_language].' (Original)')}}
+				
+				{~ if(!empty(@article.translated) ): ~}
+				
+				{~ foreach(@article.translated as @lang): ~}<br/>
+					{{\App\Plugins\html::link('page/lang/'.@lang,'> '.@available_langs[@lang])}}
+					{{\App\Plugins\html::adminlink('actions/deletetranslation/'.@article.id.'/'.@lang,'x')}}
+				{~ endforeach ~}
+				
+				{~ endif ~}
+				<br/>
+				{{\App\Plugins\html::link('actions/addtranslation/'.@article.id,'> Add translation')}}<br>
+				
+				</p>
+				
+				
+				<p>
+					{~ foreach(@pending_translations as @pending): ~}
+						<br>{{\App\Plugins\html::adminlink('actions/publishtranslation/'.@pending.id,'> Approve translation for '.@available_langs[@pending.original_language])}} 
+					{~ endforeach ~}
+				</p>
+				</div>
+				
+				
+			</div>
+			
+		
+		
+	<div class="col-md-8">
+		<div class="containing">
+		
+		
+		<div class="row">
+				<div class="col-md-1"></div>
+				<div class="col-md-10">
+				<br><br>
+			
+			<div class="row">
+				
+				
+				<div class="col-md-10">
+					<h2>{{@article.title}}</h2>
+					<div class="article-date">{{ fdate(@article.created) }}</div>
+					
+					
+				</div>
+				<div class="col-md-2">
+					{{ Template::render('elements/author.htm','text/html',array('item' => @article,'icon' => true))}}
+				</div>
+				
+			</div>
+			
+			
+			
+			
+			
+			
+			
+				{~ if(!empty(@article.img)): ~}
+				
+					<div class="article-img">
+					<img src="/{{ @article.img}}" class="img-responsive">
+					</div>
+				
+				{~ endif ~}
+				
+				<p>
+				
+				
+				
+				</p>
+				<div class="images-responsive">
+
+				<p>{{@article.text | raw}}</p>
+				</div>
+				<p>
+				
+				{{\App\Plugins\html::link('page/lang/'.@article.original_language,'> '.@available_langs[@article.original_language].' (Original)')}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
+				
+				<a href="{{@article.link}}" target='blank'> > Link</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="{{@article.share_url}}" target='blank'> > Share</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<iframe src="{{@article.share_url}}" frameborder=0 frametransparency=1 scrolling=no height=30 width=100%></iframe>
+				
+				
+				{{ Template::render('elements/disqus.htm')}}
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+			
+		
+		</div>
+	</div>
+	<div class="col-md-2"></div>
+</div></ignore>
+<script>
+$(document).ready(function(){
+$.getJSON("https://api.twitter.com/1/statuses/oembed.json?url=https%3A%2F%2Ftwitter.com%2F?q=%23php+OR+%23javascript", function( data ) {
+		console.log(data);
+		$('.twitter-timeline').html(data.html);
+});
+});
+</script>-->

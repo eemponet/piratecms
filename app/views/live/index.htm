@@ -1,0 +1,40 @@
+
+<div class="row">
+
+        <div class="col-md-7 blog-main">
+        	<div id="rss" class="containing">
+        		<div id='rss_content'>
+        	
+        		
+        		{{Template::render("elements/section-title.htm",'text/html',array('section_image' => 'menu_live.png','section_title' => 'News/RSS'))}}
+        	 	{{ Template::render('live/rss.htm') }}
+        		</div>
+        		{~ if(@aggregations.total_pages > 1): ~}
+        		<div class="more">
+        			<input type="hidden" name="page" value="1">
+        			<input type="hidden" name="total_pages" value="{{@aggregations.total_pages}}">
+        			<input type="hidden" name="url" value="live/rss">
+        			<a href="#">Load more...</a>
+        		</div>
+        		{~ endif ~}
+        		
+        	</div>
+        </div>
+        <div class="col-md-5 blog-main">
+        	<div id="social_networks" class="containing">
+        		<div id='social_networks_content'>
+        			{{Template::render("elements/section-title.htm",'text/html',array('section_image' => 'menu_live.png','section_title' => 'Live'))}}
+        		
+        			{{ Template::render('live/social.htm') }}
+        		</div>
+        		{~ if(@aggregations_social.total_pages > 1): ~}
+        		<div class="more">
+        			<input type="hidden" name="page" value="1">
+        			<input type="hidden" name="total_pages" value="{{@aggregations_social.total_pages}}">
+        			<input type="hidden" name="url" value="live/social">
+        			<a href="#">Load more...</a>
+        		</div>
+        		{~ endif ~}
+        	</div>
+        </div>
+</div>

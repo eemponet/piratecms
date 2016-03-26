@@ -1,0 +1,22 @@
+ <div class="row">
+
+        <div class="col-md-12 blog-main">
+        	<div id="resources" class="containing">
+        		
+        		{{ \Template::render('elements/changelang.htm','text/html',array('langs' => @langs,'available_langs' => @available_langs,'lang_set' => @lang_set)) }}
+        		{{ App\Plugins\html::startForm(array("method" => "POST","class" => "rapidix_form")) }}
+
+        		{{ App\Plugins\html::hidden("id")}}
+        		{{ App\Plugins\html::hidden("i18n",@lang_set)}}
+        		{{ App\Plugins\html::textArea("value_1",array("placeholder" => "Text","label" => "Text","class" => "span12 tinymce","minlength" => 2)) }}
+        		
+        		{{ App\Plugins\html::text("value_2",array("placeholder" => "Title","label" => "Title","class" => "span12","minlength" => 2)) }}
+        		
+        		{{ App\Plugins\html::submit("Gravar altera&ccedil;&otilde;es") }}
+        		{{ App\Plugins\html::endForm() }}
+        	</div>
+        </div>
+</div>
+
+
+

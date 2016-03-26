@@ -1,0 +1,15 @@
+
+{~ if(!empty(@page.value_2)): ~}
+	{{Template::render("elements/section-title.htm",'text/html',array('section_title' =>  @page.value_2))}}
+{~ endif ~}
+{~ if(!empty(@_SESSION.user) && @_SESSION.user.is_admin == true): ~}
+	<div class='admineditable translate' page='{{@page.id}}' translate='{{@page.id}}'>
+	
+{~ else: ~}
+	<div class='translate' translate='{{@page.id}}'>
+{~ endif ~}
+<div class="images-responsive">
+	{{@page.value_1 | raw}}
+	</div>
+
+</div>

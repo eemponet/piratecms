@@ -1,0 +1,6 @@
+Editing in <b>{{@available_langs[@lang_set]}}</b>, please pick another language to translate:
+        		 <repeat group="{{ @langs }}" value="{{ @item }}">
+        		{~ if(@item.alias != @lang_set): ~}
+        				<a class="" href="/{{@lang_set}}/page/lang/{{@item.alias}}">{{@available_langs[@item.alias]}}</a>,
+        		{~ endif ~}
+        		</repeat>

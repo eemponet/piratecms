@@ -1,0 +1,36 @@
+
+      <div class="row">
+      
+        <div class="col-md-12 blog-main">
+        	<div id='members' class="containing">
+        	{{Template::render("elements/section-title.htm",'text/html',array('section_title' => 'Members','section_image' => 'menu_coalition.png'))}}
+        	<div id="fullmap_leafletmap" url="/{{@lang_set}}/coalition/map">
+        		
+        		</div>
+        	
+        		<br>
+        		
+        	
+        	
+        	{{ \Template::render('elements/members-icon-footer.htm','text/html',array('members_icon_bar' => @members_icon_bar,'lang_set' => @lang_set))}}
+        		<div style="clear:both"></div>
+        		<br>
+        		<div id='members_content'>
+        		
+        		{{Template::render("coalition/members.htm")}}
+        		</div>
+        		{~ if(@members.total_pages > 1): ~}
+        		<div class="more">
+        			<input type="hidden" name="page" value="1">
+        			<input type="hidden" name="total_pages" value="{{@members.total_pages}}">
+        			<input type="hidden" name="url" value="coalition/members">
+        			<a href="#">Load more...</a>
+        		</div>
+        		{~ endif ~}
+          	 </div>
+           </div>
+           
+       
+       </div><!-- /.row -->
+
+    
