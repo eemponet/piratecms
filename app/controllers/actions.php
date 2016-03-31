@@ -23,9 +23,10 @@ class Actions extends ControllerApp{
 		// if($this->Members->isAdmin()){
 			// $sql_pub = "1";
 		// }
-		// $this->f3->set('actions',$this->Actions->paginate(1,2,'`when`','ASC',"WHERE $sql_pub AND `when` > NOW()"));
-		$this->actions();
-		$this->layout = 'default';
+		$this->f3->set('actions',$this->Actions->paginate(1,1000,'`when`','ASC',"WHERE tipo = 'antifrack' AND `when` > NOW() OR until > NOW() "));
+		// $this->actions();
+		// $this->
+		// $this->layout = 'default';
 	}
 	
 	function upcoming()
@@ -49,7 +50,7 @@ class Actions extends ControllerApp{
 			$sql_pub = "1";
 		}
 		
-		$actions = $this->Actions->paginate($this->f3->get('PARAMS.p1'),40,'id','DESC',"WHERE $sql_pub ");
+		$actions = $this->Actions->paginate($this->f3->get('PARAMS.p1'),40,'`when`','ASC',"WHERE $sql_pub ");
 		
 		$this->f3->set('actions_all',$actions);
 		// $this->f3->set('map_users',json_encode($this->Actions->getMap($actions)));
@@ -58,6 +59,9 @@ class Actions extends ControllerApp{
 	
 	function past()
 	{
+		
+		$this->f3->set('actions',$this->Actions->paginate(1,1000,'`when`','ASC',"WHERE  `when` < NOW() "));
+		/*
 		$sql_pub = "published = 1";
 		if($this->Members->isAdmin()){
 			$sql_pub = "1";
@@ -77,11 +81,21 @@ class Actions extends ControllerApp{
 			$this->f3->set('past_actions_map_users',json_encode($this->Actions->getMap($actions,'images/menu_actions_past.png')));
 		}else{
 			$this->f3->set('map_users',json_encode($this->Actions->getMap($actions)));
-		}
+		}*/
 		
 		
 		
 		
+	}
+	
+	function etapa1()
+	{
+		$this->f3->set('actions',$this->Actions->paginate(1,1000,'`when`','ASC',"WHERE tipo = 'etapa1' AND (`when` > NOW() OR until > NOW()) "));
+	}
+	
+	function etapa2()
+	{
+		$this->f3->set('actions',$this->Actions->paginate(1,1000,'`when`','ASC',"WHERE tipo = 'etapa2' AND (`when` > NOW() OR until > NOW() )"));
 	}
 	
 	function actions()
@@ -102,10 +116,10 @@ class Actions extends ControllerApp{
 	
 	function edit()
 	{
-		$this->f3->set('available_langs',$this->languagesCombo());
+		// $this->f3->set('available_langs',$this->languagesCombo());
 		$article_id = $this->f3->get('PARAMS.p1');
 		
-		if($this->f3->exists('POST.name')){
+		if($this->f3->exists('POST.when')){
 			$this->f3->set('POST.id',$article_id);
 			if(!$this->Actions->validate()){
 				$this->error($this->getTranslation('validation_error'));
@@ -114,7 +128,7 @@ class Actions extends ControllerApp{
 					$this->msg($this->getTranslation('form_ok'));
 					$article = $this->Actions->getRow("where id = ".$article_id);
 					
-					$this->reroute('actions','view/'.$article['slug']);
+					$this->reroute('actions');
 				}else{
 					$this->error($this->getTranslation('form_error'));
 				}
@@ -128,27 +142,20 @@ class Actions extends ControllerApp{
 	}
 	function publish()
 	{
-		if($this->f3->exists('POST.name')){
+		$this->f3->set('POST.tipo','antifrack');
+		if($this->f3->exists('POST.when')){
 			if(!$this->Actions->validate()){
-				
 				
 				$this->error($this->getTranslation('validation_error'));
 			}else{
-				if($this->Members->isAuthenticated()){
-					$this->f3->set('POST.published',1);
-				}else{
-					$this->f3->set('POST.published',0);
-				}
+				
 				if($this->Actions->save()){
-					if(!$this->Members->isAuthenticated()){
-						$this->notifyMods("A new event has been submitted, please approve it!","
-							Please <a href='".$this->f3->get('url')."/en/actions/view/".$this->db->lastId()."?ltoken=%login_token%'>login here</a> to the website to review the details of the new article and publish it!");
-						
-						$this->msg($this->getTranslation('submission_ok'));
-						$this->reroute('actions','thankyou');
+					
+					$this->msg("The event is now published!");
+					if($this->f3->get('POST.tipo') == 'antifrack'){
+						$this->reroute('actions');
 					}else{
-						$this->msg("The event is now published!");
-						$this->reroute('actions','view/'.$this->db->lastId());
+						$this->reroute('actions','etapa1');
 					}
 				}else{
 					$this->error($this->getTranslation('submission_error'));
@@ -156,12 +163,52 @@ class Actions extends ControllerApp{
 			}
 		}
 		
-		if($this->Members->isAuthenticated()){
-			$user = $this->f3->get('SESSION.user');
-			$this->f3->set('POST.author_name',$user['name']);
-			$this->f3->set('POST.author_email',$user['email']);
-			$this->f3->set('POST.author_img',$user['avatar']);
+		
+		$this->f3->set("available_langs",$this->languagesCombo());
+	}
+	
+	function addEtapa1()
+	{
+		$this->f3->set('POST.tipo','etapa1');
+		if($this->f3->exists('POST.when')){
+			if(!$this->Actions->validate()){
+				
+				$this->error($this->getTranslation('validation_error'));
+			}else{
+				
+				if($this->Actions->save()){
+					
+					$this->msg("The event is now published!");
+					$this->reroute('actions');
+				}else{
+					$this->error($this->getTranslation('submission_error'));
+				}
+			}
 		}
+		
+		
+		$this->f3->set("available_langs",$this->languagesCombo());
+	}
+	
+	function addEtapa2()
+	{
+		$this->f3->set('POST.tipo','etapa2');
+		if($this->f3->exists('POST.when')){
+			if(!$this->Actions->validate()){
+				
+				$this->error($this->getTranslation('validation_error'));
+			}else{
+				
+				if($this->Actions->save()){
+					
+					$this->msg("The event is now published!");
+					$this->reroute('actions');
+				}else{
+					$this->error($this->getTranslation('submission_error'));
+				}
+			}
+		}
+		
 		
 		$this->f3->set("available_langs",$this->languagesCombo());
 	}
@@ -281,7 +328,7 @@ class Actions extends ControllerApp{
 	}
 	function delete(){
 		$this->Actions->delete($this->f3->get('PARAMS.p1'));
-		$this->reroute('actions','index');
+		$this->goback();
 	}
 	
 	function deletetranslation()

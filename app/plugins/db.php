@@ -13,6 +13,7 @@ class db
 		// $this->f3 = \Base::instance();
 		
 		$this->log = \Base::instance()->get('log');
+		// $this->log = new \App\Plugins\logs();
 	}
 	
 	public function setTable($tableName)

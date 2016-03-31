@@ -62,7 +62,7 @@ function getSummary($html,$size){
 	return $rawtext;
 }
 
-function fdate($date,$format = '%B %e, %Y'){ // %A,, %H:%M
+function fdate($date,$format = '%e/%h'){ // %A,, %H:%M
 	
 	return utf8_encode(strftime($format,strtotime($date)));
 }
@@ -140,9 +140,9 @@ function fimage($fsrc,$fdst,$fext, $w=300, $h=300, $crop=FALSE)
     imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
     // imagepng($dst,$fdst.'.png');
     if($fext == 'png'){
-    	imagepng($dst,$fdst.$fext);
+    	imagepng($dst,$fdst.".".$fext);
     }else{
-    	imagejpeg($dst,$fdst.$fext);
+    	imagejpeg($dst,$fdst.".".$fext);
     }
 }
 

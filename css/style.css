@@ -1,40 +1,68 @@
 /*
  * Globals
  */
+@font-face {
+    font-family: "fofbb";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../fonts/fofbb_reg-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/fofbb_reg-webfont.woff2") format("woff2"), url("../fonts/fofbb_reg-webfont.woff") format("woff"), url("../fonts/fofbb_reg-webfont.ttf") format("truetype"), url("../fonts/fofbb_reg-webfont.svg#feast_of_flesh_bbregular") format("svg");
+}
 
- @font-face {
- 	 font-family: "Passion";
- 	 src:
- 	 url("/fonts/PassionOne-Regular.otf") format("opentype");
- 	 letter-spacing:1px;
- }
- 
-  @font-face {
- 	 font-family: "Passion-Bold";
- 	 src:
- 	 url("/fonts/PassionOne-Bold.otf") format("opentype");
- }
+
+@font-face {
+    font-family: 'miso';
+    src: url('../fonts/miso-webfont.eot');
+    src: url('../fonts/miso-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/miso-webfont.woff2') format('woff2'),
+         url('../fonts/miso-webfont.woff') format('woff'),
+         url('../fonts/miso-webfont.ttf') format('truetype'),
+         url('../fonts/miso-webfont.svg#misoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 body {
-  font-family: Arial, Georgia, "Times New Roman", Times, serif;
+  font-family: 'miso' ,Arial, Georgia, "Times New Roman", Times, serif;
+  font-size:1.8em;
   color: #1c1c1c;
 }
 body{
-	background-image:url('/images/bg.jpg');
+	background-image:url('../images/bg.jpg');
 }
 
 a{
 	color:#1c1c1c;
-	font-family:'Passion';
-	font-weight:normal !important;
+	font-family:'miso';
+	font-weight:bold;
 }
 a:hover{
 	color:#1c1c1c;
 }
+.superlinks a.active{
+	color:#1e1e1e;
+}
+.superlinks a, .lang-nav a{
+	font-family:'fofbb', Arial;
+	color:#808080;
+	font-size:1.4em;
+	line-height: 1.8em;
+}
+.superlinks a:hover, .lang-nav a:hover,.lang-nav a.active{
+	color:#1e1e1e;
+	text-decoration:none;
+}
+.lang-nav a:{
+}
+.supertexto{
+	font-family:'fofbb', Arial;
+}                                               
+
 h1, .h1,
 h2, .h2
 {
   margin-top: 0;
-  font-family: "Passion", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "miso", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
   color: #333;
 }
@@ -73,12 +101,12 @@ h6, .h6 {
 }
 /* Nav links */
 .blog-nav-item {
-	font-family: "Passion-Bold", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	
   position: relative;
   display: inline-block;
   padding: 10px;
   font-size: 20px;
-  color: white;
+  
   text-transform: uppercase;
   text-align:center;
   opacity:0.85;
@@ -114,14 +142,12 @@ h6, .h6 {
 	margin-right: 50px;
 }
 .lang-nav{
-	margin-top:50px;
-	margin-left:70px;
-	color:white;
+	font-family:'fofbb', Arial;
+	margin-top:20px;
 }
 
 .lang-nav .blog-nav-item{
 	font-size:13px;
-	font-family: "Passion";
 	padding:5px;
 }
 /*
@@ -223,15 +249,20 @@ h6, .h6 {
 	color:#1c1c1c;
 	padding: 10px;
 }
-.containing .section-title{
+
+.section-title {
+    margin-bottom: 20px;
+}
+.section-title .title{
 	/*background-color:#5c3263;*/
-	background-color: rgba(92, 50, 99, 0.65);
-	width:100%;
-	color:white;
-	font-family:"Passion";
+	
+	
+	border-bottom: 7px solid;
+	margin-bottom:20px;
+	font-family:"fofbb";
 	font-weight:normal;
-	padding-left:10px;
-	font-size:22px;
+	padding-left:20px;
+	font-size:2em;
 	padding-bottom:3px;
 	text-transform:upper;
 	margin-bottom:15px;
@@ -289,7 +320,7 @@ h6, .h6 {
 }
 
 label {
-    font-family: "Passion";
+    font-family: "miso";
     font-size: 20px;
     font-weight: normal;
 }
@@ -465,7 +496,7 @@ img.thumbnail,img.mediumsize {
 .nav > li > a:focus, .nav > li > a:hover,
 .blog-nav-item:hover,
 .blog-nav-item:focus {
-	background:#222;
+	/*background:#222;*/
 }
 
 .nav .open > a, .nav .open > a:focus, .nav .open > a:hover {
@@ -492,6 +523,10 @@ img.thumbnail,img.mediumsize {
 .leaflet-container a {
     color: #222;
     font-size:15px;
+}
+.containing .contain{
+	padding-left:30px;
+	font-size: 1.1em;
 }
 h2{
 	font-size:20px;
@@ -591,4 +626,48 @@ ul.nav li.dropdown:hover ul.dropdown-menu{ display: block; }
 .navbar-brand, .navbar-nav > li > a > img{
     max-height: 58px;
 }
+
+hr{
+	border: solid 2px;
+	color: #8f8f8f;
+	background-color:#464646;
+}
+
+.content .agenda-frackoff tr:first-child{
+	border-bottom: 4px solid black;
+	height:60px;
+	font-size:1.4em;
+	font-weight:bold;
+}
+
+.content .agenda-frackoff td{
+	border-bottom: 2px solid black;
+	padding:5px;
+}
+.agenda-frackoff table{
+	width:100%;
+}
+.agenda-frackoff .image_link{
+	float:left;
+}
+.agenda-frackoff .image_link .image_desc{
+	display:none;
+	position:absolute;
+	background-color:white;
+}
+
+
+.agenda-frackoff .image_link img{
+	padding:10px;
+	
+}
+
+.agenda-frackoff .image_link img:hover { 
+-moz-box-shadow: 0 0 20px #8f8f8f;
+-webkit-box-shadow: 0 0 20px #8f8f8f; 
+box-shadow: 0 0 20px #8f8f8f; } 
    
+
+.leafletmap{
+	height:180px;
+}

@@ -11,14 +11,14 @@
       	
       	<p>
       	{~ if(!empty(@member.rss_url)): ~}
-      		{{ \App\Plugins\html::link(@member.rss_url,'<img class="icon" src="/images/rss.png" alt="RSS"> ') }}
+      		{{ \App\Plugins\html::link(@member.rss_url,'<img class="icon" src="{{@uri}}/images/rss.png" alt="RSS"> ') }}
       	{~ endif ~}
       	{~ if(!empty(@member.twitter_account)): ~}
-      		{{ \App\Plugins\html::link("https://twitter.com/".@member.twitter_account,'<img class="icon" src="/images/twit.png" alt="Twitter Account"> ') }} <!--  [ {{@member.twitter_hashtags }} ]-->
+      		{{ \App\Plugins\html::link("https://twitter.com/".@member.twitter_account,'<img class="icon" src="{{@uri}}/images/twit.png" alt="Twitter Account"> ') }} <!--  [ {{@member.twitter_hashtags }} ]-->
       		
       	{~ endif ~}
       	{~ if(!empty(@member.facebook_account)): ~}
-      		{{ \App\Plugins\html::link(@member.facebook_account,'<img class="icon" src="/images/fb.png" alt="Facebook account"> ') }}
+      		{{ \App\Plugins\html::link(@member.facebook_account,'<img class="icon" src="{{@uri}}/images/fb.png" alt="Facebook account"> ') }}
       	{~ endif ~}
       	</p>
       	

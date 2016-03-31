@@ -9,147 +9,97 @@
     <title>{{@TITLE}}</title>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="/css/colorbox.css">
-    <link rel="stylesheet" href="/css/genericons.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
-    <link rel="stylesheet" href="/css/MarkerCluster.Default.css"/>
-    <link rel="stylesheet" href="/css/MarkerCluster.css"/>
+    <link rel="stylesheet" href="{{@uri}}css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{@uri}}css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{{@uri}}css/colorbox.css">
+    <link rel="stylesheet" href="{{@uri}}css/genericons.css">
+     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <link rel="stylesheet" href="{{@uri}}css/MarkerCluster.Default.css"/>
+    <link rel="stylesheet" href="{{@uri}}css/MarkerCluster.css"/>
 
-    <link href="/css/jquery-ui.css" rel="stylesheet">
+    <link href="{{@uri}}css/jquery-ui.css" rel="stylesheet">
     
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="{{@uri}}css/style.css">
     
-    <script src="/js/jquery.min.js"></script>
-     <script src="/js/jquery-ui.min.js"></script>
-     <script src="/js/tweetParser.min.js"></script>
+    <script src="{{@uri}}js/jquery.min.js"></script>
+     <script src="{{@uri}}js/jquery-ui.min.js"></script>
+     <script src="{{@uri}}js/tweetParser.min.js"></script>
      
   </head>
   <body>
-  <div class="blog-masthead-logo">
-  	<a href="/{{@lang_set}}"><img src="/images/logo.png" alt="Housing for people not for profit"></a>
-  </div>
   
-  <div class="blog-masthead">
-      <div class="container">
-      
-      <ul class="nav navbar-nav
-      			{~ if(!empty(@item.subitems)): ~}
-      				dropdown-menu" role"menu
-      			{~ endif ~}
-      	">
-      	{~ if(!empty(@SESSION.login)): ~}
-      				<li>
-      				{{ App\Plugins\html::link("/coalition/member/".@SESSION.user.slug,"<img src='/".@SESSION.user.avatar."' alt='".@SESSION.user.slug."'><br/>@".@SESSION.user.slug,array("class" => "blog-nav-item dropdown-toggle", "data-toggle" => "dropdown")) }}
-      				
-      				 	<ul class="dropdown-menu">
-      				 		<li>
-      				 			{{ App\Plugins\html::link("/coalition/member/".@SESSION.user.slug,"My page") }}
-      				 		</li>
-      				 		<li>
-      				 			{{ App\Plugins\html::link("/coalition/edit/".@SESSION.user.id,"Edit member info") }}
-      				 		</li>
-      				 		<li>
-      				 			{{ App\Plugins\html::link("/coalition/logout","logout") }}
-      				 		</li>
-      				 	</ul>
-      					
-      				
-      				</li>
-      	{~ endif ~}
-      	<repeat group="{{ @topmenus }}" value="{{ @item }}">
-      			<li class="
-      			{~ if(strpos(@item.link,@controller)!==false ): ~}
-      				active
-      			{~ endif ~}
-      			{~ if(!empty(@item.subitems)): ~}
-      				dropdown-submenu
-      			{~ endif ~}
-      			">
-      			{~ if(!empty(@item.subitems)): ~}
-      				
-      				
-      				
-      				{{ App\Plugins\html::link(@item.link,"<img src='/images/".@item.image."' alt='".@item.title."'><br/>	".@item.title,array("class" => "blog-nav-item dropdown-toggle", "data-toggle" => "dropdown")) }}
-      					
-      				<!--, "data-toggle" => "dropdown"--> 
-      				 	<ul class="dropdown-menu">
-      				 	<repeat group="{{ @item.subitems }}" value="{{ @sitem }}">
-      				 		<li>
-      				 			{{ App\Plugins\html::link(@sitem.link,@sitem.title) }}
-      				 		</li>
-      				 	</repeat>                
-      					</ul>
-      				
-      			{~ else: ~}
-      				{{ App\Plugins\html::link(@item.link,"<img src='/images/".@item.image."' alt='".@item.title."'><br/>	".@item.title,array("class" => "blog-nav-item" )) }}
-      			{~ endif ~}
-      			
-      			
-      			</li>
-      	</repeat>
-      	
-      	
-      	</ul>
-      	
-      
-        
-      	
-        <nav class="lang-nav">
-        
-        <repeat group="{{ @langs }}" value="{{ @item }}">
-        		{~ if(@item.alias == @lang_set): ~}
-        			<a class="blog-nav-item active" href="/{{@lang_set}}/page/lang/{{@item.alias}}">{{@item.alias}}</a> |
-        		{~ else: ~}
-        				<a class="blog-nav-item" href="/{{@lang_set}}/page/lang/{{@item.alias}}">{{@item.alias}}</a> |
-        		{~ endif ~}
-		</repeat>
-		
-        </nav>
-        
-        	
-      </div>
-    </div>
-<div class="container-fluid conteudo">
+  <input type="hidden" id="uri" value="/{{@lang_set}}{{@uri}}">
+  
+  <div class="container-fluid">
+  <div class="row">
+   	<div class="col-md-2"></div>
+   	<div class="col-md-8">
+   			<!--<div class="section-title"><span class="title">{{@TITLE}}</span></div>-->
+   	{~ if(isset(@show_banner)): ~}
+   		<img src="{{@uri}}images/banner.png" class="img-responsive" alt="Responsive image">
+   	
+   	{~ else: ~}
+   		{{ App\Plugins\html::link('/','<img src="'.@uri.'images/logo.png">' ) }}
+   	{~ endif ~}
+   	{{ Template::render("elements/nav-langs.htm") }}
+   	
+  <div class="container-fluid content">
 
      <div class="row">
-     <div class="col-md-12"></div>
-     </div>
-     	{{Template::render("elements/msg.htm")}}
-     	
+     	<div class="col-md-12">
+     			{{Template::render("elements/msg.htm")}}
         		{{Template::render(@content)}}
-        </div>
-</div><!-- /.container -->
-<br/>
-    <footer class="blog-footer">
-    	<div class="row-fluid">
-    	<div class="col-md-2">
-    		<img src="/images/logo.png" alt="Housing for people not for profit">
-    	</div>
-    	<div class="col-md-10">
-    			
-    			<p>
-    			
-    			{~ if(empty(@SESSION.login)): ~}
-    			 	{{ App\Plugins\html::link("/coalition/join","join")}} 
-    			 	| {{ App\Plugins\html::link("https://housingnotprofit.org/@lang_set/coalition/login","login")}}
+        		<br>
+        		
+        		</div>
+      </div>
+  </div>
+  </div>
+  <div class="col-md-2">
+   	</div>
+  </div>
+  
+  
+  
+   {{Template::render("elements/menu.htm")}}
+  <br>
+  <br>
+  
+  <div class="row supertexto">
+  	<div class="col-md-10"> <br><br><br><br><br>Inscreve-te por email bicicletada@disroot.org</div>
+  
+  
+   	<div class="col-md-2"> {{ App\Plugins\html::link('/','<img src="'.@uri.'images/logo.png">' ) }}
+   	</div>
+  </div>	
+ 
+  
+  
+  <div class="row supertexto">
+  	<div class="col-md-10">
+  				
+  	</div>
+  
+  
+   	<div class="col-md-2">
+   	
+   	{~ if(empty(@SESSION.login)): ~}
+    			 	<!--{{ App\Plugins\html::link("/coalition/join","registro")}} |--> {{ App\Plugins\html::link("/coalition/login","login")}}
     			 {~ else: ~} 
-    			 	{{ App\Plugins\html::link("/coalition/logout","logout")}}
+    			 	{{ App\Plugins\html::link("/page/newlink","novo link")}} |
+    			 	{{ App\Plugins\html::link("/page/newpage","nova p&aacute;gina")}} | {{ App\Plugins\html::link("/coalition/logout","logout")}}
     			 {~ endif ~}
-    			
-    			 </p>
-    			 
-    			 <p>European action coalition for the right to housing and to the city</p>
-    			 <p>
-    			 {~ if(isset(@members_icon_bar)): ~}
-    			 	{{ \Template::render('elements/members-icon-footer.htm','text/html',array('members_icon_bar' => @members_icon_bar,'lang_set' => @lang_set))}}
-    			 {~ endif ~}
-    			 </p>
-    	</div>
-    	</div>
-    	</div>
-    	
+   	</div>
+  </div>	
+  
+  
+  
+  
+  
+   <br>
+  <br>
+  
+  
     </footer>
 
     <script type="text/javascript">
@@ -165,22 +115,22 @@
   })();
 </script>
      
-      <script src="/js/bootstrap.min.js"></script>
+      <script src="{{@uri}}js/bootstrap.min.js"></script>
       
       
       <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+      <script src="{{@uri}}js/leaflet-providers.js"></script>
+      <script src="{{@uri}}js/leaflet.markercluster.js"></script>
+      <script src="{{@uri}}js/tinymce/tinymce.min.js"></script>
       
-      <script src="/js/tinymce/tinymce.min.js"></script>
-      <script src="/js/leaflet-providers.js"></script>
-      <script src="/js/leaflet.markercluster.js"></script>
-      <script src="/js/main.js"></script>
-      {~ if(!empty(@SESSION.user) && @SESSION.user.is_admin == true): ~}
-     	<script src="/js/mainadmin.js"></script>
+      <script src="{{@uri}}js/main.js"></script>
+      {~ if(!empty(@SESSION.user) && @SESSION.user.is_admin == true || true): ~}
+     	<script src="{{@uri}}js/mainadmin.js"></script>
      {~ else: ~}
-     	<script src="/js/mainguest.js"></script>
+     	<script src="{{@uri}}js/mainguest.js"></script>
      {~ endif ~}
-     <!--<script src="/js/jquery.TextTranslate.js"></script>-->
-     <script>window.twttr = (function(d, s, id) {
+     <!--<script src="{{@uri}}js/jquery.TextTranslate.js"></script>-->
+     <!--<script>window.twttr = (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0],
     t = window.twttr || {};
   if (d.getElementById(id)) return t;
@@ -196,9 +146,10 @@
  
   return t;
 }(document, "script", "twitter-wjs"));</script>
-     <!-- Piwik -->
+     
 
-<noscript><p><img src="http://analytics.eempo.net/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<noscript><p><img src="http://analytics.eempo.net/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>-->
 <!-- End Piwik Code -->
+
   </body>
 </html>

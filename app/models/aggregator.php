@@ -162,6 +162,7 @@ class Aggregator extends Model {
 		
 		// echo $member_id." ";
 		
+		
 		$item = array ( 
 			'title' => $node->get_title(),
 			'description' => $node->get_content(),
@@ -171,7 +172,9 @@ class Aggregator extends Model {
 			'member_id' => $member_id,
 			'type' => 'rss'
 			);
-		
+		echo "<pre>";
+		print_r($item);
+		echo "</pre>";
 		$link = $this->getRow("WHERE link like '".$item['link']."' AND type like 'rss'");
 		
 		// $image = getImgFromHTML($item['description']);
@@ -180,41 +183,50 @@ class Aggregator extends Model {
 		$imgtag = "";
 		$find1 = strpos($e,"<img");
 		if($find1 !== false){
-			
+			echo "..";
 			$find2 = strpos(substr($e,$find1),">");
 			if($find2 !== false){
+				echo "..1";
 				$imgtag = substr($e,$find1,$find2);
 				if(!empty($imgtag)){
+					
+					echo "..2";
 					$regex = "/src=\"(.*?)\"/"; 
 					preg_match($regex, $imgtag, $matches);
 					if(!empty($matches[1]))
 					{
-						
-						
+						echo "..3";
+						$err = false;
 						$info = pathinfo($matches[1]);
 						if(!isset($info['extension'])){
 							echo "error while downloading: ".$matches[1];
-							return;
+							$err = true;
 						}
-						if(strpos($info['extension'],'jpg') == 0 && strpos($info['extension'],'jpg') !== false){
-							$info['extension']  = 'jpg';
-						}
+						
 						
 						if(!in_array($info['extension'],array('png','jpg','jpeg'))){
-							return;
+							echo "..4";
+							echo $info['extension'];
+							$err = true;
 						}
-						// $info['extension']  = 'jpg';
-						$filename = 'images/articles/'.uniqid();
-						$dst = $filename.'.'.$info['extension'];
 						
-						file_put_contents($dst, file_get_contents($matches[1]));
-						
-						fimage($dst,$filename,'jpg');
-						
-						$item['featured_image'] = '/'.$filename.'.jpg';
-						// echo "downloading file... <img src='/".$filename.".jpg'> $filename .... <br>";
-						echo "replacing: ".$matches[1]." to ".$item['featured_image']."...";
-						$item['description'] = str_replace($matches[1],$item['featured_image'],$item['description']);
+						if(!$err){
+							if(strpos($info['extension'],'jpg') == 0 && strpos($info['extension'],'jpg') !== false){
+								$info['extension']  = 'jpg';
+							}
+							// $info['extension']  = 'jpg';
+							$filename = 'images/articles/'.uniqid();
+							$dst = $filename.'.'.$info['extension'];
+							
+							file_put_contents($dst, file_get_contents($matches[1]));
+							
+							fimage($dst,$filename,'jpg');
+							
+							$item['featured_image'] = '/'.$filename.'.jpg';
+							// echo "downloading file... <img src='/".$filename.".jpg'> $filename .... <br>";
+							echo "replacing: ".$matches[1]." to ".$item['featured_image']."...";
+							$item['description'] = str_replace($matches[1],$item['featured_image'],$item['description']);
+						}
 					}
 				}
 			}

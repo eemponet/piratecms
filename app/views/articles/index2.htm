@@ -4,10 +4,10 @@
         <div class="col-md-8 blog-main">
         	<div class="containing">
         	
-        <div class="section-title"><img src="/images/menu_articles.png" alt="articles icon">Articles<span class="options">{{ App\Plugins\html::link("/articles/publish","publish") }}</span></div>
+        <div class="section-title"><img src="{{@uri}}/images/menu_articles.png" alt="articles icon">Articles<span class="options">{{ App\Plugins\html::link("/articles/publish","publish") }}</span></div>
         
           <div class="blog-post">
-            <img src="/images/test_pic.png">
+            <img src="{{@uri}}/images/test_pic.png">
             <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
 
             <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>

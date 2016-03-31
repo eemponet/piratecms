@@ -1,13 +1,16 @@
 [globals]
 db_dns=mysql:host=localhost;port=3306;dbname=
-db_name=db
-db_user=db_usr
-db_pass=dasd12321
+db_name=db_name
+db_user=db_username
+db_pass=db_password
 uri=/
 url=http://localhost
 salt=h7sye21
-DEBUG=3
-#LANG=pt
-#LANGS="en","fr","es"
+DEBUG=5
 UPLOAD_DIR=files/
 LAYOUT=default
+; TMPDIR=app/tmp/
+; LOGFILE=apps/tmp/app.log
+; LANG=pt
+; LANGS="en","fr","es"
+; CHARSET=UTF-8

@@ -20,8 +20,8 @@ class Actions extends Model {
 				
 				// array('author_name' => array('required' => true, 'minlength' => 10)),
 				// array('author_email' => array('required' => true,'email' => true)),
-				array('name' => array('required' => true, 'minlength' => 10)),
-				array('details' => array('required' => true, 'minwords' => 3, 'maxwords' => 10000)),
+				// array('name' => array('required' => true, 'minlength' => 5)),
+				array('details' => array('required' => true, 'minwords' => 2, 'maxwords' => 50,'maxlength' => 200)),
 				// array('author_img' => array('image' => true, 'filesize' => 500000)),
 				array('img' => array('image' => true, 'filesize' => 500000)),
 				// array('url' => array('url' => true)),
@@ -34,10 +34,16 @@ class Actions extends Model {
 	public function validate(){
 		// print_r($_POST);
 		// die('fuu');
+		$until = $this->f3->get('POST.until');
+		
+		if(empty($until)){
+			$this->f3->clear('POST.until');
+		}
+		
 		
 		$this->saveFile('img');
 		
-		$this->saveFile('author_img');
+		// $this->saveFile('author_img');
 		
 		// return true;
 		return parent::validate();

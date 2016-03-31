@@ -34,14 +34,18 @@ class Configs extends Controllerapp{
 		$this->f3->set('mails',$mails);
 		
 		$this->f3->set('menu_topo',array(
-			array('link' => '/configs','caption' => "Configurações gerais",'icon' => 'th'),
+			array('link' => '/configs','caption' => "ConfiguraÃ§Ãµes gerais",'icon' => 'th'),
 			array('link' => '/configs/createtemplate','caption' => "Novo template para mail",'icon' => 'plus')
 			
 			));
 	}
 	function edithtmlpage()
 	{
+		$this->f3->set('TITLE','Editar pgina');
 		$this->f3->set('available_langs',$this->languagesCombo());
+		
+		$menus = array(1 => 1,2 => 2,3 => 3);
+		$this->f3->set('menus',$menus);
 		$config = $this->Configs->getRow("WHERE id = '".$this->f3->get('PARAMS.p1')."'");
 		
 		

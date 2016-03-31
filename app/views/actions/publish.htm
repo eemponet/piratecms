@@ -1,14 +1,42 @@
 
-
 <div class="containing">
-{~ if(empty(@SESSION.user.id)): ~}
+{~ if(empty(@SESSION.user.id)&& false): ~}
 		{{Template::render("elements/guest_nopost.htm",'text/html') }}
 {~ else: ~}
 
 {{ App\Plugins\html::startForm(array("method" => "POST","class" =>"form-horizontal","enctype" => "multipart/form-data")) }}
+
+    {{ App\Plugins\html::hidden("tipo")}}
+	{{ App\Plugins\html::text("when",array("placeholder" => "","label" => "Quando?","class" => "datepicker-ui","minlength" => 2)) }} 
 	
+	{{ App\Plugins\html::text("until",array("placeholder" => "","label" => "Até","class" => "datepicker-ui")) }}
+	{{ App\Plugins\html::text("where",array("placeholder" => "Viana do Castelo","label" => "Partida","class" => "span12","minlength" => 2)) }}<br/>
 	
+	{~ if(@POST.tipo == 'etapa1' ||@POST.tipo == 'etapa2' ): ~}
+		{{ App\Plugins\html::text("destination",array("placeholder" => "Vila Real St António","label" => "Chegada","class" => "span12","minlength" => 2)) }}<br/>
+		{{ App\Plugins\html::text("distancia",array("placeholder" => "10","class" => "span12","label" => "Distância (km)")) }}
+	{~ endif ~}
+	{{ App\Plugins\html::textArea("details",array("placeholder" => "Vão passar um filme...","label" => "O quê?","class" => "span12","minlength" => 2)) }}<br/>
+
+	{{ App\Plugins\html::text("link",array("placeholder" => @url,"label" => "Hyperlink","class" => "span12","minlength" => 2)) }}<br/>
+	
+	{~ if(!empty(@POST.img)): ~}
+			{{ App\Plugins\html::hidden("img") }}
+			<span class="btn btn-default btn-file"> 
+			<img src='/{{@POST.img}}' class='thumbnail' style='float:left;'>
+			Replace image <input type="file" name="img" value="{{@POST.img}}"></span>
+			
+		{~ else: ~}
+			<span class="btn btn-default btn-file"> Upload image <input type="file" name="img"></span>
+		{~ endif ~}
+	
+<!--
+
 	{{ App\Plugins\html::hidden("member_id",@SESSION.user.id) }}
+	
+	
+	
+	
 	
 		{{ App\Plugins\html::text("author_name",array("placeholder" => "Author name","label" => "Author name","class" => "span12 checkvisibility","minlength" => 2)) }}<br/>
 		{{ App\Plugins\html::text("author_email",array("placeholder" => "Author email","label" => "Author email","class" => "span12","minlength" => 2)) }}<br/>
@@ -29,11 +57,11 @@
 		
 	{{ App\Plugins\html::text("name",array("placeholder" => "Action name","label" => "Action name","class" => "span12","minlength" => 2)) }}<br/>
 	
-	{{ App\Plugins\html::text("when",array("placeholder" => "","label" => "When","class" => "datepicker-ui","minlength" => 2)) }}<br/>
-	{{ App\Plugins\html::text("until",array("placeholder" => "","label" => "Until","class" => "datepicker-ui","minlength" => 2)) }}
+	
+	
 	
 	<!--Hour: {{ App\Plugins\html::comboHour("when_hour",array()) }}
-	 Minutes: {{ App\Plugins\html::comboMinute("when_min",array()) }}<br/>-->
+	 Minutes: {{ App\Plugins\html::comboMinute("when_min",array()) }}<br/>
 	
 	
 	{{ App\Plugins\html::text("link",array("placeholder" => @url,"label" => "Source","class" => "span12","minlength" => 2)) }}<br/>
@@ -52,8 +80,8 @@
 		
 	</div>
 	<br>
-	
-	{{ App\Plugins\html::submit("Save action",array("class" => "btn btn-primary")) }}
+	-->
+	{{ App\Plugins\html::submit("Gravar na agenda",array("class" => "btn btn-primary")) }}
 	
 {{ App\Plugins\html::endForm() }}
 {~ endif ~}

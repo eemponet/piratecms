@@ -12,3 +12,5 @@ tinymce.init({
     image_advtab: false,
             menubar: false,
 });
+
+

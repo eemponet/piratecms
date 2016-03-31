@@ -441,3 +441,9 @@ function openmemberpage()
 	window.location = this.url;
 }
 
+
+/** MAPS **/
+
+function startMap(id){
+	var mymap = L.map(id).setView([51.505, -0.09], 13);
+}

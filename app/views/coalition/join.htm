@@ -1,20 +1,9 @@
 
 
- <div class="row">
-
-         <div class="col-md-12 blog-main">
-         	<div id="resources" class="containing">
-         		
-         		{{ \Template::render('elements/editable.htm','text/html',array('page' => @page)) }}
-         		
-         	</div>
-         </div>
-</div>
-
 <div class="containing">
 
 {~ if(empty(@SESSION.user)): ~}
-        			<p>If you want to join the coalition, please fill up the form {{ \App\Plugins\html::link('/coalition/join','here')}}</p> 
+        			
         			<!--<p>If you are already registered and want to update your information {{ \App\Plugins\html::link('/coalition/login','login here')}}</p>-->
         	
         		
@@ -25,7 +14,7 @@
 	<br/>
 	
 	
-	{{ App\Plugins\html::text("name",array("placeholder" => "Name","label" => "Name","class" => "span12","minlength" => 2)) }}<br/>
+	{{ App\Plugins\html::text("name",array("placeholder" => "Nome","label" => "Nome","class" => "span12","minlength" => 2)) }}<br/>
 	{{ App\Plugins\html::textArea("summary",array("placeholder" => "Summary","label" => "Summary","class" => "span12","minlength" => 2)) }}<br/>
 	
 	{~ if(!empty(@POST.avatar)): ~}
@@ -48,14 +37,14 @@
 	{{ App\Plugins\html::password("password_confirmation",array("placeholder" => "Password confirmation","label" => "Password confirmation","class" => "span12","minlength" => 2)) }}<br/>
 	
 	{{ App\Plugins\html::text("location",array("placeholder" => "Lisbon, Portugal","label" => "Location","class" => "span12","minlength" => 2)) }}<br/>
-	<label>RSS/Atom <a href="https://en.wikipedia.org/wiki/RSS" target="_blank"><img src="/images/rss.png" height="15"/></a>: </label>
+	<label>RSS/Atom <a href="https://en.wikipedia.org/wiki/RSS" target="_blank"><img src="{{@uri}}/images/rss.png" height="15"/></a>: </label>
 	<input type="text" minlength="2" class="span12 form-control" placeholder="RSS" name="rss_url">
 	<br>
 	{{ App\Plugins\html::text("twitter_account",array("placeholder" => "&commat;Account","label" => "Twitter account","class" => "span12","minlength" => 2)) }}<br/>
 	
 	
 	{{ App\Plugins\html::text("gps_coords",array("placeholder" => "","label" => "Please click somewhere on the map!","class" => "span12","minlength" => 2,"readonly" => true)) }}<br/>
-	<div id="join_leafletmap">
+	<div id="leaflet_joinmap" class="leafletmap" target="gps_coords">
 		
 	</div>
 	
@@ -66,3 +55,10 @@
 {{ App\Plugins\html::endForm() }}
 {~ endif ~}
 </div>
+
+<script>
+	$(document).ready(function(){
+			// startMap("leaflet_joinmap");
+			var mymap = L.map('leaflet_joinmap').setView([51.505, -0.09], 13);
+	});
+</script>

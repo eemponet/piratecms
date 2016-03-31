@@ -6,36 +6,19 @@
         		
         		
         	
-        			{{Template::render("elements/section-title.htm",'text/html',array('section_image' => 'menu_actions.png','section_title' => 'Upcoming actions',
+        			{{Template::render("elements/section-title.htm",'text/html',array('section_title' => 'Agenda anti-fracking',
         			)) }}
         			
+        			{{Template::render("actions/actions.htm",'text/html',array('actions' => @actions)) }}
+        			
+        			<div style="clear:both;"></div>
+        			<br><br>
+        			<a href="/{{@_SESSION.lang}}/actions/publish/new">Adicionar evento</a> |
+        			<a href="/{{@_SESSION.lang}}/actions/past">Eventos anteriores...</a>
         			
         		
-        		
-        			<div id="fullmap_leafletmap" data="{{@map_users}}" data2="{{ isset(@past_actions_map_users) ? @past_actions_map_users : '' }}">
-        		
-        			</div>
-        	
-        			<a href="/{{@_SESSION.lang}}/actions/publish/new"><button type="button" class="btn btn-primary btn-lg">Add an action to the map</button></a>
-        			
-        	<div id="actions_content">
-        		{{ Template::render('actions/actions.htm','text/html',array('actions' => @actions_all)) }}
-        		
-        		
+
         	</div>
-        	
-        	
-        	{~ if(@actions_all.total_pages > 1): ~}
-        		<div class="more loadmore">
-        			<input type="hidden" name="page" value="1">
-        			<input type="hidden" name="div" value="#actions">
-        			<input type="hidden" name="total_pages" value="{{@actions_all.total_pages}}">
-        			<input type="hidden" name="url" value="actions/actions">
-        			<a href="#">Load more...</a>
-        		</div>
-        		{~ endif ~}
-        		</div>
-        </div>
-        	  
- </div>
-    
+</div>
+</div>
+</div>

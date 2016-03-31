@@ -1,8 +1,9 @@
 $(document).ready(function(){
 		$(".admineditable").prepend(function(){
 				var page = $(this).attr('page');
-				var lang = $('html')[0].lang;
-				return '<a class="option_over" href="/'+lang+'/configs/edithtmlpage/'+page+'">edit</a>';
+				//var lang = $('html')[0].lang;
+				var uri = $("#uri").val();
+				return '<a class="option_over" href="'+uri+'configs/edithtmlpage/'+page+'">edit</a>';
 		});
 			
 			// '<a class="option_over" href="/'.$('html')[0].lang.'/configs/edithtmlpage/">edit</a>');
@@ -23,7 +24,8 @@ tinymce.init({
     menubar: false,
     relative_urls: false,
     remove_script_host: false,
-    document_base_url: "https://housingnotprofit.org/"
+    document_base_url: window.location.protocol + "//" + window.location.host + "/"
+    //"https://housingnotprofit.org/"
 });
 		
 });

@@ -331,6 +331,8 @@ class Model
 			$language_set = $this->f3->get('lang_set');
 		}
 		
+		$default_lang = $this->f3->get('LANG');
+		
 		if(is_array($this->translated_fields) && !empty($language_set)){
 			
 			foreach($rows as $key => $row){
@@ -347,6 +349,19 @@ class Model
 						
 						if(!empty($res[0]['field_value'])){
 							$rows[$key][$_key] = $res[0]['field_value']."   ";
+						}else{
+							$q = "SELECT field_value FROM i18n_translations 
+							WHERE 
+							table_name like '".$this->tableName."' AND
+							field_id = ".$rows[$key][$this->primaryKey]." AND 
+							field_name like '".$_key."' AND
+							language like '".$default_lang."' ";
+							$res = $this->db->exec($q);
+							if(!empty($res[0]['field_value'])){
+								$rows[$key][$_key] = $res[0]['field_value']."   ";
+							}
+							
+							
 						}
 						
 					}
@@ -443,6 +458,10 @@ class Model
 	}
 	
 	public function beforeSave(){
+		if($this->alwaysValidate && !$this->validate()){
+			$this->error($this->getTranslation('validation_error'));
+			return false;
+		}
 		if(!$this->f3->exists('POST.id')){
 			$this->f3->set('POST.created',date('Y-m-d H:i:s'));
 		}
@@ -455,6 +474,7 @@ class Model
 	
 	public function afterSave()
 	{
+		$this->msg($this->getTranslation('submission_ok'));
 		return true;
 	}
 	

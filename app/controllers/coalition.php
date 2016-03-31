@@ -5,9 +5,11 @@ namespace App\Controllers;
 class Coalition extends ControllerApp{
 	
 	public $translate = true;
-	protected $models = array("Members","MembersSocial","Aggregator","Configs");
+	// protected $models = array("Members","MembersSocial","Aggregator","Configs");
+	
+	protected $models = array("Configs","Members");
 
-	public $title = '';
+	public $title = " - ";
 	function __construct()
 	{
 		parent::__construct();
@@ -44,6 +46,13 @@ class Coalition extends ControllerApp{
 	
 	function index()
 	{
+		$this->title = 'Manifesto';
+		$this->f3->set('page',$this->Configs->getPage('manifesto'));
+		$this->f3->set('show_banner',true);
+	}
+	
+	function index2()
+	{
 		
 		// print_r($_SESSION);
 		// die('yellow');
@@ -73,6 +82,7 @@ class Coalition extends ControllerApp{
 		// $this->f3->set('configs',$this->Configs->getRow("WHERE "));
 		$this->f3->set('page',$this->Configs->getPage('index'));
 	}
+	
 	
 	function memberslist()
 	{
@@ -207,7 +217,8 @@ class Coalition extends ControllerApp{
 		
 		if($this->Members->isAuthenticated()){
 			// print_r($this->f3->get('SESSION'));
-			$this->f3->reroute('/'.$this->f3->get('lang_set').'/coalition/member/'.$this->f3->get('SESSION.user.slug'));
+			// $this->f3->reroute('/'.$this->f3->get('lang_set').'/coalition/member/'.$this->f3->get('SESSION.user.slug'));
+			$this->f3->reroute('/');
 			// die('buuh');
 		}
 		// die('SEM MAIL?');

@@ -6,36 +6,29 @@
         		
         		
         	
-        			{{Template::render("elements/section-title.htm",'text/html',array('section_image' => 'menu_actions.png','section_title' => 'Past actions',
+        			{{Template::render("elements/section-title.htm",'text/html',array('section_image' => 'menu_actions.png','section_title' => 'Eventos anteriores...',
         			)) }}
         			
+        			{{Template::render("actions/actions.htm",'text/html',array('actions' => @actions)) }}
+        			
+        			<div style="clear:both;"></div>
+        			<br><br>
+        			
+        			<a href="/{{@_SESSION.lang}}/actions">Próximos eventos...</a>
+        			
+        		
+
+</div></div></div></div>
         			
         		
         		
-        			<div id="fullmap_leafletmap" data="{{@map_users}}">
-        		
-        			</div>
-        	
-        			<a href="/{{@_SESSION.lang}}/actions/publish/new"><button type="button" class="btn btn-primary btn-lg">Add an action to the map</button></a>
         			
-        	<div id="actions_content">
-        		{{ Template::render('actions/actions.htm','text/html',array('actions' => @actions)) }}
-        		
-        		
-        	</div>
+        			
         	
         	
-        	{~ if(@actions.total_pages > 1): ~}
-        		<div class="more loadmore">
-        			<input type="hidden" name="page" value="1">
-        			<input type="hidden" name="div" value="#actions">
-        			<input type="hidden" name="total_pages" value="{{@actions.total_pages}}">
-        			<input type="hidden" name="url" value="actions/actions">
-        			<a href="#">Load more...</a>
-        		</div>
-        		{~ endif ~}
-        		</div>
-        </div>
-        	  
- </div>
+        	
+        		
+        
+         
+ 
     
