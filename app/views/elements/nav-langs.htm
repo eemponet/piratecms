@@ -1,0 +1,11 @@
+<nav class="lang-nav">
+        
+        <repeat group="{{ @langs }}" value="{{ @item }}">
+        		{~ if(@item.alias == @lang_set): ~}
+        			<a class="blog-nav-item active" href="/{{@lang_set}}/page/lang/{{@item.alias}}">{{@item.alias}}</a>
+        		{~ else: ~}
+        				<a class="blog-nav-item" href="/{{@lang_set}}/page/lang/{{@item.alias}}">{{@item.alias}}</a>
+        		{~ endif ~}
+		</repeat>
+		
+        </nav>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html {{ !empty(@lang_set) ? 'lang='.@lang_set : '' }}>
+  <head>
+    <meta charset="{{@CHARSET}}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+    <title>{{@TITLE}}</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{@uri}}css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{@uri}}css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{{@uri}}css/colorbox.css">
+    <link rel="stylesheet" href="{{@uri}}css/genericons.css">
+    <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />-->
+    <link rel="stylesheet" href="{{@uri}}css/MarkerCluster.Default.css"/>
+    <link rel="stylesheet" href="{{@uri}}css/MarkerCluster.css"/>
+
+    <link href="{{@uri}}css/jquery-ui.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{{@uri}}css/style.css">
+    
+    <script src="{{@uri}}js/jquery.min.js"></script>
+     <script src="{{@uri}}js/jquery-ui.min.js"></script>
+     <script src="{{@uri}}js/tweetParser.min.js"></script>
+     
+  </head>
+  <body>
+  
+  <input type="hidden" id="uri" value="/{{@lang_set}}{{@uri}}">
+  
+  <div class="container-fluid">
+  <div class="row">
+   	<div class="col-md-2"></div>
+   	<div class="col-md-8">
+   	
+   	
+   
+  
+  <br><br><br><br>
+  <div class="container-fluid">
+
+     <div class="row">
+     	<div class="col-md-12">
+     			{{Template::render("elements/msg.htm")}}
+        		{{Template::render(@content)}}
+        		</div>
+      </div>
+  </div>
+  <br><br>
+  <div class="row superlinks">
+  	<div class="col-md-2">
+   	</div>
+   	<div class="col-md-2">
+   		{{ App\Plugins\html::link('/page/show/cronograma',"cronograma",array("class" => "")) }}
+   		<br>
+   	</div>
+   	<div class="col-md-1">
+   	</div>
+   	<div class="col-md-2">
+   		{{ App\Plugins\html::link('/page/show/manifesto',"manifesto",array("class" => "")) }}
+   		<br>
+   	</div>
+   	<div class="col-md-1">
+   	</div>
+   	<div class="col-md-2">
+   		{{ App\Plugins\html::link('/page/show/plano',"plano e ideias",array("class" => "")) }}
+   		<br>
+   	</div>
+   	<div class="col-md-2">
+   	</div>
+   	
+  </div>
+  <br>
+  <br>
+  
+  <div class="row supertexto">
+  	<div class="col-md-10"> <br><br><br><br><br>Inscreve-te por email info@bicicletada.colectivo1000101.org</div>
+  
+  
+   	<div class="col-md-2">{{ App\Plugins\html::link('/','<img src="'.@uri.'images/logo.png">' ) }}
+   	</div>
+  </div>	
+  </div>
+  
+  <div class="col-md-2"> 
+   	</div>
+  </div>
+  
+   <br>
+  <br>
+  
+  
+    </footer>
+
+    <script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//analytics.eempo.net/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+     
+      <script src="{{@uri}}js/bootstrap.min.js"></script>
+      
+      
+      <!--<script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+      <script src="{{@uri}}js/leaflet-providers.js"></script>
+      <script src="{{@uri}}js/leaflet.markercluster.js"></script>-->
+      <script src="{{@uri}}js/tinymce/tinymce.min.js"></script>
+      
+      <script src="{{@uri}}js/main.js"></script>
+      {~ if(!empty(@SESSION.user) && @SESSION.user.is_admin == true || true): ~}
+     	<script src="{{@uri}}js/mainadmin.js"></script>
+     {~ else: ~}
+     	<script src="{{@uri}}js/mainguest.js"></script>
+     {~ endif ~}
+     <!--<script src="{{@uri}}js/jquery.TextTranslate.js"></script>-->
+     <!--<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+ 
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+ 
+  return t;
+}(document, "script", "twitter-wjs"));</script>
+     
+
+<noscript><p><img src="http://analytics.eempo.net/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>-->
+<!-- End Piwik Code -->
+  </body>
+</html>

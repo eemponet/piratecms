@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html {{ !empty(@lang_set) ? 'lang='.@lang_set : '' }}>
+  <head>
+    <meta charset="{{@CHARSET}}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+    <title>{{@TITLE}}</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{@uri}}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{@uri}}/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{{@uri}}/css/colorbox.css">
+    <link rel="stylesheet" href="{{@uri}}/css/genericons.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+    <link rel="stylesheet" href="{{@uri}}/css/MarkerCluster.Default.css"/>
+    <link rel="stylesheet" href="{{@uri}}/css/MarkerCluster.css"/>
+
+    <link href="{{@uri}}/css/jquery-ui.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{{@uri}}/css/style.css">
+    
+    <script src="{{@uri}}/js/jquery.min.js"></script>
+     <script src="{{@uri}}/js/jquery-ui.min.js"></script>
+     <script src="{{@uri}}/js/tweetParser.min.js"></script>
+     
+  </head>
+  <body>
+  <div class="blog-masthead-logo">
+  	<a href="/{{@lang_set}}"><img src="{{@uri}}/images/logo.png" alt="Housing for people not for profit"></a>
+  </div>
+  
+  <div class="blog-masthead">
+      <div class="container">
+      
+      <ul class="nav navbar-nav
+      			{~ if(!empty(@item.subitems)): ~}
+      				dropdown-menu" role"menu
+      			{~ endif ~}
+      	">
+      	{~ if(!empty(@SESSION.login)): ~}
+      				<li>
+      				{{ App\Plugins\html::link("/coalition/member/".@SESSION.user.slug,"<img src='/".@SESSION.user.avatar."' alt='".@SESSION.user.slug."'><br/>@".@SESSION.user.slug,array("class" => "blog-nav-item dropdown-toggle", "data-toggle" => "dropdown")) }}
+      				
+      				 	<ul class="dropdown-menu">
+      				 		<li>
+      				 			{{ App\Plugins\html::link("/coalition/member/".@SESSION.user.slug,"My page") }}
+      				 		</li>
+      				 		<li>
+      				 			{{ App\Plugins\html::link("/coalition/edit/".@SESSION.user.id,"Edit member info") }}
+      				 		</li>
+      				 		<li>
+      				 			{{ App\Plugins\html::link("/coalition/logout","logout") }}
+      				 		</li>
+      				 	</ul>
+      					
+      				
+      				</li>
+      	{~ endif ~}
+      	<repeat group="{{ @topmenus }}" value="{{ @item }}">
+      			<li class="
+      			{~ if(strpos(@item.link,@controller)!==false ): ~}
+      				active
+      			{~ endif ~}
+      			{~ if(!empty(@item.subitems)): ~}
+      				dropdown-submenu
+      			{~ endif ~}
+      			">
+      			{~ if(!empty(@item.subitems)): ~}
+      				
+      				
+      				
+      				{{ App\Plugins\html::link(@item.link,"<img src='@uri/images/".@item.image."' alt='".@item.title."'><br/>	".@item.title,array("class" => "blog-nav-item dropdown-toggle", "data-toggle" => "dropdown")) }}
+      					
+      				<!--, "data-toggle" => "dropdown"--> 
+      				 	<ul class="dropdown-menu">
+      				 	<repeat group="{{ @item.subitems }}" value="{{ @sitem }}">
+      				 		<li>
+      				 			{{ App\Plugins\html::link(@sitem.link,@sitem.title) }}
+      				 		</li>
+      				 	</repeat>                
+      					</ul>
+      				
+      			{~ else: ~}
+      				{{ App\Plugins\html::link(@item.link,"<img src='@uri/images/".@item.image."' alt='".@item.title."'><br/>	".@item.title,array("class" => "blog-nav-item" )) }}
+      			{~ endif ~}
+      			
+      			
+      			</li>
+      	</repeat>
+      	
+      	
+      	</ul>
+      	
+      
+        
+      	
+        <nav class="lang-nav">
+        
+        <repeat group="{{ @langs }}" value="{{ @item }}">
+        		{~ if(@item.alias == @lang_set): ~}
+        			<a class="blog-nav-item active" href="/{{@lang_set}}/page/lang/{{@item.alias}}">{{@item.alias}}</a> |
+        		{~ else: ~}
+        				<a class="blog-nav-item" href="/{{@lang_set}}/page/lang/{{@item.alias}}">{{@item.alias}}</a> |
+        		{~ endif ~}
+		</repeat>
+		
+        </nav>
+        
+        	
+      </div>
+    </div>
+<div class="container-fluid conteudo">
+
+     <div class="row">
+     <div class="col-md-12"></div>
+     </div>
+     	{{Template::render("elements/msg.htm")}}
+     	
+        		{{Template::render(@content)}}
+        </div>
+</div><!-- /.container -->
+<br/>
+    <footer class="blog-footer">
+    	<div class="row-fluid">
+    	<div class="col-md-2">
+    		<img src="{{@uri}}/images/logo.png" alt="Housing for people not for profit">
+    	</div>
+    	<div class="col-md-10">
+    			
+    			<p>
+    			
+    			{~ if(empty(@SESSION.login)): ~}
+    			 	{{ App\Plugins\html::link("/coalition/join","join")}} 
+    			 	| {{ App\Plugins\html::link("https://housingnotprofit.org/@lang_set/coalition/login","login")}}
+    			 {~ else: ~} 
+    			 	{{ App\Plugins\html::link("/coalition/logout","logout")}}
+    			 {~ endif ~}
+    			
+    			 </p>
+    			 
+    			 <p>European action coalition for the right to housing and to the city</p>
+    			 <p>
+    			 {~ if(isset(@members_icon_bar)): ~}
+    			 	{{ \Template::render('elements/members-icon-footer.htm','text/html',array('members_icon_bar' => @members_icon_bar,'lang_set' => @lang_set))}}
+    			 {~ endif ~}
+    			 </p>
+    	</div>
+    	</div>
+    	</div>
+    	
+    </footer>
+
+    <script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//analytics.eempo.net/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+     
+      <script src="{{@uri}}/js/bootstrap.min.js"></script>
+      
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+      
+      <script src="{{@uri}}/js/tinymce/tinymce.min.js"></script>
+      <script src="{{@uri}}/js/leaflet-providers.js"></script>
+      <script src="{{@uri}}/js/leaflet.markercluster.js"></script>
+      <script src="{{@uri}}/js/main.js"></script>
+      {~ if(!empty(@SESSION.user) && @SESSION.user.is_admin == true): ~}
+     	<script src="{{@uri}}/js/mainadmin.js"></script>
+     {~ else: ~}
+     	<script src="{{@uri}}/js/mainguest.js"></script>
+     {~ endif ~}
+     <!--<script src="{{@uri}}/js/jquery.TextTranslate.js"></script>-->
+     <script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+ 
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+ 
+  return t;
+}(document, "script", "twitter-wjs"));</script>
+     <!-- Piwik -->
+
+<noscript><p><img src="http://analytics.eempo.net/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+  </body>
+</html>

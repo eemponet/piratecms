@@ -1,0 +1,13 @@
+ {{header("Content-type: text/csv") }}
+ <check if="{{!empty(@filename)}}">
+ <true>
+ 	{{header("Content-Disposition: attachment; filename=".@filename)}}
+ </true>
+ <false>
+ 	{{header("Content-Disposition: attachment; filename=file.csv")}}
+ </false>
+ </check>
+{{header("Pragma: no-cache")}}
+{{header("Expires: 0")}}
+
+ {{ Template::render(@content) }}

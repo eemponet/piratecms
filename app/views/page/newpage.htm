@@ -1,0 +1,21 @@
+
+<div class="containing">
+
+        			{{Template::render("elements/section-title.htm",'text/html',array('section_title' => 'Nova pagina'))}}
+
+{{ App\Plugins\html::startForm(array("method" => "POST","class" =>"form-horizontal","enctype" => "multipart/form-data")) }}
+	
+	
+	<br/>
+	
+	
+	{{ App\Plugins\html::text("value_2",array("placeholder" => "T&iacute;tulo","label" => "T&iacute;tulo","class" => "span12","minlength" => 2)) }}<br/>
+	
+	{{ App\Plugins\html::combo("value_3",@menus,array("label" => "Escolhe o men&uacute;","class" => "span12")) }}<br/>
+	
+	{{ App\Plugins\html::text("orderby",array("placeholder" => "Ordem","label" => "Ordem","class" => "span12","minlength" => 1)) }}
+	{{ App\Plugins\html::submit("Submit...",array("class" => "btn btn-primary")) }}
+	
+{{ App\Plugins\html::endForm() }}
+
+</div>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Error page not found</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/colorbox.css">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <link rel="stylesheet" href="/css/MarkerCluster.Default.css"/>
+    <link rel="stylesheet" href="/css/MarkerCluster.css"/>
+
+    <link href="/css/jquery-ui.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <script src="/js/jquery.min.js"></script>
+     <script src="/js/jquery-ui.min.js"></script>
+     
+  </head>
+  <body>
+  <div class="blog-masthead-logo">
+  	<a href="/"><img src="{{@uri}}/images/logo.png" alt="Housing for people not for profit"></a>
+  </div>
+    <div class="blog-masthead">
+      <div class="container">
+      
+      
+        
+      
+        
+        	
+      </div>
+    </div>
+<div class="container-fluid">
+
+     <div class="row">
+     <div class="col-md-12"></div>
+     <div class="containing center">
+    	<h1>Error page not found.<br><a href="javascript:history.go(-1);">Go back..</a></h1>
+    	
+    	{{@ERROR.code }}
+    	{~ if(@DEBUG > 3): ~}
+    		- {{@ERROR.text }}
+    	{~ endif ~}
+        </div>
+       </div>
+</div><!-- /.container -->
+<br/>
+    <footer class="blog-footer">
+    	<div class="row-fluid">
+    	<div class="col-md-2">
+    		<img src="{{@uri}}/images/logo.png" alt="Housing for people not for profit">
+    	</div>
+    	<div class="col-md-6">
+    			
+    			
+    			 
+    			 <p>European action coalition for the right to housing and to the city</p>
+    	</div>
+    		<div class="col-md-4">
+    			
+    		</div>
+    	</div>
+    	</div>
+    	
+    </footer>
+
+    
+     
+      <script src="/js/bootstrap.min.js"></script>
+      
+      
+      <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+      <script src="/js/leaflet-providers.js"></script>
+      <script src="/js/leaflet.markercluster.js"></script>
+      <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+      <script src="/js/main.js"></script>
+      
+  </body>
+</html>

@@ -1,0 +1,27 @@
+
+      <div class="row">
+
+        <div class="col-md-12 blog-main">
+        	<div id="actions" class="containing">
+        		
+        		
+        	
+        			{{Template::render("elements/section-title.htm",'text/html',array('section_title' => 'Agenda anti-fracking',
+        			)) }}
+        			
+        			{{Template::render("actions/actions.htm",'text/html',array('actions' => @actions)) }}
+        			
+        			<div style="clear:both;"></div>
+        			<br><br>
+        			
+        			
+        			{{\App\Plugins\html::link('actions/etapa1/','Ver primeira etapa...') }}
+        			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        			{{\App\Plugins\html::adminlink('actions/addEtapa2/','   Adicionar paragem (etapa 2)') }}
+        			
+        		
+
+        	</div>
+</div>
+</div>
+</div>

@@ -1,0 +1,50 @@
+{{include('../header_gestaov2.php');}}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    
+    <link rel="stylesheet" href="{{@BASE}}/css/style.css">
+    <script src="{{@BASE}}/js/general.js"></script>
+    <script src="{{@BASE}}/js/URI.js"></script>
+    <script src="{{@BASE}}/js/chosen.jquery.js"></script>
+    
+<script src="{{@BASE}}/js/select2.min.js"></script>
+<link rel="stylesheet" href="{{@BASE}}/css/select2.min.css">
+<!--
+<script src="{{@BASE}}/js/chosen.jquery.js"></script>
+<link rel="stylesheet" href="{{@BASE}}/css/chosen.css">
+-->
+
+<input id="base" name="base" type="hidden" value="{{@BASE}}">
+<input id="title" name="title" type="hidden" value="{{@title}}">
+<div id='content' class='gestaov2'>
+			
+				<div id='sub-content'>
+				
+					<div id='grey-content'>
+					
+					<div class="messages">
+						<check if="{{!empty(@msg)}}"><true>
+							<span class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>{{@msg}}</span>
+						</true></check>
+						<check if="{{!empty(@error_msg)}}"><true>
+							<span class="btn btn-danger"><span class="glyphicon glyphicon-warning-sign"></span>{{@error_msg}}</span>
+						</true></check>
+					</div>
+					<div id='title-grey'>
+						<check if="{{ isset(@menu_topo) }}">
+						<true>
+						<repeat group="{{ @menu_topo }}" value="{{ @item }}">
+							{{ App\Plugins\html::link(@item.link,"<span class='glyphicon glyphicon-".@item.icon."'></span>".@item.caption) }}
+						</repeat>
+						</true>
+						</check>
+					</div>
+						
+						<div id='textcontent'>
+						
+ 
+							{{Template::render(@content)}}
+						</div>
+					</div>
+				</div>
+</div>
