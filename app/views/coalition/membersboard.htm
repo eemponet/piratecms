@@ -1,7 +1,10 @@
-
+<div class="article members row superlinks">
 {~ foreach( @members.results as @key => @item): ~}
 
-			{~ if(@key%4 == 0 ): ~}
+
+			{~ if((@key)%4 == 0 ): ~}
+			
+				</div>
 				<div class="article members row superlinks">
 			{~ endif ~}
 			
@@ -23,11 +26,7 @@
         	</div>
         	
         	
-     		{~ if(@key%4 == 0 && @key != 0 ): ~}
-     			<br>
-				</div>
-				
-			{~ endif ~}
+     		
 {~ endforeach ~}
 {~ if(count(@members.results)%4 != 0): ~}
 	<br>
