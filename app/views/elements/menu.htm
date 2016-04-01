@@ -18,9 +18,9 @@
 
    	<div class="col-md-3">
    	
-   	{~ if(!empty(@SESSION.user)) : ~}
-   		{{Template::render("elements/submenu.htm",'text/html',array('menus' => @menu_principal[2]))}}
-   		{~ endif ~}
+   	
+   	{{Template::render("elements/submenu.htm",'text/html',array('menus' => @menu_principal[2]))}}
+   	
    		
    		
    	</div>
