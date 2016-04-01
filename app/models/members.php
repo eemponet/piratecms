@@ -24,8 +24,6 @@ class Members extends Model {
 				
 				// array('original_language' => array('required' => true)),
 				array('name' => array('required' => true, 'minlength' => 3)),
-				
-				array('website' => array('required' => true, 'minlength' => 5)),
 				array('avatar' => array('image' => true, 'filesize' => 500000)),
 				
 				array('summary' => array('required' => true, 'minwords' => 5))

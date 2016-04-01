@@ -46,6 +46,15 @@ class Coalition extends ControllerApp{
 	
 	function index()
 	{
+		// $this->f3->set('show_banner',true);
+		// $lang = '';
+		// if(($this->f3->exists('LANGS') || $this->f3->exists('LANG') ) && !$this->f3->exists('PARAMS.lang')){
+		// 	$lang = '/'.$this->f3->get('LANG');
+		// }
+		// $lang = '/'.$this->f3->get('LANG');
+		// $this->f3->reroute($lang.'/page/show/manifesto');
+		
+		
 		$this->title = 'Manifesto';
 		$this->f3->set('page',$this->Configs->getPage('manifesto'));
 		$this->f3->set('show_banner',true);

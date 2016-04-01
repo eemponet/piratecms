@@ -46,10 +46,13 @@ class Configs extends Controllerapp{
 		
 		$menus = array(1 => 1,2 => 2,3 => 3);
 		$this->f3->set('menus',$menus);
+		
 		$config = $this->Configs->getRow("WHERE id = '".$this->f3->get('PARAMS.p1')."'");
 		
 		
 		if($this->f3->exists('POST.id')){
+			$value_1 = str_replace("'","\'",$this->f3->get('POST.value_1'));
+			$this->f3->set('POST.value_1',$value_1);
 			if($this->Configs->edit()){
 				$this->f3->set('msg','Guardado!');
 				$this->f3->set('SESSION.lastroute',$this->f3->get('SESSION.lroute'));
