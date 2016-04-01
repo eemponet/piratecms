@@ -1,0 +1,39 @@
+
+{~ foreach( @members.results as @key => @item): ~}
+
+			{~ if(@key%4 == 0 ): ~}
+				<div class="article members row superlinks">
+			{~ endif ~}
+			
+			
+			{~ if(@item.activated == 0): ~}
+			    
+				<div class="col-md-3 article-member item_inactive">
+			{~ elseif(@item.published == 0): ~}
+				<div class="col-md-3 article-member item_hidden">
+			{~ else: ~}
+				<div class="col-md-3 article-member">
+			{~ endif ~}
+			
+        				
+        				{~ if(!empty(@item.avatar)): ~}
+        					<p>{{ \App\Plugins\html::link('coalition/member/'.@item.slug,'<img src="/'.@item.avatar.'" title="'.@item.name.'" alt="'.@item.name.'">') }}</p>
+        				{~ endif ~}
+        				
+        	</div>
+        	
+        	
+     		{~ if(@key%4 == 0 && @key != 0 ): ~}
+     			<br>
+				</div>
+				
+			{~ endif ~}
+{~ endforeach ~}
+{~ if(count(@members.results)%4 != 0): ~}
+	<br>
+				</div>
+				
+			{~ endif ~}
+        		<br/><br/><br/>
+        		
+        		

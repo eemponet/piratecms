@@ -1,0 +1,32 @@
+{~ if(!empty(@SESSION.user) && @SESSION.user.is_admin == 1): ~}
+      	<div class="containing">
+      	<b>Moderator options</b>
+      		<p>
+      		{~ if(@member.activated == 0): ~}
+        							 
+        							{{ App\Plugins\html::adminlink("/@controller/activate/".@member.id,"Activate",array('title' => "here")) }}
+        	{~ elseif (@member.published == 0): ~}
+      			 
+      			{{ App\Plugins\html::adminlink("/@controller/publish/".@member.id,"Show it!",array('title' => "here")) }}
+      		{~ endif ~}
+      		</p>
+      		<p>
+      		{{ \App\Plugins\html::adminlink('coalition/edit/'.@member.id,'Edit member info') }}</p>
+      		
+      		{~ if(@member.activated != 0 && @member.published != 0): ~}
+      			
+      			{{ App\Plugins\html::adminlink("/@controller/hide/".@member.id,"Hide user!",array('title' => "hide",'class' => 'confirmation_link')) }}
+      		{~ endif ~}
+      		<!--<p>You can <u>remove</u> this member clicking
+      			{{ App\Plugins\html::adminlink("/@controller/remove/".@member.id," here ",array('title' => "hide",'class' => 'confirmation_link')) }}-->
+      		</p>
+      		
+      	
+      		</div>
+      		<br/>
+      	{~ elseif (!empty(@SESSION.user) && @SESSION.user.id == @member.id): ~}
+      		<div class="containing">
+      			<p> 
+      			{{ \App\Plugins\html::link('coalition/edit/'.@member.id,'Edit my info') }}</p>
+      		</div>
+      	{~ endif ~}
