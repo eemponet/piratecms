@@ -553,7 +553,7 @@ class Model
 		return $this->getRow("WHERE ".$this->tableName.".".$this->primaryKey." = $id ".$this->sql_esconder);
 	}
 	
-	public function update($where, $data,$showQuery = false){ //WHERE já tem o WHERE escrito!
+	public function update($where, $data,$showQuery = false){ 
 		/*foreach($data as $field => $value){
 		if(in_array($field,$this->translated_fields)){
 		$res = $this->db->getRow('i18n_translations',"WHERE 

@@ -1,8 +1,10 @@
 
 
 <div class="containing">
+{{ \Template::render('elements/editable.htm','text/html',array('page' => @page))}}
 
-{~ if(empty(@SESSION.user)): ~}
+
+
         			
         			<!--<p>If you are already registered and want to update your information {{ \App\Plugins\html::link('/coalition/login','login here')}}</p>-->
         	
@@ -38,7 +40,8 @@
 	
 	{{ App\Plugins\html::text("location",array("placeholder" => "Lisbon, Portugal","label" => "Location","class" => "span12","minlength" => 2)) }}<br/>
 	<label><a href="https://en.wikipedia.org/wiki/RSS" target="_blank">RSS/Atom </a>: </label>
-	<input type="text" minlength="2" class="span12 form-control" placeholder="RSS" name="rss_url">
+	
+	{{ App\Plugins\html::text("rss_url",array("placeholder" => "RSS","label" => "","class" => "span12","minlength" => 2)) }}<br/>
 	<br>
 	{{ App\Plugins\html::text("twitter_account",array("placeholder" => "&commat;Account","label" => "Twitter account","class" => "span12","minlength" => 2)) }}<br/>
 	
@@ -53,7 +56,7 @@
 	{{ App\Plugins\html::submit("Juntar-me!...",array("class" => "btn btn-primary")) }}
 	
 {{ App\Plugins\html::endForm() }}
-{~ endif ~}
+
 </div>
 
 <script>

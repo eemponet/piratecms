@@ -341,11 +341,12 @@ h3{
 }
 .article-member-avatar{
 	vertical-align:middle;
-	height:50px;
-	width:50px;
+	height:100%;
+	width:100%;
 	margin-right:15px;
 	padding:5px;
 	float:left;
+	background-color:black;
 }
 .article-member-avatar img{
 	max-height:50px;

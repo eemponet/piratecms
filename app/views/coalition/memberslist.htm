@@ -3,21 +3,16 @@
       
         <div class="col-md-12 blog-main">
         	<div id='members' class="containing">
-        	{{Template::render("elements/section-title.htm",'text/html',array('section_title' => 'Members','section_image' => 'menu_coalition.png'))}}
-        	<div id="fullmap_leafletmap" url="/{{@lang_set}}/coalition/map">
-        		
-        		</div>
         	
-        		<br>
-        		
+        	{{ \Template::render('elements/editable.htm','text/html',array('page' => @page))}}
         	
         	
-        	{{ \Template::render('elements/members-icon-footer.htm','text/html',array('members_icon_bar' => @members_icon_bar,'lang_set' => @lang_set))}}
+        	
         		<div style="clear:both"></div>
-        		<br>
+        		
         		<div id='members_content'>
         		
-        		{{Template::render("coalition/members.htm")}}
+        		{{Template::render("coalition/membersboard.htm")}}
         		</div>
         		{~ if(@members.total_pages > 1): ~}
         		<div class="more">
@@ -27,6 +22,10 @@
         			<a href="#">Load more...</a>
         		</div>
         		{~ endif ~}
+          	 
+          	 <br/><br/>
+          	 {{ \App\Plugins\html::adminlink('/coalition/createmember','Adicionar novo membro')}}
+          	 
           	 </div>
            </div>
            

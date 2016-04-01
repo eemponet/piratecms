@@ -1,64 +1,29 @@
 <div class="coalition">
-      <div class="row member">
-      <div class="col-md-3">
-      	<div class="containing">
+      
       	
       	
       	
-      	{~ if(!empty(@SESSION.user) && @SESSION.user.is_admin == 1): ~}
-      	<div class="containing">
-      	<b>Moderator options</b>
-      		<p>
-      		{~ if(@member.activated == 0): ~}
-        							 
-        							{{ App\Plugins\html::adminlink("/@controller/activate/".@member.id,"Activate",array('title' => "here")) }}
-        	{~ elseif (@member.published == 0): ~}
-      			 
-      			{{ App\Plugins\html::adminlink("/@controller/publish/".@member.id,"Show it!",array('title' => "here")) }}
-      		{~ endif ~}
-      		</p>
-      		<p>
-      		{{ \App\Plugins\html::adminlink('coalition/edit/'.@member.id,'Edit member info') }}</p>
-      		
-      		{~ if(@member.activated != 0 && @member.published != 0): ~}
-      			
-      			{{ App\Plugins\html::adminlink("/@controller/hide/".@member.id,"Hide user!",array('title' => "hide",'class' => 'confirmation_link')) }}
-      		{~ endif ~}
-      		<!--<p>You can <u>remove</u> this member clicking
-      			{{ App\Plugins\html::adminlink("/@controller/remove/".@member.id," here ",array('title' => "hide",'class' => 'confirmation_link')) }}-->
-      		</p>
-      		
       	
-      		</div>
-      		<br/>
-      	{~ endif ~}
-      	{~ if (!empty(@SESSION.user) && @SESSION.user.id == @member.id): ~}
-      		<div class="containing">
-      			<p> 
-      			{{ \App\Plugins\html::link('coalition/edit/'.@member.id,'Edit my info') }}</p>
-      		</div>
-      	{~ endif ~}
-      	
-      	
-      	{{ Template::render('coalition/member_details.htm')}}
-      	<!-- submetido<br>
-      	
-      	nome<br>
-        		localidade<br>
-        		mapa<br>
-        	-->	
-        		
-        		
+      	<div class="row containing member">
+      		{{ Template::render('coalition/member_details.htm')}}
       	</div>
-      </div>
+      	{~ if(!empty(@SESSION.user) && (@SESSION.user.is_admin == 1 || @SESSION.user.id == @member.id)): ~}
+      		<div class="row containing col-md-12">
+      			{{ Template::render('coalition/member_options.htm')}}
+      		</div>
+      	{~ endif ~}
+      	
       
       
+     
+       <div class="row member">
+       
       {~ if(count(@aggregations.results) > 1): ~}
       
       {~ if(count(@aggregations_social.results) > 0): ~}
-      	<div class="col-md-5 blog-main">
+      	<div class="col-md-8 blog-main">
       {~ else: ~}
-      	<div class="col-md-9 blog-main">
+      	<div class="col-md-12 blog-main">
       {~ endif ~}
         	<div id="rss" class="containing">
         	
@@ -85,7 +50,7 @@
          	<div class="col-md-4 blog-main">
          {~ endif ~}
         {~ else: ~}
-        	<div class="col-md-9 blog-main">
+        	<div class="col-md-12 blog-main">
         {~ endif ~}
        {~ if(count(@aggregations_social.results) > 0): ~}
         <div id="social_networks" class="containing">
@@ -112,5 +77,5 @@
         {~ endif ~}
 
       </div><!-- /.row -->
-
+</div>
 </div>

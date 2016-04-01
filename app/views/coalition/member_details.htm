@@ -1,42 +1,45 @@
 
+	
+      	{{ \Template::render('elements/section-title.htm','text/html',array('section_title' => 'Rede'))}}
+      	
+      	<div class="col-md-4">
+      	
       	{~ if(!empty(@member.avatar)): ~}
+      		{{ !empty(@member.website) ? '<a href="'.@member.website.'" target="_blank">' : '' }}
       		<img class="img-responsive avatar" src="/{{@member.avatar}}" alt="{{@member.name}}">
+      		{{ !empty(@member.website) ? '</a>' : '' }}
+      		
+      		
+      	{~ else: ~}
+      		<p>{{@member.name}}</p>
       	{~ endif ~}
-      	<p></p>
-      	<h3>{{@member.name}}</h3>
-      	<h4>@{{@member.slug}}</h4>
-      	{~ if(!empty(@member.website)): ~}
-      		<p><a href="{{@member.website}}" target="_blank">{{ @member.website }}</a></p>
+      	<br/>
+      	{~ if(!empty(@member.rss_url)): ~}
+      		{{ \App\Plugins\html::link(@member.rss_url,'<img class="icon" src="'.@uri.'images/rss.png" alt="RSS"> ') }}
       	{~ endif ~}
       	
-      	<p>
-      	{~ if(!empty(@member.rss_url)): ~}
-      		{{ \App\Plugins\html::link(@member.rss_url,'<img class="icon" src="{{@uri}}/images/rss.png" alt="RSS"> ') }}
-      	{~ endif ~}
       	{~ if(!empty(@member.twitter_account)): ~}
-      		{{ \App\Plugins\html::link("https://twitter.com/".@member.twitter_account,'<img class="icon" src="{{@uri}}/images/twit.png" alt="Twitter Account"> ') }} <!--  [ {{@member.twitter_hashtags }} ]-->
+      		{{ \App\Plugins\html::link("https://twitter.com/".@member.twitter_account,'<img class="icon" src="'.@uri.'images/twit.png" alt="Twitter Account">') }} <!--  [ {{@member.twitter_hashtags }} ]-->
       		
       	{~ endif ~}
+      	
       	{~ if(!empty(@member.facebook_account)): ~}
-      		{{ \App\Plugins\html::link(@member.facebook_account,'<img class="icon" src="{{@uri}}/images/fb.png" alt="Facebook account"> ') }}
+      		{{ \App\Plugins\html::link(@member.facebook_account,'facebook') }}
       	{~ endif ~}
-      	</p>
+      	</div>
+      	<div class="col-md-8">
+      
+      	
+      	<!--{~ if(!empty(@member.website)): ~}
+      		{{ !empty(@member.website) ? '<a href="'.@member.website.'" target="_blank">' : '' }}
+      		<p>{{ @member.website }}</p>
+      		{{ !empty(@member.website) ? '</a>' : '' }}
+      	{~ endif ~}
+      	-->
+      	
       	
       	
       	
       	<p>{{@member.summary}}</p>
-      	
-      	
-      	<br><p>Since {{ fdate(@member.founddate,'%B %e, %Y') }}<p>
-      	
-      	{~ if(!empty(@member.email) && false): ~}
-      		<p>Email: {{ \App\Plugins\html::link('mailto:'.@member.email,@member.email) }}</p>
-      	{~ endif ~}
-      	
-      	
-      	
-      	{{ App\Plugins\html::hidden("gps_coords",@member.gps_coords) }}<br/>
-      	
-      	<div id="view_leafletmap">
-		
       	</div>
+      	

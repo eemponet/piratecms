@@ -88,37 +88,39 @@ class Members extends Model {
 		
 		//verify email in db...!
 		
-		if(!$this->isAuthenticated()){
+		
+		$slug = $this->f3->get('POST.slug');
+		
+		if(empty($slug)){
+			$slug = $this->slugify($this->f3->get('POST.name'));
+			$this->f3->set('POST.slug',$slug);
 			
-			$slug = $this->f3->get('POST.slug');
-			
-			if(empty($slug)){
-				$slug = $this->slugify($this->f3->get('POST.name'));
+			$slug_duplicate = $this->getRow("WHERE slug like '".$slug."'");
+			if(!empty($slug_duplicate)){
+				$slug .= uniqid();
 				$this->f3->set('POST.slug',$slug);
-				
-				$slug_duplicate = $this->getRow("WHERE slug like '".$slug."'");
-				if(!empty($slug_duplicate)){
-					$slug .= uniqid();
-					$this->f3->set('POST.slug',$slug);
-				}
 			}
-			
-			
-			// $this->f3->set('POST.approved',true);
-			$passwd = $this->f3->get('POST.password');
-			$this->f3->set('POST.password',md5(md5($passwd.$this->f3->get('salt'))));
-			
-			$this->saveFile('avatar');
-			
-			$this->f3->set('POST.created',date("Y-m-d H:i"));
 		}
 		
+		
+		// $this->f3->set('POST.approved',true);
+		$passwd = $this->f3->get('POST.password');
+		$this->f3->set('POST.password',md5(md5($passwd.$this->f3->get('salt'))));
+		
+		$this->saveFile('avatar');
+		
+		$this->f3->set('POST.created',date("Y-m-d H:i"));
 		
 		
 		
 		return true;
 	}
 	
+	function save()
+	{
+		$this->beforeSave();
+		return parent::save();
+	}
 	function login()
 	{
 		$email = $this->f3->get('POST.email');
@@ -223,8 +225,9 @@ class Members extends Model {
 		if($this->isAdmin()){
 			$sql_published = "1";
 		}
-		
-		$this->f3->set('members',$this->paginate($this->f3->get('PARAMS.p1'),10,'name','ASC',"WHERE $sql_published"));
+		// $this->f3->set('members',$this->getRows(" WHERE $sql_published ORDER BY name ASC"));
+	
+		$this->f3->set('members',$this->paginate($this->f3->get('PARAMS.p1'),100,'name','ASC',"WHERE $sql_published"));
 	}
 	
 	public function getIconBar()
@@ -340,6 +343,27 @@ class Members extends Model {
 		$this->update("email like '%".$email."%'",array("password" => "'".md5(md5($passw.$this->f3->get('salt')))."'") );
 		
 		return $passw;
+	}
+	
+	function activate($id){
+		
+		$member = $this->getById($id);
+		if(empty($member)){
+			$this->error("Erro utilizador não encontrado... ".$id);
+			return false;
+		}
+		
+		if(!$this->update("id = ".$id,array("activated" => 1,"published" => 1))){
+			$this->error("Erro na query? utilizador não encontrado...");
+			$this->update("id = ".$id,array("activated" => 1,"published" => 1),true);
+			return false;
+		}
+		
+		
+		// $this->newAction("new member activated",$member['id'],'member');
+		
+		return true;
+		
 	}
 }
 

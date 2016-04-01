@@ -5,11 +5,11 @@ namespace App\Controllers;
 class Coalition extends ControllerApp{
 	
 	public $translate = true;
-	// protected $models = array("Members","MembersSocial","Aggregator","Configs");
+	protected $models = array("Members","MembersSocial","Aggregator","Configs","Members");
 	
-	protected $models = array("Configs","Members");
+	// protected $models = array("Configs","Members");
 
-	public $title = " - ";
+	public $title = "";
 	function __construct()
 	{
 		parent::__construct();
@@ -102,14 +102,17 @@ class Coalition extends ControllerApp{
 		
 		$this->Members->getPages();
 		
-		$this->f3->set('page',$this->Configs->getPage('intro_memberslist'));
+		$this->f3->set('page',$this->Configs->getPage('rede'));
 	}
 	
 	function join()
 	{
-		
+		$this->title = "Junta-te a nós!.";
 		$this->f3->set('page',$this->Configs->getPage('join'));
 		
+		if($this->Members->isAuthenticated()){
+			$this->reroute('coalition','createmember');
+		}
 		if($this->f3->exists('POST.email')){
 			if(!$this->Members->validate()){
 				$this->error($this->getTranslation('validation_error'));
@@ -142,6 +145,58 @@ class Coalition extends ControllerApp{
 		$this->f3->set("available_langs",$this->languagesCombo());
 	}
 	
+	function createmember()
+	{
+		$this->title = "Junta-te a nós!.";
+		$this->f3->set('page',$this->Configs->getPage('join'));
+		
+		if($this->f3->exists('POST.email')){
+			if(!$this->Members->validate()){
+				$this->error($this->getTranslation('validation_error'));
+				if($this->f3->exists('FILES')){
+					$this->f3->set('FILES',$this->f3->get('FILES'));
+				}
+			}else{
+				if($this->Members->save()){
+					// $this->msg($this->getTranslation('submission_ok'));
+					// $this->f3->set('SESSION.member_slug',$this->f3->get('POST.slug'));
+					// $this->Members->bypassLogin($this->f3->get('POST.email'));
+					
+					$email = $this->f3->get('POST.email');
+					$name = $this->f3->get('POST.name');
+					$member = $this->Members->getRow("WHERE email like '$email'");
+					
+					if(!$this->Members->activate($member['id'])){
+						$this->error("Erro a activar novo membro!! ".$email." ".$member['id']);
+					}else{
+						
+						// $this->sendMail($member['email'],'Your account has been approved','Hello,<br>You can view your <a href="'.$this->f3->get('url').'/en/coalition/member/'.$member['slug'].'">member page</a><br> Your account has been approved, you can now login to our website!');
+						// $this->Members->newAction("new member activated",$member['id'],'member');
+						$this->msg("Novo membro activado membro!! ".$email);
+						$this->title = "";
+					}
+					
+					$this->reroute('coalition','memberslist');
+					
+					/*$this->notifyMods("New account to be approved $name","Please <a href='".$this->f3->get('url')."/en/coalition/member/".$this->f3->get('POST.slug')."?ltoken=%login_token%'>login here</a> to the website to review the details of the new member and activate the new account!");
+					
+					$this->sendMail("$name <$email>",'Your account is awaiting moderation, please wait for the activation e-mail sent by our team.','Hello,<br> we received your details, please wait for the activation of your account.');
+					
+					$this->reroute('coalition','thankyou');*/
+					
+					
+					
+				}else{
+					$this->error($this->getTranslation('error_submission'));
+				}
+			}
+		}
+		
+		$this->f3->set('section_subtitle',"Active coalition members");
+		
+		$this->f3->set("available_langs",$this->languagesCombo());
+	}
+	
 	function edit()
 	{
 		$user_id = $this->f3->get('SESSION.user.id');
@@ -159,6 +214,7 @@ class Coalition extends ControllerApp{
 			}else{
 				if($this->Members->edit()){
 					$this->msg($this->getTranslation('form_ok'));
+					$this->reroute('coalition','memberslist');
 				}else{
 					$this->error($this->getTranslation('form_error'));
 				}
@@ -280,7 +336,9 @@ class Coalition extends ControllerApp{
 	
 	function thankyou()
 	{
-		$this->layout = 'default_temp';
+               // $this->layout = 'default_temp';
+               $this->f3->set('section_title','Confirme o seu registo!');
+               $this->title = 'Obrigado, pelo registo, aguarde o mail com a confirmação!';
 		
 	}
 	
@@ -299,17 +357,11 @@ class Coalition extends ControllerApp{
 	
 	function activate()
 	{
-		if(!$this->f3->exists('PARAMS.p1') || !$this->Members->update("id = ".$this->f3->get('PARAMS.p1'),array("activated" => 1,"published" => 1))){
+		if(!$this->Members->activate($this->f3->get('PARAMS.p1'))){
 			$this->error($this->getTranslation('form_error'));
-			
-			
 		}else{
-			$member = $this->Members->getRow("WHERE id = ".$this->f3->get('PARAMS.p1'));
 			$this->sendMail($member['email'],'Your account has been approved','Hello,<br>You can view your <a href="'.$this->f3->get('url').'/en/coalition/member/'.$member['slug'].'">member page</a><br> Your account has been approved, you can now login to our website!');
-			
-			$id = $this->f3->get('PARAMS.p1');
-			$this->Members->newAction("new member activated",$id,'member');
-			
+	
 			$this->msg($this->getTranslation('form_ok'));
 		}
 		
