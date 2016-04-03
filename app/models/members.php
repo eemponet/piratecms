@@ -26,7 +26,7 @@ class Members extends Model {
 				array('name' => array('required' => true, 'minlength' => 3)),
 				array('avatar' => array('image' => true, 'filesize' => 500000)),
 				
-				array('summary' => array('required' => true, 'minwords' => 5))
+				array('summary' => array('required' => true, 'minwords' => 2))
 					//, 'maxwords' => 100)),
 				
 				);
@@ -36,6 +36,12 @@ class Members extends Model {
 	}
 	
 	public function validate(){
+		$passwd = $this->f3->get('POST.password');
+		if(empty($passwd) && $this->isAuthenticated()){
+			$this->f3->clear('POST.password');
+			$this->f3->clear('POST.password_confirmation');
+		}
+		
 		$ret = parent::validate();
 		
 		if(!$ret){
