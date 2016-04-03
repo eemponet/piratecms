@@ -681,3 +681,21 @@ box-shadow: 0 0 20px #8f8f8f; }
 .leafletmap{
 	height:180px;
 }
+
+.member-summary{
+	height:100px;
+}
+.member-links{
+	height:20px;
+}
+.member-logo{
+	height:120px;
+	margin-bottom:15px;
+}
+.member-logo img{
+	max-height:120px;
+	max-width:150px;
+}
+.member-links img{
+	height:20px;
+}

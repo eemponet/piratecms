@@ -17,39 +17,40 @@
 			{~ else: ~}
 				<div class="col-md-3 article-member">
 			{~ endif ~}
-						<div class="memberslist-logo">
+						<div class="member-logo">
         				{{ !empty(@item.website) ? '<a href="'.@item.website.'" target="_blank">' : '' }}
         				{~ if(!empty(@item.avatar)): ~}
-        						<img class="img-responsive avatar " src="/{{@item.avatar}}" alt="{{@item.name}}">
+        						<img class="img-responsive center-block avatar" src="/{{@item.avatar}}" class="" alt="{{@item.name}}">
         				{~ endif ~}
         				{{ !empty(@item.website) ? '</a>' : '' }}
         				</div>
-        				<br>
-        				<br>
+        				
+        				
+        				<p class="member-site">
         				{{ !empty(@item.website) ? '<a href="'.@item.website.'" target="_blank">' : '' }}
-        					<p>{{@item.name}}</p>
+        					{{@item.name}}
         				{{ !empty(@item.website) ? '</a>' : '' }}
-        				
-        				{~ if(!empty(@member.rss_url)): ~}
-        					{{ \App\Plugins\html::link(@member.rss_url,'<img class="icon" src="'.@uri.'images/rss.png" alt="RSS"> ') }}
+        				</p>
+        				<p class="member-links">
+        				{~ if(!empty(@item.rss_url)): ~}
+        					{{ \App\Plugins\html::link(@item.rss_url,'<img class="icon" src="'.@uri.'images/rss.png" alt="RSS"> ') }}
         				{~ endif ~}
-        				{~ if(!empty(@member.twitter_account)): ~}
-        					{{ \App\Plugins\html::link("https://twitter.com/".@member.twitter_account,'<img class="icon" src="'.@uri.'images/twit.png" alt="Twitter Account">') }} <!--  [ {{@member.twitter_hashtags }} ]-->
+        				{~ if(!empty(@item.twitter_account)): ~}
+        					{{ \App\Plugins\html::link("https://twitter.com/".@item.twitter_account,'<img class="icon" src="'.@uri.'images/twit.png" alt="Twitter Account">') }} <!--  [ {{@member.twitter_hashtags }} ]-->
         				{~ endif ~}
+        				{~ if(!empty(@item.facebook_account)): ~}
+        					{{ \App\Plugins\html::link(@item.facebook_account,'<img class="icon" src="'.@uri.'images/fb.png" alt="Facebook"> ') }}
+        				{~ endif ~}
+        				</p>
         				
-        				<p>{{@member.summary}}</p>
-        				
+        				<p class="member-summary">{{ \App\Plugins\html::link('/coalition/member/'.@item.slug,@item.summary) }}</p>
         				
         	</div>
         	
         	
      		
 {~ endforeach ~}
-{~ if(count(@members.results)%4 != 0): ~}
-	<br>
 				</div>
 				
-			{~ endif ~}
-        		<br/><br/><br/>
         		
         		
