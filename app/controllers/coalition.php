@@ -466,7 +466,7 @@ class Coalition extends ControllerApp{
 		}
 		
 		$name = $member['name'];
-		$this->oneClickMail($member['id'],"$name <$email>","Your housingnotprofit.org login request","
+		$this->oneClickMail($member['id'],"$name <$email>","Your ".$this->f3->get('url')." login request","
 			<h2>
 			Use this link to securely login to your account @".$member['slug'].".<br><br>
 			<h1>

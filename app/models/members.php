@@ -47,20 +47,21 @@ class Members extends Model {
 			}
 			
 			
-		}else{
-			
-			$passwd = $this->f3->get('POST.password');
-			
-			if(empty($passwd)){
-				
-				$this->f3->clear('POST.password');
-				$this->f3->clear('POST.password_confirmation');
-			}else if($this->f3->exists('POST.password_confirmation')){
-				$this->update("email like '%".$email."%'",array("password" => "'".md5(md5($passw.$this->f3->get('salt')))."'") );
-			}
-			
-			// return false;
 		}
+		
+			
+		$passwd = $this->f3->get('POST.password');
+		
+		if(empty($passwd) && $this->isAuthenticated()){
+			
+			$this->f3->clear('POST.password');
+			$this->f3->clear('POST.password_confirmation');
+		}else{
+			$this->update("email like '%".$email."%'",array("password" => "'".md5(md5($passwd.$this->f3->get('salt')))."'") );
+		}
+		
+		// return false;
+		
 		
 		if($this->f3->exists('POST.twitter_account')){
 			$twitter = $this->f3->get('POST.twitter_account');

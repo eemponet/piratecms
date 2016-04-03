@@ -348,6 +348,15 @@ h3{
 	float:left;
 	background-color:black;
 }
+
+.memberslist-logo{
+	height:100px;
+	text-align:center;
+}
+.memberslist-logo img{
+	max-height:100px;
+	text-align:center;
+}
 .article-member-avatar img{
 	max-height:50px;
 	max-width:50px;

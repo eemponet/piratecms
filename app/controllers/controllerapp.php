@@ -164,7 +164,7 @@ class ControllerApp extends Controller{
 		return $available_langs;
 	}
 	
-	function notifyMods($subject, $message, $from = 'European action coalition for the right to housing and to the city <info@housingnotprofit.org>') 
+	function notifyMods($subject, $message, $from) 
 	{
 		$mods = $this->db->getRows('members','WHERE is_admin = 1 AND activated = 1','name,email,id');
 		$to = "";
@@ -182,8 +182,11 @@ class ControllerApp extends Controller{
 		
 	}
 	
-	function oneClickMail($member_id,$to, $subject, $message, $from = 'European action coalition for the right to housing and to the city <info@housingnotprofit.org>') 
+	function oneClickMail($member_id,$to, $subject, $message, $from) 
 	{
+		if(empty($from)){
+			$from =  $this->f3->get('SITE_TITLE')." <".$this->f3->get('SUPPORT_MAIL').">";
+		}
 		$members = new \App\Models\Members();
 		$login_token = $members->createLoginToken($member_id);
 		$message = str_replace("%login_token%",$login_token,$message);
@@ -193,7 +196,7 @@ class ControllerApp extends Controller{
 		<table>
 			<tr>
 				<td>
-					<h1><font color='#866B8C' face='Arial, Helvetica, sans-serif'>European action coalition for the right to housing and to the city</font></h1>
+					<h1><font color='#866B8C' face='Arial, Helvetica, sans-serif'>".$this->f3->get('SITE_TITLE')."</font></h1>
 				</td>
 			</tr>
 			<tr>
@@ -206,7 +209,7 @@ class ControllerApp extends Controller{
 			</tr>
 			<tr>
 				<td>
-					<a href='http://www.housingnotprofit.org/'><img width='220px' src='http://housingnotprofit.org/images/logo.png' alt='Housing not profit'>
+					<a href='".$this->f3->get('url')."'><img width='220px' src='".$this->f3->get('url')."/images/logo.png' alt='".$this->f3->get('SITE_TITLE')."'>
 					</a>
 				</td>
 			</tr>
@@ -223,15 +226,17 @@ class ControllerApp extends Controller{
 		
 		return mail($to, $subject, $body, $headers);
 	}
-	function sendMail($to, $subject, $message, $from = 'European action coalition for the right to housing and to the city <info@housingnotprofit.org>') 
+	function sendMail($to, $subject, $message, $from) 
 		{
-		
+		if(empty($from)){
+			$from =  $this->f3->get('SITE_TITLE')." <".$this->f3->get('SUPPORT_MAIL').">";
+		}
 		$body = "<html><head></head>
 		<body>
 		<table>
 			<tr>
 				<td>
-					<h1><font color='#866B8C' face='Arial, Helvetica, sans-serif'>European action coalition for the right to housing and to the city</font></h1>
+					<h1><font color='#866B8C' face='Arial, Helvetica, sans-serif'>".$this->f3->get('SITE_TITLE')."</font></h1>
 				</td>
 			</tr>
 			<tr>
@@ -244,7 +249,7 @@ class ControllerApp extends Controller{
 			</tr>
 			<tr>
 				<td>
-					<a href='http://www.housingnotprofit.org/'><img width='220px' src='http://housingnotprofit.org/images/logo.png' alt='Housing not profit'>
+					<a href='".$this->f3->get('url')."'><img width='220px' src='".$this->f3->get('url')."/images/logo.png' alt='".$this->f3->get('SITE_TITLE')."'>
 					</a>
 				</td>
 			</tr>
