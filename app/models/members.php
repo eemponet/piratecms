@@ -58,6 +58,7 @@ class Members extends Model {
 			
 		$passwd = $this->f3->get('POST.password');
 		
+		$email = $this->f3->get('POST.email');
 		if(!empty($passwd)){
 			$this->update("email like '%".$email."%'",array("password" => "'".md5(md5($passwd.$this->f3->get('salt')))."'") );
 		}
