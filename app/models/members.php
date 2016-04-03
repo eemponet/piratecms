@@ -100,7 +100,15 @@ class Members extends Model {
 	public function beforeSave(){
 		
 		//verify email in db...!
-		
+		$id = $this->f3->exists('POST.id');
+		if(empty($id)){
+			$email = $this->f3->get('POST.email');
+			$rows = $this->getRows("WHERE email like '%$email%'");
+			if(!empty($rows)){
+				$this->error('email já registado');
+				return false;
+			}
+		}
 		
 		$slug = $this->f3->get('POST.slug');
 		
@@ -131,7 +139,7 @@ class Members extends Model {
 	
 	function save()
 	{
-		$this->beforeSave();
+		// $this->beforeSave();
 		return parent::save();
 	}
 	function login()
