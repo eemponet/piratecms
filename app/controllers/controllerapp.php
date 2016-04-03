@@ -182,7 +182,7 @@ class ControllerApp extends Controller{
 		
 	}
 	
-	function oneClickMail($member_id,$to, $subject, $message, $from) 
+	function oneClickMail($member_id,$to, $subject, $message, $from = '') 
 	{
 		if(empty($from)){
 			$from =  $this->f3->get('SITE_TITLE')." <".$this->f3->get('SUPPORT_MAIL').">";
