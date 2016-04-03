@@ -360,7 +360,7 @@ class Coalition extends ControllerApp{
 		if(!$this->Members->activate($this->f3->get('PARAMS.p1'))){
 			$this->error($this->getTranslation('form_error'));
 		}else{
-			$this->sendMail($member['email'],'Your account has been approved','Hello,<br>You can view your <a href="'.$this->f3->get('url').'/en/coalition/member/'.$member['slug'].'">member page</a><br> Your account has been approved, you can now login to our website!');
+			//$this->sendMail($member['email'],'Your account has been approved','Hello,<br>You can view your <a href="'.$this->f3->get('url').'/en/coalition/member/'.$member['slug'].'">member page</a><br> Your account has been approved, you can now login to our website!');
 	
 			$this->msg($this->getTranslation('form_ok'));
 		}
