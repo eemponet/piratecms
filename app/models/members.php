@@ -36,6 +36,12 @@ class Members extends Model {
 	}
 	
 	public function validate(){
+		$ret = parent::validate();
+		
+		if(!$ret){
+			return false;
+		}
+			
 		$this->saveFile('avatar','jpg',300,300);
 		
 		if(!$this->isAuthenticated()){
@@ -52,13 +58,12 @@ class Members extends Model {
 			
 		$passwd = $this->f3->get('POST.password');
 		
-		if(empty($passwd) && $this->isAuthenticated()){
-			
-			$this->f3->clear('POST.password');
-			$this->f3->clear('POST.password_confirmation');
-		}else{
+		if(!empty($passwd)){
 			$this->update("email like '%".$email."%'",array("password" => "'".md5(md5($passwd.$this->f3->get('salt')))."'") );
 		}
+		$this->f3->clear('POST.password');
+		$this->f3->clear('POST.password_confirmation');
+		
 		
 		// return false;
 		
@@ -74,7 +79,7 @@ class Members extends Model {
 		}
 		
 		
-		return parent::validate();
+		return true;
 	}
 	
 	public function edit()
