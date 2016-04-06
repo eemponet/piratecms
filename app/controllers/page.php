@@ -33,6 +33,7 @@ class Page extends ControllerApp{
 		$this->f3->set('page',$page);
 		
 		
+		$this->f3->set('description',substr(strip_tags($page['value_1']),0,155);
 	}
 	
 	function lang()

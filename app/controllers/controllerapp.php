@@ -60,6 +60,10 @@ class ControllerApp extends Controller{
 		$this->f3->set('langs',$langs);
 		
 		
+		// $meta = array("description" => "Page description. No longer than 155 characters.");
+		// https://moz.com/blog/meta-data-templates-123
+		// $this->f3->set('meta',$meta);
+		
 		// $this->f3->clear('SESSION.msg');
 		// $this->f3->clear('SESSION.error_msg');
 	}
@@ -81,6 +85,37 @@ class ControllerApp extends Controller{
 		
 		
 		$this->f3->set('menu_principal',$menus);
+		
+		
+		
+	}
+	
+	function afterroute(){
+		$title = "";
+		if($this->f3->exists('SITE_TITLE')){
+			$title = $this->f3->get('SITE_TITLE');
+			if(!empty($this->title)){
+				$title .= ' - ';
+				$title .= $this->title;
+			}
+		}
+		$this->f3->set('meta.title',$title);
+		
+		$description = $this->f3->get('description');
+		if(isset($this->description)){
+			$description = $this->description;
+		}
+		$this->f3->set('meta.description',$description);
+		
+		$url = $this->f3->get('url').$this->f3->get('uri');
+		$this->f3->set('meta.image',$url.'images/logo.png');
+		
+		$this->f3->set('meta.site_name',$this->f3->get('SITE_TITLE'));
+		
+		parent::afterroute();
+		
+		
+		
 		
 	}
 	function hasPermission(){

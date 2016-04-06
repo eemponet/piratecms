@@ -206,10 +206,9 @@ class Controller{
 			$title = $this->f3->get('SITE_TITLE');
 			if(!empty($this->title)){
 				$title .= ' - ';
+				$title .= $this->title;
 			}
 		}
-		
-		$title .= $this->title;
 		
 		$this->f3->set('TITLE',$title);
 		
@@ -235,7 +234,8 @@ class Controller{
 		echo \Template::instance()->render('layouts/'.$this->layout.".htm");
 		
 		if(!in_array($this->layout,array('empty','blank'))){
-			$this->f3->set('SESSION.lastroute',str_replace($this->f3->get('BASE'),"",$this->f3->get('URI')));
+			// $this->f3->set('SESSION.lastroute',str_replace($this->f3->get('BASE'),"",$this->f3->get('URI')));
+			$this->f3->set('SESSION.lastroute',$this->curPageURL());
 		}
 		
 		// echo "<pre>";
@@ -243,7 +243,6 @@ class Controller{
 		// echo "</pre>";
 		
 	}
-	
 	
 	function goback()
 	{
@@ -295,4 +294,19 @@ class Controller{
 		
 		// print_r($admins);
 	}
+	
+	
+	
+	function curPageURL() {
+		$pageURL = 'http';
+		if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
+		$pageURL .= "://";
+		if ($_SERVER["SERVER_PORT"] != "80") {
+			$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+		} else {
+			$pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+		}
+		return $pageURL;
+	}
+
 }

@@ -36,6 +36,7 @@
         					{{ \App\Plugins\html::link(@item.rss_url,'<img class="icon" src="'.@uri.'images/rss.png" alt="RSS"> ') }}
         				{~ endif ~}
         				{~ if(!empty(@item.twitter_account)): ~}
+        				
         					{{ \App\Plugins\html::link("https://twitter.com/".@item.twitter_account,'<img class="icon" src="'.@uri.'images/twit.png" alt="Twitter Account">') }} <!--  [ {{@member.twitter_hashtags }} ]-->
         				{~ endif ~}
         				{~ if(!empty(@item.facebook_account)): ~}
