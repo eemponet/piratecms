@@ -28,6 +28,8 @@ class Actions extends ControllerApp{
 		$this->f3->set('meta.title',"Agenda anti-fracking e não convencionais");
 		$this->f3->set('meta.description',"Aqui podes adicionar e acompanhar todos os evento. Debates, jantares, festas, encontros, passeios, oficinas...");
 		
+		// $this->f3->set('FUCK',"BRA");
+		
 		// $this->
 		// $this->actions();
 		// $this->
