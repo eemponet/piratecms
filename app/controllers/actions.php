@@ -24,9 +24,16 @@ class Actions extends ControllerApp{
 			// $sql_pub = "1";
 		// }
 		$this->f3->set('actions',$this->Actions->paginate(1,1000,'`when`','ASC',"WHERE tipo = 'antifrack' AND `when` > NOW() OR until > NOW() "));
+		
+		$this->f3->set('meta.title',"Agenda anti-fracking e não convencionais");
+		$this->f3->set('meta.description',"Aqui podes adicionar e acompanhar todos os evento. Debates, jantares, festas, encontros, passeios, oficinas...");
+		
+		// $this->
 		// $this->actions();
 		// $this->
 		// $this->layout = 'default';
+		
+		// $this->f3->set('page',$this->Configs->getPage('/actions/'));
 	}
 	
 	function upcoming()

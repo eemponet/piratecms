@@ -170,11 +170,11 @@ class Controller{
 		$this->f3->set('CHARSET',$charset);
 		
 		
-		if(strlen($this->title) < 1)
-		{
-			$this->title =  $this->f3->get('PARAMS.controller').' '. $this->f3->get('PARAMS.action');
-		}
-		$this->f3->set('title',$this->title);
+		// if(strlen($this->title) < 1)
+		// {
+		// 	$this->title =  $this->f3->get('PARAMS.controller').' '. $this->f3->get('PARAMS.action');
+		// }
+		// $this->f3->set('title',$this->title);
 		
 		$this->setlocale();
         

@@ -107,18 +107,28 @@ class ControllerApp extends Controller{
 				// $titulo = $this->title;
 			}
 		}
-		
+		if(!$this->f3->exists('meta.title')){
 		$this->f3->set('meta.title',$titulo." - ".$title);
+		}
 		// $this->f3->set('meta.title',$title);
 		
+		
 		$description = $this->f3->get('description');
-		if(isset($this->description)){
+		if(!empty($this->description)){
 			$description = $this->description;
 		}
-		$this->f3->set('meta.description',$description);
-		
+		if(!$this->f3->exists('meta.description')){
+			$this->f3->set('meta.description',$description);
+		}
 		$url = $this->f3->get('url').$this->f3->get('uri');
-		$this->f3->set('meta.image',$url.'images/cache/cartaz.jpg');
+		
+		$image = $url.'images/cache/cartaz.jpg';
+		if(isset($this->image)){
+			$image = $this->image;
+		}
+		if(!$this->f3->exists('meta.image')){
+		$this->f3->set('meta.image',$image);
+		}
 		
 		$this->f3->set('meta.site_name',$this->f3->get('SITE_TITLE'));
 		
