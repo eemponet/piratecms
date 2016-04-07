@@ -91,15 +91,25 @@ class ControllerApp extends Controller{
 	}
 	
 	function afterroute(){
-		$title = "";
+		$titulo = "";
+		// if(!empty($this->title)){
+				// $title .= ' - ';
+				// $title .= $this->title;
+				// $titulo .= "DSADSA".$this->title;
+				// $titulo = $this->title;
+			// }
 		if($this->f3->exists('SITE_TITLE')){
 			$title = $this->f3->get('SITE_TITLE');
 			if(!empty($this->title)){
-				$title .= ' - ';
-				$title .= $this->title;
+				// $title .= ' - ';
+				// $title .= $this->title;
+				$titulo .= $this->title;
+				// $titulo = $this->title;
 			}
 		}
-		$this->f3->set('meta.title',$title);
+		
+		$this->f3->set('meta.title',$titulo." - ".$title);
+		// $this->f3->set('meta.title',$title);
 		
 		$description = $this->f3->get('description');
 		if(isset($this->description)){
@@ -108,10 +118,11 @@ class ControllerApp extends Controller{
 		$this->f3->set('meta.description',$description);
 		
 		$url = $this->f3->get('url').$this->f3->get('uri');
-		$this->f3->set('meta.image',$url.'images/logo.png');
+		$this->f3->set('meta.image',$url.'images/cache/cartaz.jpg');
 		
 		$this->f3->set('meta.site_name',$this->f3->get('SITE_TITLE'));
 		
+		$this->f3->set('meta.url',$this->curPageURL());
 		parent::afterroute();
 		
 		

@@ -29,7 +29,7 @@ class Page extends ControllerApp{
 			$this->error('página não encontrada!');
 			$this->f3->reroute('/');
 		}
-		$this->title = $page['value_2'];
+		$this->title = trim($page['value_2']);
 		$this->f3->set('page',$page);
 		
 		

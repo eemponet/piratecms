@@ -198,16 +198,12 @@ class Controller{
 		setlocale(LC_TIME,$langs[$lang]);
 	}
 	function afterroute() {
-		// echo "<pre>";
-		// print_r($_SESSION);
-		// echo "</pre>";
 		$title = '';
+		if(!empty($this->title)){
+			$title .= $this->title.' - ';
+		}
 		if($this->f3->exists('SITE_TITLE')){
-			$title = $this->f3->get('SITE_TITLE');
-			if(!empty($this->title)){
-				$title .= ' - ';
-				$title .= $this->title;
-			}
+			$title .= $this->f3->get('SITE_TITLE');
 		}
 		
 		$this->f3->set('TITLE',$title);
