@@ -69,8 +69,26 @@ class ControllerApp extends Controller{
 	}
 	
 	function beforeroute(){
-		parent::beforeroute();
 		$this->Configs = new \App\Models\Configs();
+		
+		
+		
+		
+		parent::beforeroute();
+		
+		$page_id = '/'.$this->controller.'/'.$this->action;
+		
+		
+		$page = $this->Configs->getPage($page_id,'*',true);
+		// if(empty($page)){
+		// 	$this->error('página não encontrada!');
+		// 	$this->f3->reroute('/');
+		// }
+		$this->title = trim($page['value_2']);
+		$this->f3->set('page',$page);
+		
+		
+		
 		for($i=1;$i<=3;$i++){
 			$menu = $this->Configs->getRows("WHERE value_3=$i AND (tipo='htmlpage' OR tipo = 'link') ORDER BY orderby");
 			// ,"value_2 as title,CONCAT('/page/show/',value) as link
@@ -96,6 +114,9 @@ class ControllerApp extends Controller{
 		if(!$this->f3->exists('title') && !empty($this->title) ){
 			$this->f3->set('title',$this->title);
 		}
+		
+		
+		
 		// if(!empty($this->title)){
 				// $title .= ' - ';
 				// $title .= $this->title;

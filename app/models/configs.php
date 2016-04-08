@@ -32,9 +32,11 @@ create table configs(
 	}
 	
 	public function getPage($slug){
-		return $this->getRow("WHERE value like '$slug' AND tipo = 'htmlpage'");
+		$row = $this->getRow("WHERE value like '$slug' AND tipo = 'htmlpage'");
 		$row['link'] = $menu['value'];
 		$row['title'] = $menu['value_2'];
+		
+		return $row;
 		// $row['value'] = 'dsa';
 	}
 	
@@ -43,6 +45,8 @@ create table configs(
 		$row = $this->getRow("WHERE value like '$route' AND tipo = 'link'");
 		$row['link'] = '/page/show/'.$menu['value'];
 		$row['title'] = $menu['value_2'];
+		
+		return $row;
 	}
 	
 	public function newPage()

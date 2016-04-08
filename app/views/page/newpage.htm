@@ -10,7 +10,7 @@
 	
 	
 	{{ App\Plugins\html::text("value_2",array("placeholder" => "T&iacute;tulo","label" => "T&iacute;tulo","class" => "span12","minlength" => 2)) }}<br/>
-	
+	{{ App\Plugins\html::textArea("value_1",array("placeholder" => "Text","label" => "Text","class" => "span12 tinymce","minlength" => 2)) }}
 	{{ App\Plugins\html::combo("value_3",@menus,array("label" => "Escolhe o men&uacute;","class" => "span12")) }}<br/>
 	
 	{{ App\Plugins\html::text("orderby",array("placeholder" => "Ordem","label" => "Ordem","class" => "span12","minlength" => 1)) }}

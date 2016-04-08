@@ -23,6 +23,7 @@ class Page extends ControllerApp{
 	function show()
 	{
 		$this->f3->set('hide_banner',1);
+		
 		$page_id = $this->f3->get('PARAMS.p1');
 		$page = $this->Configs->getPage($page_id);
 		if(empty($page)){
@@ -74,6 +75,14 @@ class Page extends ControllerApp{
     				$this->f3->reroute('/');
     			}
     		}
+    	}
+    	
+    	if($this->f3->exists('PARAMS.p1') ){
+    		$value = '/'.$this->f3->get('PARAMS.p1');
+    		if($this->f3->exists('PARAMS.p2') ){
+    			$value .= '/'.$this->f3->get('PARAMS.p2');
+    		}
+    		$this->f3->set('POST.value',$value);
     	}
     	// slugify $this->f3->set('PO' 
     	

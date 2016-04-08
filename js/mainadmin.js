@@ -5,7 +5,8 @@ $(document).ready(function(){
 				var uri = $("#uri").val();
 				return '<a class="option_over" href="'+uri+'configs/edithtmlpage/'+page+'">edit</a>';
 		});
-			
+		
+		
 			// '<a class="option_over" href="/'.$('html')[0].lang.'/configs/edithtmlpage/">edit</a>');
 		
 			
