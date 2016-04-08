@@ -104,7 +104,7 @@ class Coalition extends ControllerApp{
 		
 		$this->Members->getPages();
 		
-		$this->f3->set('page',$this->Configs->getPage('rede'));
+		// $this->f3->set('page',$this->Configs->getPage('rede'));
 	}
 	
 	function join()
