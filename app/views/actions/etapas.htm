@@ -1,0 +1,65 @@
+<div class="agenda-frackoff">
+
+        			
+        			<table>
+        				<tbody>
+        					<tr class="odd">
+        						<td></td>
+        						<td></td>
+        						<td></td>
+        						<td></td>
+        						<td></td>
+        					</tr>
+        					
+        				    
+        				    {~ if(count(@actions.results) > 0): ~}
+        				    {~ foreach( @actions.results as @key => @item): ~}
+        				    <tr class="odd">
+        				    	<td>        				    	
+        				    		{{ \App\Plugins\html::link('actions/view/'.@item.slug, @item.tempo_intervalo) }}
+        				    	</td>
+        				    	<td>
+        				    	{{ \App\Plugins\html::link('actions/view/'.@item.slug, @item.distancia.' km') }} 
+        				    		
+        				    	</td>
+        				    	<td>
+        				    	{{ \App\Plugins\html::link('actions/view/'.@item.slug, @item.where.' / '.@item.destination) }}
+        				    		
+        				    	</td>
+        				    	
+        				    		
+        				    	<td>
+        				    	
+        				    	
+        				    	 
+        				    		<a href="{{\App\Plugins\html::getLink('/actions/view/'.@item.slug)}} ">
+        				    			{{@item.details | raw}}
+        				    		</a>
+        				    	
+        				    		<br>
+        				    	</td>
+        				    	<td>
+        				    		{{\App\Plugins\html::adminlink('actions/edit/'.@item.id,'Editar') }}
+        				    		{{\App\Plugins\html::adminlink('actions/delete/'.@item.id,'X',array('class' => 'confirmation_link')) }}
+        				    	</td>
+        				   	</tr>
+        				   	{~ endforeach ~}
+        				   	{~ endif ~}
+        			  </tbody>
+        			</table>
+        			<hr>
+        			{~ if(count(@actions.results) > 0): ~}
+        				    {~ foreach( @actions.results as @key => @item): ~}
+        				     {~ if(!empty(@item.img)): ~}
+        				    	<div class="image_link">
+        				    		<span class="image_desc">
+        				    		{{fdate(@item.when)}} {{!empty(@item.until) ? ' até '.fdate(@item.until) : '' }}
+        				    		</span>
+        				    		<a href="{{@item.link}}">
+        				    		{{\App\Plugins\html::img(@item.img) }}
+        				    		
+        				    		</a>
+        				    	</div>
+        				    {~ endif ~}
+        					{~ endforeach ~}
+        			{~ endif ~}
