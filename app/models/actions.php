@@ -101,6 +101,7 @@ class Actions extends Model {
 			if(isset($rows[$key]['details'])){
 				$rows[$key]['summary'] = getSummary($rows[$key]['details'],200);
 			}
+			$rows[$key]['tempo_intervalo'] = fdate($rows[$key]['when']).(!empty($rows[$key]['until']) ? ' até '.fdate($rows[$key]['until']) : '');
 		}
 		
 		return $rows;
