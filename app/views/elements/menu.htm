@@ -8,11 +8,12 @@
 	
       			      				
       				
-      				{{Template::render("elements/submenu.htm",'text/html',array('menus' => @menu_principal[0] ))}}
+      				{{Template::render("elements/submenu.htm",'text/html',array('menus' => @menu_principal[0],'title' => 'BICICLETADA' ))}}
       				
-      				{{Template::render("elements/submenu.htm",'text/html',array('menus' => @menu_principal[1] ))}}
-      				{{Template::render("elements/submenu.htm",'text/html',array('menus' => @menu_principal[2] ))}}
+      				{{Template::render("elements/submenu.htm",'text/html',array('menus' => @menu_principal[1],'title' => 'AGENDA ' ))}}
+      				{{Template::render("elements/submenu.htm",'text/html',array('menus' => @menu_principal[2],'title' => 'INFO' ))}}
       				
+      				{{Template::render("elements/submenu.htm",'text/html',array('menus' => @menu_principal[3],'title' => 'XTRAS' ))}}
 	
     </ul>
 

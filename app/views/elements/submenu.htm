@@ -1,14 +1,14 @@
 
 <li class="dropdown-submenu">
-
+{{ App\Plugins\html::link("",@title, array("data-toggle" => "dropdown","class" => "blog-nav-item dropdown-toggle")) }}
+					 <ul class="dropdown-menu">
 {~ foreach(@menus as @key => @menu_item): ~}
 
 
 	
 				{~ if(@key == 0): ~}
 				
-					 {{ App\Plugins\html::link(@menu_item.link,@menu_item.title, array("data-toggle" => "dropdown","class" => "blog-nav-item dropdown-toggle")) }}
-					 <ul class="dropdown-menu">
+					 
 				{~ endif ~}
 					
    		 			

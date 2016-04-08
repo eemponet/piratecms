@@ -92,7 +92,7 @@ class ControllerApp extends Controller{
 		}
 		
 		
-		for($i=1;$i<=3;$i++){
+		for($i=1;$i<=4;$i++){
 			$menu = $this->Configs->getRows("WHERE value_3=$i AND (tipo='htmlpage' OR tipo = 'link') ORDER BY orderby");
 			// ,"value_2 as title,CONCAT('/page/show/',value) as link
 			// $menu['title'] = $menu['value_2'];
