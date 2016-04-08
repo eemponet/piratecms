@@ -651,4 +651,8 @@ class Model
 		
 		$this->log("error: ".$msg);
 	}
+	
+	function lang(){
+		return $this->f3->get('lang_set');
+	}
 }

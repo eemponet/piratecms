@@ -45,8 +45,8 @@ a:hover{
 .superlinks a, .lang-nav a{
 	font-family:'fofbb', Arial;
 	color:#808080;
-	font-size:1.4em;
-	line-height: 1.8em;
+	font-size:1.1em;
+	line-height: 1.3em;
 }
 .superlinks a:hover, .lang-nav a:hover,.lang-nav a.active{
 	color:#1e1e1e;

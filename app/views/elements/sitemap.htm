@@ -1,0 +1,29 @@
+
+
+<div class="row superlinks">
+  	
+   <div class="col-md-2"></div>
+   	<div class="col-md-3">
+   	
+   		{{Template::render("elements/submenu_sitemap.htm",'text/html',array('menus' => @menu_principal[0]))}}
+   		
+   		
+   		
+   	</div>
+   
+   	<div class="col-md-3">
+   
+   		 {{Template::render("elements/submenu_sitemap.htm",'text/html',array('menus' => @menu_principal[1]))}}
+   	
+   	</div>
+
+   	<div class="col-md-3">
+   	
+   	
+   	{{Template::render("elements/submenu_sitemap.htm",'text/html',array('menus' => @menu_principal[2]))}}
+   	
+   		
+   		
+   	</div>
+   	<div class="col-md-1"></div>
+  </div>

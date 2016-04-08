@@ -31,8 +31,18 @@ create table configs(
 			);
 	}
 	
-	public function getPage($page){
-		return $this->getRow("WHERE value = '$page' AND tipo = 'htmlpage'");
+	public function getPage($slug){
+		return $this->getRow("WHERE value like '$slug' AND tipo = 'htmlpage'");
+		$row['link'] = $menu['value'];
+		$row['title'] = $menu['value_2'];
+		// $row['value'] = 'dsa';
+	}
+	
+	
+	public function getLink($route){
+		$row = $this->getRow("WHERE value like '$route' AND tipo = 'link'");
+		$row['link'] = '/page/show/'.$menu['value'];
+		$row['title'] = $menu['value_2'];
 	}
 	
 	public function newPage()
@@ -55,5 +65,28 @@ create table configs(
 	// 	$this->f3->set('POST.value',$slug);
 	// 	parent::beforeSave();
 	// }
+	
+	public function getRows($conds = '',$select = '*',$showQuery = false){
+		$rows = parent::getRows($conds,$select,$showQuery);
+		
+		foreach($rows as $key => $row){
+			$tipo = $row['tipo'];
+			
+			if($tipo == 'link'){
+				$rows[$key]['link'] = $row['value'];
+				$rows[$key]['title'] = $row['value_2'];
+			}
+			
+			if($tipo == 'htmlpage'){
+				$rows[$key]['link'] = '/page/show/'.$row['value'];
+				$rows[$key]['title'] = $row['value_2'];
+			}
+			
+			
+		}
+		
+		return $rows;
+	}
+	
 }
 

@@ -76,10 +76,11 @@ class ControllerApp extends Controller{
 			// ,"value_2 as title,CONCAT('/page/show/',value) as link
 			// $menu['title'] = $menu['value_2'];
 			// $menu['link'] = 'page/show/'.$menu['value'];
-			foreach($menu as $k => $item){
-				$menu[$k]['link'] = '/page/show/'.$item['value'];
-				$menu[$k]['title'] = $item['value_2'];
-			}
+			// foreach($menu as $k => $item){
+				// if()
+				// $menu[$k]['link'] = '/page/show/'.$item['value'];
+				// $menu[$k]['title'] = $item['value_2'];
+			// }
 			$menus[] = $menu;
 		}
 		
@@ -92,6 +93,9 @@ class ControllerApp extends Controller{
 	
 	function afterroute(){
 		$titulo = "";
+		if(!$this->f3->exists('title') && !empty($this->title) ){
+			$this->f3->set('title',$this->title);
+		}
 		// if(!empty($this->title)){
 				// $title .= ' - ';
 				// $title .= $this->title;

@@ -270,6 +270,7 @@ class Controller{
 	
 	function setTitle($title)
 	{
+		$this->title = $title;
 		$this->f3->set('title',$title);
 	}
 	
@@ -294,15 +295,35 @@ class Controller{
 	
 	
 	function curPageURL() {
+		$url = $this->f3->get('BASE');
+		echo "<pre>";
+		print_r($_SERVER);
+		echo "</pre>";
 		$pageURL = 'http';
-		if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
-		$pageURL .= "://";
+		if (!empty($_SERVER["HTTPS"])) {
+			$pageURL .= "s";
+		}
+			$pageURL .= "://";
 		if ($_SERVER["SERVER_PORT"] != "80") {
 			$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
 		} else {
 			$pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
 		}
+		echo $pageURL;
 		return $pageURL;
+		
+		// $pageURL = 'http';
+		// if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
+		// $pageURL .= "://";
+		// if ($_SERVER["SERVER_PORT"] != "80") {
+		// 	$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+		// } else {
+		// 	$pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+		// }
+		// return $pageURL;
 	}
-
+	
+	function lang(){
+		return $this->f3->get('lang_set');
+	}
 }

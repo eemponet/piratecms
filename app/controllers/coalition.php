@@ -99,11 +99,11 @@ class Coalition extends ControllerApp{
 			$this->f3->reroute('/'.$this->f3->get('LANG').'/');
 		}
 		
-		
+		// $this->setTitle('Rede');
 		
 		
 		$this->Members->getPages();
-		$this->title = 'Rede';
+		
 		$this->f3->set('page',$this->Configs->getPage('rede'));
 	}
 	

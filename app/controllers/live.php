@@ -3,13 +3,14 @@ namespace App\Controllers;
 
 class Live extends ControllerApp{
 	protected $models = array('Aggregator','Members');
-	
+	public $title="Noticias/RSS";
 	function index()
 	{
 		$this->f3->set('aggregations',$this->Aggregator->getRss());
 		
 		$this->f3->set('aggregations_social',$this->Aggregator->getSocial());
 		// Aggregator->paginate(1,4,'postDate','DESC',',members WHERE m'.$this->sql_show.' AND type like "twit"','aggregator.id'));
+		$this->setTitle("Noticias/RSS");
 	}
 	
 	function social()

@@ -1,5 +1,59 @@
-{~ foreach(@menus as @menu_item): ~}
-   		 	<check if="{{ @menu_item.tipo == 'link' }}">
+
+<li class="dropdown-submenu">
+
+{~ foreach(@menus as @key => @menu_item): ~}
+
+
+	
+				{~ if(@key == 0): ~}
+				
+					 {{ App\Plugins\html::link(@menu_item.link,@menu_item.title, array("data-toggle" => "dropdown","class" => "blog-nav-item dropdown-toggle")) }}
+					 <ul class="dropdown-menu">
+				{~ endif ~}
+					
+   		 			
+      				 <li>{{ App\Plugins\html::link(@menu_item.link,@menu_item.title) }}</li>
+   		 		
+   				
+   
+
+{~ endforeach ~}
+</ul>
+</li>
+{~ if(false): ~}
+
+<a data-toggle="dropdown" class="blog-nav-item dropdown-toggle" href="/en/coalition/memberslist"><img alt="Coalition" src="/images/menu_coalition.png"><br>	Coalition</a>      					
+      				<!--, "data-toggle" => "dropdown"--> 
+      				 	<ul class="dropdown-menu">
+      				 	      				 		<li>
+      				 			<a href="/en/coalition/join">Join us</a>      				 		</li>
+      				 	      				 		<li>
+      				 			<a href="/en/coalition/memberslist">Members</a>      				 		</li>
+      				 	                
+      					</ul>
+      				
+      					
+
+<br><br><br>
+
+<a data-toggle="dropdown" class="blog-nav-item dropdown-toggle" href="/en/coalition/memberslist"><img alt="Coalition" src="/images/menu_coalition.png"><br>	Coalition</a>      					
+      				<!--, "data-toggle" => "dropdown"--> 
+      				 	<ul class="dropdown-menu">
+      				 	      				 		<li>
+      				 			<a href="/en/coalition/join">Join us</a>      				 		</li>
+      				 	      				 		<li>
+      				 			<a href="/en/coalition/memberslist">Members</a>      				 		</li>
+      				 	                
+      					</ul>
+      				
+      			      			
+      			
+      			
+      			
+      			
+   		 	
+
+<check if="{{ @menu_item.tipo == 'link' }}">
    		 		<true>
    		 			{{ App\Plugins\html::link(@menu_item.value,@menu_item.title) }}
    		 		</true>
@@ -9,4 +63,4 @@
    			</check>
    			{{ App\Plugins\html::adminlink('/page/delete/'.@menu_item.id,'<span style="color:red; font-size:0.5em;vertical-align:top;" title="apagar">x</span>',array('class' => 'confirmation_link')) }}
    			<br>
-{~ endforeach ~}
+   		{~ endif ~}

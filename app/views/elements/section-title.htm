@@ -1,4 +1,5 @@
-				<div class="section-title">
+			{~ if(!empty(@newversion) ): ~}
+			<div class="section-title">
 					<span class="title">
         			{~ if( !empty(@section_image) && false): ~}
         				<img src="{{@uri}}/images/{{@section_image}}" alt="articles icon">
@@ -27,4 +28,6 @@
         		
         		{~ if( !empty(@section_subtitle) ): ~}
         			<h3>{{App\Plugins\html::i18n(@section_subtitle)}}</h3>
+        		{~ endif ~}
+        		
         		{~ endif ~}
