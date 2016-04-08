@@ -156,7 +156,7 @@ class ControllerApp extends Controller{
 			$image = $this->image;
 		}
 		if(!$this->f3->exists('meta.image')){
-		$this->f3->set('meta.image',$image);
+			$this->f3->set('meta.image',$image);
 		}
 		
 		$this->f3->set('meta.site_name',$this->f3->get('SITE_TITLE'));

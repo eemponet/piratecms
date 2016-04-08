@@ -1,7 +1,7 @@
 
 <div class="row centercontent">
 	
-	<div class="col-md-6">
+	<div class="col-md-12">
 		<div class="containing">
 		
 		
@@ -64,29 +64,12 @@
 				
 				
 				
-				{~ if(!empty(@SESSION.user) && @SESSION.user.is_admin == 1): ~}
-      	<div class="containing">
-      	<h2>Moderator options</h2>
-      		<p>
-      		{~ if(@event.published != 1): ~}
 				
-				{{ \App\Plugins\html::adminlink('actions/publishit/'.@event.id,'> Publish this action') }}
-			{~ else: ~}
-				{{ \App\Plugins\html::adminlink('actions/hide/'.@event.id,'> Hide this action') }}
-				
-			{~ endif ~}
-			<br>
-			
-			{{\App\Plugins\html::adminlink('actions/edit/'.@event.id,'> Edit content') }}<br>
-			<!--{{\App\Plugins\html::adminlink('actions/delete/'.@event.id,'> Delete.') }}-->
-			
-      		</div>
-      		<br/>
-      	{~ endif ~}
-	
       	
       	
       	<div class="containing">
+      	<div class="row">
+      	<div class="col-md-6">
       		<h2>Translations</h2>
       	<p>
 				
@@ -113,15 +96,34 @@
 				</p>
 				</div>
 				
-				</div>
-				<div class="col-md-1"></div>
+				<div class="col-md-6">
+		{~ if(!empty(@SESSION.user) && @SESSION.user.is_admin == 1): ~}
+      	
+      	<h2>Moderator options</h2>
+      		<p>
+      		{~ if(@event.published != 1): ~}
+				
+				{{ \App\Plugins\html::adminlink('actions/publishit/'.@event.id,'> Publish this action') }}
+			{~ else: ~}
+				{{ \App\Plugins\html::adminlink('actions/hide/'.@event.id,'> Hide this action') }}
+				
+			{~ endif ~}
+			<br>
+			
+			{{\App\Plugins\html::adminlink('actions/edit/'.@event.id,'> Edit content') }}<br>
+			<!--{{\App\Plugins\html::adminlink('actions/delete/'.@event.id,'> Delete.') }}-->
+			
+      		</div>
+      		<br/>
+      	{~ endif ~}
+	</div></div>
 			</div>
 			
 		
 		</div>
 	</div>
-	
-	<div class="col-md-6">
+	{{ Template::render('elements/discourse.htm')}}
+	<!--<div class="col-md-6">
 		<div class="containing">
 		
 		{{ Template::render('elements/disqus.htm')}}
@@ -133,6 +135,6 @@
 		{~ endif ~}
 		</div>
 		
-	</div>
+	</div>-->
 	
 </div>
