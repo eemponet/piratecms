@@ -44,7 +44,7 @@ class Configs extends Controllerapp{
 		$this->f3->set('TITLE','Editar pgina');
 		$this->f3->set('available_langs',$this->languagesCombo());
 		
-		$menus = array(1 => 1,2 => 2,3 => 3);
+		$menus = array(1 => 1,2 => 2,3 => 3,4 => 4);
 		$this->f3->set('menus',$menus);
 		
 		$config = $this->Configs->getRow("WHERE id = '".$this->f3->get('PARAMS.p1')."'");
