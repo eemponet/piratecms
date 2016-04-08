@@ -4,5 +4,7 @@ fatfree... part of main code.
 git clone https://github.com/bcosca/fatfree.git
 
 twitter api:
-https://github.com/J7mbo/twitter-api-php.git
+git clone https://github.com/J7mbo/twitter-api-php.git
 
+to add expando.. run  ( on the root folder) 
+git clone https://github.com/expando/expando.github.com.git

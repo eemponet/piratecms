@@ -700,3 +700,11 @@ box-shadow: 0 0 20px #8f8f8f; }
 .member-links img{
 	height:20px;
 }
+.article-rss iframe
+{
+	height:100px;
+}
+.article-rss
+{
+	/*height:100px;*/
+}

@@ -1,3 +1,5 @@
+
+
 {~ foreach( @aggregations.results as @item): ~}
 <div class="article row newpage">
 
@@ -7,19 +9,24 @@
         					{{ Template::render('elements/member.htm','text/html',array('member' => @item.Members))}}
         				</div>
         				{~ if(!empty(@item.featured_image) && false): ~}
-        						<div class="col-md-5">
+        						<div class="col-md-5 article-rss">
         				{~ else: ~}
-        						<div class="col-md-9">
+        						<div class="col-md-9 article-rss">
         				{~ endif ~}
         		{~ else: ~}
         			{~ if(!empty(@item.featured_image)  && false): ~}
-        						<div class="col-md-7">
+        						<div class="col-md-7 article-rss">
         			{~ else: ~}
-        						<div class="col-md-12">
+        						<div class="col-md-12 article-rss">
         			{~ endif ~}
         		{~ endif ~}
         				<a href="{{@item.link}}">
         					<h3>{{@item.title | raw}}</h3>
+        					<div class="article-date">
+        					{{@item.postDate}}
+        					{{date('F j, Y, H:i',strtotime(@item.postDate))}}
+        						
+        					</div>
         					</a>
         					<div class="article-body">
         						{~ if(!empty(@item.featured_image)): ~}
@@ -32,18 +39,20 @@
         				
         					</div>
         					
-        					<div class="article-date">
-        						{{fdate(@item.date) }}
-        					</div>
+        					
         					<a href="{{@item.link}}"> > Read more </a>&nbsp;&nbsp;&nbsp;&nbsp;
-        					<a href="/expando/add/index.htm?u={{@item.link}}&t={{@item.enctitle | raw}}" target='blank'> > Share</a>
-        					{~ if( empty(@hideshare) ): ~}
+        					<a href="/expando/add/index.htm?u={{@item.link}}&t={{@item.enctitle | raw}}" target='blank'> > Share</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        					
+        					{{ \App\Plugins\html::link('/live/delete/'.@item.id,'> Hide') }}
+        					{~ if( empty(@hideshare) && false ): ~}
         							<iframe src="/expando/add/index.htm?u={{@item.link}}&{{urlencode(@item.title)}}" frameborder=0 frametransparency=1 scrolling=no height=30 width=100%></iframe>
-        							<hr>
+        							
         					{~ else: ~}
-        						<br><br>
+        						
         					{~ endif ~}
-        				</div>
+        					<hr>
+        					
+        				
         				
         				
         						<div class="article-options">
@@ -51,7 +60,7 @@
         							{{ \App\Plugins\html::link('/live/delete/'.@item.id,'hide') }}
         						{~ endif ~}
         						</div>
-        						
+        						</div>
 					</div>
 					
         		{~ endforeach ~}
