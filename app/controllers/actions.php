@@ -214,7 +214,7 @@ class Actions extends ControllerApp{
 				if($this->Actions->save()){
 					
 					$this->msg("The event is now published!");
-					$this->reroute('actions');
+					$this->reroute('actions','etapa2');
 				}else{
 					$this->error($this->getTranslation('submission_error'));
 				}
