@@ -127,7 +127,7 @@
 		{{ Template::render('elements/disqus.htm')}}
 		{~ if(!empty(@event.twitter_hashtags)): ~}
 				{{ App\Plugins\html::hashtagify(@event.twitter_hashtags)}}
-					
+				
 				{{\Template::render('live\social.htm','text/html',array('aggregations_social' => @aggregations_action,'hidememberinfo' => true))}}
 		
 		{~ endif ~}
