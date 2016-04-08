@@ -93,10 +93,12 @@ class Members extends Model {
 	{
 		
 		$this->saveFile('avatar');
-		
+		$this->slug();
 		return parent::edit();
 		
 	}
+	
+	
 	public function beforeSave(){
 		
 		//verify email in db...!
@@ -110,6 +112,20 @@ class Members extends Model {
 			}
 		}
 		
+		// $this->f3->set('POST.approved',true);
+		$passwd = $this->f3->get('POST.password');
+		$this->f3->set('POST.password',md5(md5($passwd.$this->f3->get('salt'))));
+		
+		$this->saveFile('avatar');
+		
+		$this->f3->set('POST.created',date("Y-m-d H:i"));
+		
+		
+		$this->slug();
+		return true;
+	}
+	
+	function slug(){
 		$slug = $this->f3->get('POST.slug');
 		
 		if(empty($slug)){
@@ -122,24 +138,11 @@ class Members extends Model {
 				$this->f3->set('POST.slug',$slug);
 			}
 		}
-		
-		
-		// $this->f3->set('POST.approved',true);
-		$passwd = $this->f3->get('POST.password');
-		$this->f3->set('POST.password',md5(md5($passwd.$this->f3->get('salt'))));
-		
-		$this->saveFile('avatar');
-		
-		$this->f3->set('POST.created',date("Y-m-d H:i"));
-		
-		
-		
-		return true;
 	}
-	
 	function save()
 	{
 		// $this->beforeSave();
+		
 		return parent::save();
 	}
 	function login()

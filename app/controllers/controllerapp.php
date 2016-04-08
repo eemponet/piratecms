@@ -10,7 +10,7 @@ class ControllerApp extends Controller{
 		
 		"coalition" => array("index" => true,"join" => true,"login" => true,"member" => true,"thankyou" => true,"map" => true,"memberslist" => true,"recover" => true,"members" => true,"onelinkrecovery" => true),
 		
-		"actions" => array("index" => true,"rss" => true,"social" => true,"view" => true,"map" => true,"publish" => true,"thankyou" => true,"upcoming" => true,"past" => true,"etapa1" => true,"etapa2" => true),
+		"actions" => array("index" => true,"rss" => true,"social" => true,"view" => true,"map" => true,"publish" => true,"thankyou" => true,"upcoming" => true,"past" => true,"etapa1" => true,"etapa2" => true,"etapa" => true),
 		"campaigns" => array("index" => true),
 		"resources" => true,
 		

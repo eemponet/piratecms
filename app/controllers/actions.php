@@ -191,7 +191,7 @@ class Actions extends ControllerApp{
 				if($this->Actions->save()){
 					
 					$this->msg("The event is now published!");
-					$this->reroute('actions');
+					$this->reroute('actions','etapa1');
 				}else{
 					$this->error($this->getTranslation('submission_error'));
 				}
@@ -253,6 +253,29 @@ class Actions extends ControllerApp{
 		
 	}
 	
+	function etapa()
+	{
+		
+		$slug = $this->f3->get('PARAMS.p1');
+		
+		$this->f3->set("available_langs",$this->languagesCombo());
+		$event = $this->Actions->getRow("WHERE slug like '".$slug."'");
+		if(empty($event)){
+			$event = $this->Actions->getRow("WHERE id = ".$slug."");
+			$this->reroute('actions','view/'.$event['slug']);
+		}
+		// $event['share_url'] = '/expando/add/index.htm?u='.$this->f3->get('url').'/actions/view/'.$event['id'].'&t='.urlencode($event['name']);
+		$action_id = $event['id'];
+		$this->f3->set('aggregations_action',$this->Aggregator->getTwits(1,"aggregator.action_id = ".$action_id));
+		
+		$this->f3->set('event',$event);
+		
+		$this->f3->set('event.translated',$this->Actions->getTranslatedLangs($event['id']));
+		
+		$this->f3->set('pending_translations',$this->Actions->getPendingTranslations($event['id'],$this->languagesCombo()));
+		
+		
+	}
 	function map()
 	{
 		$this->layout = 'blank';

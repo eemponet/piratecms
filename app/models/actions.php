@@ -30,7 +30,10 @@ class Actions extends Model {
 		
 		
 	}
-	
+	public function edit(){
+		$this->slug();
+		return parent::edit();
+	}
 	public function validate(){
 		// print_r($_POST);
 		// die('fuu');
@@ -48,6 +51,22 @@ class Actions extends Model {
 		// return true;
 		return parent::validate();
 	}
+	
+	function slug(){
+		$slug = $this->f3->get('POST.slug');
+		
+		
+		$slug = $this->slugify($this->f3->get('POST.where').'_'.$this->f3->get('POST.destination'));
+		$this->f3->set('POST.slug',$slug);
+		
+		$slug_duplicate = $this->getRow("WHERE slug like '".$slug."'");
+		if(!empty($slug_duplicate)){
+			$slug .= uniqid();
+			$this->f3->set('POST.slug',$slug);
+		}
+		
+	}
+	
 	public function beforeSave(){
 		
 		if(!$this->validate())
@@ -62,22 +81,22 @@ class Actions extends Model {
 		// $details = $this->f3->get('POST.details');
 		// $details = str_replace($details,"'","");
 		// $this->f3->set('POST.details',$details);
-		
-		if(!$this->f3->exists('POST.original_article')){
-			$when = $this->f3->get('POST.when'); //' '.$this->f3->get('POST.when_hour').':'.$this->f3->get('POST.when_min');
+		$this->slug();
+		// if(!$this->f3->exists('POST.original_article')){
+		// 	$when = $this->f3->get('POST.when'); //' '.$this->f3->get('POST.when_hour').':'.$this->f3->get('POST.when_min');
 			
-			$this->f3->set('POST.when',date('Y-m-d',strtotime($when)));
+		// 	$this->f3->set('POST.when',date('Y-m-d',strtotime($when)));
 			
 			
-			$slug = $this->slugify($this->f3->get('POST.name'));
-			$this->f3->set('POST.slug',$slug);
-			$slug_duplicate = $this->getRow("WHERE slug like '".$slug."'");
-			if(!empty($slug_duplicate)){
-				$slug .= uniqid();
-				$this->f3->set('POST.slug',$slug);
-			}
+		// 	$slug = $this->slugify($this->f3->get('POST.name'));
+		// 	$this->f3->set('POST.slug',$slug);
+		// 	$slug_duplicate = $this->getRow("WHERE slug like '".$slug."'");
+		// 	if(!empty($slug_duplicate)){
+		// 		$slug .= uniqid();
+		// 		$this->f3->set('POST.slug',$slug);
+		// 	}
 			
-		}
+		// }
 		return parent::beforeSave();
 	}
 	

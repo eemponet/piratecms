@@ -16,14 +16,14 @@
         				    {~ foreach( @actions.results as @key => @item): ~}
         				    <tr class="odd">
         				    	<td>        				    	
-        				    		{{ \App\Plugins\html::link('actions/view/'.@item.slug, @item.tempo_intervalo) }}
+        				    		{{ \App\Plugins\html::link('actions/etapa/'.@item.id, @item.tempo_intervalo) }}
         				    	</td>
         				    	<td>
-        				    	{{ \App\Plugins\html::link('actions/view/'.@item.slug, @item.distancia.' km') }} 
+        				    	{{ \App\Plugins\html::link('actions/etapa/'.@item.slug, @item.distancia.' km') }} 
         				    		
         				    	</td>
         				    	<td>
-        				    	{{ \App\Plugins\html::link('actions/view/'.@item.slug, @item.where.' / '.@item.destination) }}
+        				    	{{ \App\Plugins\html::link('actions/etapa/'.@item.slug, @item.where.' / '.@item.destination) }}
         				    		
         				    	</td>
         				    	
@@ -32,14 +32,14 @@
         				    	
         				    	
         				    	 
-        				    		<a href="{{\App\Plugins\html::getLink('/actions/view/'.@item.slug)}} ">
+        				    		<a href="{{\App\Plugins\html::getLink('/actions/etapa/'.@item.id)}} ">
         				    			{{@item.details | raw}}
         				    		</a>
         				    	
         				    		<br>
         				    	</td>
         				    	<td>
-        				    		{{\App\Plugins\html::adminlink('actions/edit/'.@item.id,'Editar') }}
+        				    		{{\App\Plugins\html::adminlink('actions/addEtapa1/'.@item.id,'Editar') }}
         				    		{{\App\Plugins\html::adminlink('actions/delete/'.@item.id,'X',array('class' => 'confirmation_link')) }}
         				    	</td>
         				   	</tr>
