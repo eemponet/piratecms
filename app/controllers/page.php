@@ -50,7 +50,7 @@ class Page extends ControllerApp{
     
     function newpage()
     {
-    	$menus = array(1 => 1,2 => 2,3 => 3);
+    	$menus = array(1 => 1,2 => 2,3 => 3,4 => 4);
     	$this->f3->set('menus',$menus);
     	if($this->Members->isAuthenticated()){
     		if($this->f3->exists('POST.value_2')){
