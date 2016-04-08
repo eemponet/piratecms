@@ -296,9 +296,7 @@ class Controller{
 	
 	function curPageURL() {
 		$url = $this->f3->get('BASE');
-		echo "<pre>";
-		print_r($_SERVER);
-		echo "</pre>";
+		
 		$pageURL = 'http';
 		if (!empty($_SERVER["HTTPS"])) {
 			$pageURL .= "s";
