@@ -3,6 +3,6 @@
 
    			{{ App\Plugins\html::link(@menu_item.link,@menu_item.title) }}
    			
-   			{{ App\Plugins\html::adminlink('/page/delete/'.@menu_item.id,'<span style="color:red; font-size:0.5em;vertical-align:top;" title="apagar">x</span>',array('class' => 'confirmation_link')) }}
+   			<!--{{ App\Plugins\html::adminlink('/page/delete/'.@menu_item.id,'<span style="color:red; font-size:0.5em;vertical-align:top;"- title="apagar">x</span>',array('class' => 'confirmation_link')) }}-->
    			<br>
    		{~ endforeach ~}
