@@ -106,6 +106,7 @@ class Actions extends ControllerApp{
 	
 	function etapa2()
 	{
+		$this->f3->set('page',$this->Configs->getLink('/actions/etapa1'));
 		$this->f3->set('actions',$this->Actions->paginate(1,1000,'`when`','ASC',"WHERE tipo = 'etapa2' AND (`when` > NOW() OR until > NOW() )"));
 	}
 	

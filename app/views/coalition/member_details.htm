@@ -5,14 +5,10 @@
       	<div class="col-md-4">
       	
       	{~ if(!empty(@member.avatar)): ~}
-      		{{ !empty(@member.website) ? '<a href="'.@member.website.'" target="_blank">' : '' }}
-      		<img class="img-responsive avatar" src="/{{@member.avatar}}" alt="{{@member.name}}">
-      		{{ !empty(@member.website) ? '</a>' : '' }}
-      		
-      		
-      	{~ else: ~}
-      		<p>{{@member.name}}</p>
-      	{~ endif ~}
+						{{ !empty(@member.website) ? \App\Plugins\html::link(@member.website,'<img class="img-responsive center-block avatar" src="/'.@member.avatar.'" class="" alt="'.@member.name.'">') : '<img class="img-responsive center-block avatar" src="/'.@member.avatar.'" class="" alt="'.@member.name.'">' }}
+		{~ endif ~}
+		
+		{{ !empty(@member.website) ? \App\Plugins\html::link(@member.website,@member.name) : @member.name}}
       	<br/>
       	{~ if(!empty(@member.rss_url)): ~}
       		{{ \App\Plugins\html::link(@member.rss_url,'<img class="icon" src="'.@uri.'images/rss.png" alt="RSS"> ') }}
@@ -28,14 +24,6 @@
       	{~ endif ~}
       	</div>
       	<div class="col-md-8">
-      
-      	
-      	<!--{~ if(!empty(@member.website)): ~}
-      		{{ !empty(@member.website) ? '<a href="'.@member.website.'" target="_blank">' : '' }}
-      		<p>{{ @member.website }}</p>
-      		{{ !empty(@member.website) ? '</a>' : '' }}
-      	{~ endif ~}
-      	-->
       	
       	
       	

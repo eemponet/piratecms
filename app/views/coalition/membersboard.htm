@@ -18,18 +18,18 @@
 				<div class="col-md-3 article-member">
 			{~ endif ~}
 						<div class="member-logo">
-        				{{ !empty(@item.website) ? '<a href="'.@item.website.'" target="_blank">' : '' }}
-        				{~ if(!empty(@item.avatar)): ~}
-        						<img class="img-responsive center-block avatar" src="/{{@item.avatar}}" class="" alt="{{@item.name}}">
-        				{~ endif ~}
-        				{{ !empty(@item.website) ? '</a>' : '' }}
+						
+						{~ if(!empty(@item.avatar)): ~}
+							{{\App\Plugins\html::link('/coalition/member/'.@item.slug,'<img class="img-responsive center-block avatar" src="/'.@item.avatar.'" class="" alt="'.@item.name.'">')}}
+						{~ endif ~}
+						
+        				
         				</div>
         				
         				
-        				<p class="member-site">
-        				{{ !empty(@item.website) ? '<a href="'.@item.website.'" target="_blank">' : '' }}
-        					{{@item.name}}
-        				{{ !empty(@item.website) ? '</a>' : '' }}
+        				<p class="member-page">
+        				{{ !empty(@item.website) ? \App\Plugins\html::link('/coalition/member/'.@item.slug,@item.name) : '' }}
+        					
         				</p>
         				<p class="member-links">
         				{~ if(!empty(@item.rss_url)): ~}
