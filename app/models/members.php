@@ -255,7 +255,7 @@ class Members extends Model {
 		}
 		// $this->f3->set('members',$this->getRows(" WHERE $sql_published ORDER BY name ASC"));
 	
-		$this->f3->set('members',$this->paginate($this->f3->get('PARAMS.p1'),100,'created','DESC',"WHERE $sql_published"));
+		$this->f3->set('members',$this->paginate($this->f3->get('PARAMS.p1'),100,'created','ASC',"WHERE $sql_published"));
 	}
 	
 	public function getIconBar()
