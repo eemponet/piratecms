@@ -403,7 +403,7 @@ class Aggregator extends Model {
 		if(!empty($member_id)){
 			$member_sql = " AND aggregator.member_id = ".$member_id;
 		}
-		return $this->paginate($page,$per_page,'postDate','DESC',"WHERE  aggregator.visible = 1  AND type like 'rss' ".$member_sql,'aggregator.id','aggregator.*',true);
+		return $this->paginate($page,$per_page,'postDate','DESC',"WHERE  aggregator.visible = 1  AND type like 'rss' ".$member_sql,'aggregator.id','aggregator.*');
 	}
 	
 	
