@@ -78,16 +78,13 @@ class ControllerApp extends Controller{
 		
 		$page_id = '/'.$this->controller.'/'.$this->action;
 		
+		$page = $this->Configs->getPage($page_id);
 		
-		$page = $this->Configs->getPage($page_id,'*');
-		if(empty($page)){
-			$page = $this->Configs->getLink($page_id,'*');
+		
+		if(!isset($page['id'])){
+			$page = $this->Configs->getLink($page_id);
 		}
 		
-		// if(empty($page)){
-		// 	$this->error('página não encontrada!');
-		// 	$this->f3->reroute('/');
-		// }
 		if(!empty($page)){
 			$this->title = trim($page['value_2']);
 			$this->f3->set('page',$page);
