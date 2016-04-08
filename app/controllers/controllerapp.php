@@ -87,6 +87,7 @@ class ControllerApp extends Controller{
 		
 		if(!empty($page)){
 			$this->title = trim($page['value_2']);
+			$this->description = strip_tags($page['value_1']);
 			$this->f3->set('page',$page);
 		}
 		
@@ -144,6 +145,7 @@ class ControllerApp extends Controller{
 		if(!empty($this->description)){
 			$description = $this->description;
 		}
+		$description = substr($description,0,155);
 		if(!$this->f3->exists('meta.description')){
 			$this->f3->set('meta.description',$description);
 		}
