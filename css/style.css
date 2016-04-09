@@ -511,6 +511,7 @@ img.thumbnail,img.mediumsize {
 
 .nav .open > a, .nav .open > a:focus, .nav .open > a:hover {
 	background:#444;
+	color:white;
 }
 .dropdown-menu {
     background-color: #444;
