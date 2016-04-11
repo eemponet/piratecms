@@ -8,40 +8,37 @@
         				<div class="col-md-2 article-member">
         					{{ Template::render('elements/member.htm','text/html',array('member' => @item.Members))}}
         				</div>
-        				{~ if(!empty(@item.featured_image) && false): ~}
-        						<div class="col-md-5 article-rss">
-        				{~ else: ~}
-        						<div class="col-md-9 article-rss">
-        				{~ endif ~}
+        				<div class="col-md-10 article-rss">
         		{~ else: ~}
-        			{~ if(!empty(@item.featured_image)  && false): ~}
-        						<div class="col-md-7 article-rss">
-        			{~ else: ~}
-        						<div class="col-md-12 article-rss">
-        			{~ endif ~}
+        			
+        				<div class="col-md-12 article-rss">
+        			
         		{~ endif ~}
         				<a href="{{@item.link}}">
         					<h3>{{@item.title | raw}}</h3>
         					<div class="article-date">
-        					{{@item.postDate}}
-        					{{date('F j, Y, H:i',strtotime(@item.postDate))}}
+        					
+        					{{date('j F, Y, H:i',strtotime(@item.postDate))}}
         						
         					</div>
         					</a>
         					<div class="article-body">
-        						{~ if(!empty(@item.featured_image)): ~}
-        					<div class="col-md-4">
-        						<img class="img-responsive" src="{{@item.featured_image}}">
+        						
+        					
+        					
+        					{~ if(!empty(@item.featured_image)): ~}
+        						<div class="row">
+        						<div class="col-md-8">{{ @item.description | raw }}</div> 
+        						<div class="col-md-4"><img class="img-responsive" src="{{@item.featured_image}}"></div>
+        						</div>
+        					{~ else: ~}
+        						{{ @item.description | raw }}
+        					{~ endif ~}
         					</div>
-        				{~ endif ~}
-        					
-        					{{ @item.description | raw }} 
-        				
-        					</div>
         					
         					
-        					{{\App\Plugins\html::link(@item.link,'_read_more')}}<br>
-        					<a href="{{@item.share_url}}">{{\App\Plugins\html::i18n('_share')}}</a><br>
+        					{{\App\Plugins\html::link(@item.link,'_read_more')}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        					<a href="{{@item.share_url}}">{{\App\Plugins\html::i18n('_share')}}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         					{{ \App\Plugins\html::link('/live/delete/'.@item.id,'_hide') }}
         					
         					
