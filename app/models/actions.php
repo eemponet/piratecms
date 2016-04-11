@@ -247,6 +247,12 @@ class Actions extends Model {
 		// die(1);
 		return $events;
 	}
+	
+	function getAgenda(){
+		return $this->paginate(1,1000,'`when`','ASC',"WHERE tipo like 'antifrack'  AND ( `when` >= (NOW() - interval 1 day) OR until >= NOW() )",'id');
+		
+		//AND `when` >= (NOW() - interval 1 day) OR until >= NOW()
+	}
 }
 
 
