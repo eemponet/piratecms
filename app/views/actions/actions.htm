@@ -25,7 +25,7 @@
         				    		
         				    	</td>
         				    	<td>
-        				    		{{ \App\Plugins\html::link('actions/etapa/'.@item.slug,@item.where) }}
+        				    		{{ \App\Plugins\html::link('actions/view/'.@item.slug,@item.where) }}
         				    	</td>
         				    	<td>
         				    	<a href="{{ \App\Plugins\html::getlink('actions/view/'.@item.slug.'') }}">
@@ -50,7 +50,7 @@
         				    		<span class="image_desc">
         				    		{{fdate(@item.when)}} {{!empty(@item.until) ? ' até '.fdate(@item.until) : '' }}
         				    		</span>
-        				    		<a href="{{@item.link}}">
+        				    		<a href="{{ \App\Plugins\html::getlink('actions/view/'.@item.slug) }}">
         				    		{{\App\Plugins\html::img(@item.img) }}
         				    		
         				    		</a>
