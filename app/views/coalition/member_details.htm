@@ -1,14 +1,23 @@
 
 	
       	
-      	<div class="col-md-4">
+      	<div class="col-md-6">
+      	<h1>
+      	{{ !empty(@member.website) ? \App\Plugins\html::link(@member.website,@member.name) : @member.name}}</h1>
+      	<p>{{@member.summary}}</p>
+      	</div>
+      	<div class="col-md-6">
       	
+      	
+      	<p class="text-right">
       	{~ if(!empty(@member.avatar)): ~}
-						{{ !empty(@member.website) ? \App\Plugins\html::link(@member.website,'<img class="img-responsive center-block avatar" src="/'.@member.avatar.'" class="" alt="'.@member.name.'">') : '<img class="img-responsive center-block avatar" src="/'.@member.avatar.'" class="" alt="'.@member.name.'">' }}
+						{{ !empty(@member.website) ? \App\Plugins\html::link(@member.website,'<img class="img-responsive avatar" src="/'.@member.avatar.'" class="" alt="'.@member.name.'">') : '<img class="img-responsive avatar" src="/'.@member.avatar.'" class="" alt="'.@member.name.'">' }}
 		{~ endif ~}
 		
-		{{ !empty(@member.website) ? \App\Plugins\html::link(@member.website,@member.name) : @member.name}}
+		
       	<br/>
+      	
+      	{{ !empty(@member.website) ? \App\Plugins\html::link(@member.website,'Site') : ''}}
       	{~ if(!empty(@member.rss_url)): ~}
       		{{ \App\Plugins\html::link(@member.rss_url,'<img class="icon" src="'.@uri.'images/rss.png" alt="RSS"> ') }}
       	{~ endif ~}
@@ -21,12 +30,7 @@
       	{~ if(!empty(@member.facebook_account)): ~}
       		{{ \App\Plugins\html::link(@member.facebook_account,'facebook') }}
       	{~ endif ~}
+      	</p>
       	</div>
-      	<div class="col-md-8">
       	
-      	
-      	
-      	
-      	<p>{{@member.summary}}</p>
-      	</div>
       	
