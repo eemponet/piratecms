@@ -231,7 +231,7 @@ class Model
 	
 	
 	
-	function saveFile($inputname,$fdst='jpg', $w=300, $h=300)
+	function saveFile($inputname,$fdst='jpg', $w=900, $h=900)
 	{
 		
 		if(empty($this->destination_dir)){
