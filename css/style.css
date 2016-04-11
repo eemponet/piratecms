@@ -670,7 +670,7 @@ hr{
 
 .agenda-frackoff .image_link img{
 	padding:10px;
-	
+	max-width:200px;
 }
 
 .agenda-frackoff .image_link img:hover { 
