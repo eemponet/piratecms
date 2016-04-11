@@ -14,7 +14,7 @@ global $langdefs;
  	 				"+ Create" => "+ Criar",
  	 				"_add_translation" => "> Adicionar tradução",
  	 				"_edit" => "> Editar",
- 	 				
+ 	 				"_visit" => "Visitar website",
  	 				);
 
 ?>

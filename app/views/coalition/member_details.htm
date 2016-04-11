@@ -5,6 +5,8 @@
       	<h1>
       	{{ !empty(@member.website) ? \App\Plugins\html::link(@member.website,@member.name) : @member.name}}</h1>
       	<p>{{@member.summary}}</p>
+      	
+      	{{ !empty(@member.website) ? \App\Plugins\html::link(@member.website,'_visit',array('target' => '_blank')) : ''}}
       	</div>
       	<div class="col-md-6">
       	
@@ -17,7 +19,7 @@
 		
       	<br/>
       	
-      	{{ !empty(@member.website) ? \App\Plugins\html::link(@member.website,'Site') : ''}}
+      	
       	{~ if(!empty(@member.rss_url)): ~}
       		{{ \App\Plugins\html::link(@member.rss_url,'<img class="icon" src="'.@uri.'images/rss.png" alt="RSS"> ') }}
       	{~ endif ~}
