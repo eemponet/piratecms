@@ -9,11 +9,11 @@ global $langdefs;
  	 				"Map of solidarity" => "Mapa solidário",
  	 				"News/RSS" => "Notícias/RSS",
  	 				"Live" => "Tempo real",
- 	 				"View more" => "Ver mais",
- 	 				"> Read more" => "> Ler mais",
+ 	 				"_read_more" => "> Ler mais",
+ 	 				"_share" => "> Partilhar",
  	 				"+ Create" => "+ Criar",
- 	 				
- 	 				
+ 	 				"_add_translation" => "> Adicionar tradução",
+ 	 				"_edit" => "> Editar",
  	 				
  	 				);
 

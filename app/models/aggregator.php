@@ -438,8 +438,26 @@ class Aggregator extends Model {
 			if(isset($rows[$key]['title'])){
 				$rows[$key]['enctitle'] = urlencode($rows[$key]['title']);
 			}
+			if(isset($rows[$key]['id']) && isset($rows[$key]['title'])){
+				$rows[$key]['share_url'] = '/expando/add/index.htm?u='.$rows[$key]['link'].'&t='.urlencode($rows[$key]['title']);
+			}
 		}
 		
+		return $rows;
+	}
+	public function paginate($page = 1, $page_views = 5, $order_field = 'created', $order_order = 'DESC',$conds = '',$pageCountSelect = 'id', $select = '*',$showQuery = false)
+	{
+		$rows = parent::paginate($page, $page_views, $order_field, $order_order,$conds,$pageCountSelect, $select,$showQuery);
+		// echo "<pre>";
+		// print_r($rows);
+		foreach($rows['results'] as $key => $row){
+			
+			if(!empty($row['link']) ){
+				$rows['results'][$key]['share_url'] = '/expando/add/index.htm?u='.$row['link'].'&t='.urlencode($row['title']);
+			}
+		}
+		// print_r($rows);
+		// echo "</pre>";
 		return $rows;
 	}
 }

@@ -19,9 +19,17 @@ class html{
 		}
 	}
 	
+	static function userlink($href,$content = '',$array_attrs = array() )
+	{
+		$user = \Base::instance()->get('SESSION.user');
+		if(!empty($user['id']) ){
+			\App\Plugins\html::link($href,$content,$array_attrs);
+		}
+	}
 	
 	static function link($href,$content = '',$array_attrs = array() )
 	{
+		
 		$attrs = '';
 		
 		foreach($array_attrs as $key => $val)
@@ -55,15 +63,18 @@ class html{
 	}
 	static function getLink($href)
 	{
-		$uri = \Base::instance()->get('BASE');
+		$url = \Base::instance()->get('url');
 		$lang = \Base::instance()->get('lang_set');
+		$uri = \Base::instance()->get('uri');
+		
 		
 		if(!empty($lang)){
 			$lang_href = "/$lang";
 		}else{
 			$lang_href = '';
 		}
-		echo $uri."$lang_href"."$href";
+		
+		echo $url."$lang_href".$uri."$href";
 	}
 	static function email($name,$array_attrs )
 	{

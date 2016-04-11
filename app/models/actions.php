@@ -121,6 +121,9 @@ class Actions extends Model {
 				$rows[$key]['summary'] = getSummary($rows[$key]['details'],200);
 			}
 			$rows[$key]['tempo_intervalo'] = fdate($rows[$key]['when']).(!empty($rows[$key]['until']) ? ' até '.fdate($rows[$key]['until']) : '');
+			
+			$rows[$key]['partida_destino'] = $rows[$key]['where'].(!empty($rows[$key]['destination']) ? ' / '. $rows[$key]['destination'] : '');
+			
 		}
 		
 		return $rows;

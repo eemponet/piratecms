@@ -43,6 +43,7 @@ function i18n($id)
 	
 	$lang = $_SESSION['lang'];
 	
+	// echo $id;
 	if(isset($langdefs[$lang][$id])){
 		return $langdefs[$lang][$id];
 	}

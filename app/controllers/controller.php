@@ -242,11 +242,13 @@ class Controller{
 	
 	function goback()
 	{
-		$referer = $this->f3->get('SERVER.HTTP_REFERER');
-		if(!empty($referer)){
-			$this->f3->reroute($referer);
-		}else{
+		if($this->f3->exists('SESSION.lastroute')){
 			$this->f3->reroute($this->f3->get('SESSION.lastroute'));
+		}else{
+			$referer = $this->f3->get('SERVER.HTTP_REFERER');
+			
+			$this->f3->reroute($referer);
+			
 		}
 	}
 	

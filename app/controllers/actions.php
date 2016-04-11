@@ -128,6 +128,7 @@ class Actions extends ControllerApp{
 	
 	function edit()
 	{
+		
 		// $this->f3->set('available_langs',$this->languagesCombo());
 		$article_id = $this->f3->get('PARAMS.p1');
 		
@@ -376,11 +377,23 @@ class Actions extends ControllerApp{
 	
 	function hide()
 	{
-		if(!$this->f3->exists('PARAMS.p1') || !$this->Actions->update("id = ".$this->f3->get('PARAMS.p1'),array("published" => 0))){
-			$this->error($this->getTranslation('form_error'));
+		if(!$this->f3->exists('PARAMS.p1')){
+			$this->error($this->getTranslation('form_params'));
 		}else{
-			$this->msg($this->getTranslation('form_ok'));
-		}
+			$this->f3->set('POST.id',$this->f3->get('PARAMS.p1'));
+			$this->f3->set('POST.published',0);
+			if(!$this->Actions->edit()){
+				$this->error($this->getTranslation('form_error'));
+			}else{
+				$this->msg($this->getTranslation('form_ok'));
+			}
+			
+			// if(!$this->Actions->update("id = ".$this->f3->get('PARAMS.p1'),array("published" => 0))){
+				// $this->error($this->getTranslation('form_error'));
+			// }else{
+				
+			// }
+		} 
 		
 		$this->goback();
 	}

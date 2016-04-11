@@ -7,11 +7,7 @@
       	<div class="row containing member">
       		{{ Template::render('coalition/member_details.htm')}}
       	</div>
-      	{~ if(!empty(@SESSION.user) && (@SESSION.user.is_admin == 1 || @SESSION.user.id == @member.id)): ~}
-      		<div class="row containing col-md-12">
-      			{{ Template::render('coalition/member_options.htm')}}
-      		</div>
-      	{~ endif ~}
+      	
       	
       
       
@@ -28,11 +24,9 @@
         	<div id="rss" class="containing">
         	
         	
-        	<div id='rss_content'>
-        		<div class="section-title">
-        		<img src="{{@uri}}/images/menu_live.png" alt="articles icon">
-        		News/RSS
-        	</div>
+        	
+        		<hr>
+        		
         	{{Template::render("live/rss.htm")}}
         	</div>
         	{~ if(@aggregations.total_pages > 1): ~}

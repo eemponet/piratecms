@@ -1,7 +1,6 @@
 
-<div class="row centercontent">
 	
-	<div class="col-md-6">
+	<div class="col-md-12">
 		<div class="containing">
 		
 		
@@ -12,127 +11,136 @@
 				<br><br>
 				<div class="row">
 					
-					<div class="col-md-10">
-					
-					
-						<h2>{{@event.name}}</h2>
+					<div class="col-md-6">
+					<h1>{{ App\Plugins\html::link(@event.link,@event.tempo_intervalo)}}</h1>
 				
 						<div class="article-date">
 						
-						<h2>{{  fdate(@event.when)  }} {{ !empty(@event.until) && @event.until > 0 ? '- '.fdate(@event.until): ''}}
+							<h2>{{ App\Plugins\html::link(@event.link,@event.partida_destino)}}</h2>						
+						</div>
 						
-						<br>{{ @event.location }}</h2></div> 
+							<p>{{@event.details | raw}}</p>
+						
+						
+						<h2>
+      			
+				
+				</h2>
+					</div>
+					<div class="col-md-6">
+					
+						{~ if(!empty(@event.img)): ~}
+				
+							<div class="article-img">
+								<img src="/{{ @event.img}}" class="img-responsive">
+							</div>
+				
+						{~ endif ~}
 						<h4>
 						{~ if(!empty(@event.twitter_hashtags)): ~}
 							{{ App\Plugins\html::hashtagify(@event.twitter_hashtags)}}
 						{~ endif ~}
-						</h4>	
+						</h4>
+						{{ App\Plugins\html::hidden("gps_coords",@event.gps_coords) }}<br/>
+						{~ if(!empty(@event.gps_coords)): ~}
+						<div id="view_leafletmap">
+		
+						</div>
+						{~ endif ~}
+						Fonte: {{ App\Plugins\html::link(@event.link,@event.link)}}
+				
 					</div>
-						<div class="col-md-2">
+						<!--<div class="col-md-2">
 						
 						{{ Template::render('elements/author.htm','text/html',array('item' => @event,'show_name' => true)) }}
-						</div>
+						</div>-->
 				</div>
 		
-				<br/>
-				{~ if(!empty(@event.img)): ~}
-				
-					<div class="article-img">
-					<img src="/{{ @event.img}}" class="img-responsive">
-					</div>
-				
-				{~ endif ~}
-				
-				<p>{{@event.details | raw}}</p>
 				
 				
 				
-				<h2>
-				<a href="{{@event.link}}" target='_blank'> > Read more</a><br>
-				<a href="{{@event.share_url}}" target='_blank'> > Share</a>
-				</h2>
-				<iframe src="{{@event.share_url}}" frameborder=0 frametransparency=1 scrolling=no height=30 width=100%></iframe>
 				
-				{{ App\Plugins\html::hidden("gps_coords",@event.gps_coords) }}<br/>
-				{~ if(!empty(@event.gps_coords)): ~}
-				<div id="view_leafletmap">
-		
-				</div>
-				{~ endif ~}
+				
 			
 				
+			</div>	
+			</div>
 				
 				
-				
-				{~ if(!empty(@SESSION.user) && @SESSION.user.is_admin == 1): ~}
-      	<div class="containing">
-      	<h2>Moderator options</h2>
-      		<p>
-      		{~ if(@event.published != 1): ~}
-				
-				{{ \App\Plugins\html::adminlink('actions/publishit/'.@event.id,'> Publish this action') }}
-			{~ else: ~}
-				{{ \App\Plugins\html::adminlink('actions/hide/'.@event.id,'> Hide this action') }}
-				
-			{~ endif ~}
-			<br>
-			
-			{{\App\Plugins\html::adminlink('actions/edit/'.@event.id,'> Edit content') }}<br>
-			<!--{{\App\Plugins\html::adminlink('actions/delete/'.@event.id,'> Delete.') }}-->
-			
-      		</div>
-      		<br/>
-      	{~ endif ~}
-	
       	
+
+      	<div class="row">
       	
-      	<div class="containing">
-      		<h2>Translations</h2>
+		<div class="col-md-3">
+      		{{\App\Plugins\html::link(@event.link,'_read_more')}}
+      			<br>
+      			{{\App\Plugins\html::link(@event.share_url,'_share')}}
       	<p>
 				
-				{{\App\Plugins\html::link('page/lang/'.@event.original_language,'> '.@available_langs[@event.original_language].' (Original)')}}
+				<!--{{\App\Plugins\html::link('page/lang/'.@event.original_language,'> '.@available_langs[@event.original_language].' (Original)')}}-->
 				
 				{~ if(!empty(@event.translated) ): ~}
 				
 				{~ foreach(@event.translated as @lang): ~}<br/>
-					{{\App\Plugins\html::link('page/lang/'.@lang,'> '.@available_langs[@lang])}}
-					{{\App\Plugins\html::adminlink('actions/deletetranslation/'.@event.id.'/'.@lang,'x')}}
+					{{\App\Plugins\html::userlink('page/lang/'.@lang,'> '.@available_langs[@lang])}}
+					{{\App\Plugins\html::userlink('actions/deletetranslation/'.@event.id.'/'.@lang,'x')}}
 				{~ endforeach ~}
 				
 				{~ endif ~}
-				<br/>
-				{{\App\Plugins\html::link('actions/addtranslation/'.@event.id,'> Add translation')}}<br>
+				
+				{{\App\Plugins\html::userlink('actions/addtranslation/'.@event.id,'_add_translation')}}<br>
 				
 				</p>
+				{~ if(!empty(@SESSION.user) && @SESSION.user.is_admin == 1): ~}
+      	
+      	
+      		<p>
+      		{~ if(false): ~}
+      		{~ if(@event.published != 1): ~}
 				
+				{{ \App\Plugins\html::userlink('actions/publishit/'.@event.id,'> Publish this action') }}
+			{~ else: ~}
+				{{ \App\Plugins\html::userlink('actions/hide/'.@event.id,'_hide_action') }}
+				
+			{~ endif ~}
+			<br>
+			{~ endif ~}
+			
+			
+			{{\App\Plugins\html::userlink('actions/edit/'.@event.id,'_edit') }}<br>
+			<!--{{\App\Plugins\html::adminlink('actions/delete/'.@event.id,'> Delete.') }}-->
+			
+      		</div>
+      		
+      	{~ endif ~}
 				
 				<p>
 					{~ foreach(@pending_translations as @pending): ~}
-						<br>{{\App\Plugins\html::adminlink('actions/publishtranslation/'.@pending.id,'> Approve translation for '.@available_langs[@pending.original_language])}} 
+						{{\App\Plugins\html::userlink('actions/publishtranslation/'.@pending.id,'> Approve translation for '.@available_langs[@pending.original_language])}} <br>
 					{~ endforeach ~}
 				</p>
-				</div>
 				
 				</div>
-				<div class="col-md-1"></div>
-			</div>
-			
+				<div class="col-md-3">
 		
+      	<div class="col-md-6">
+      	</div>
+      	</div>
 		</div>
-	</div>
-	
-	<div class="col-md-6">
+		
+	</div>	
+	{{ Template::render('elements/discourse.htm')}}
+	<!--<div class="col-md-6">
 		<div class="containing">
 		
 		{{ Template::render('elements/disqus.htm')}}
 		{~ if(!empty(@event.twitter_hashtags)): ~}
 				{{ App\Plugins\html::hashtagify(@event.twitter_hashtags)}}
-					
+				
 				{{\Template::render('live\social.htm','text/html',array('aggregations_social' => @aggregations_action,'hidememberinfo' => true))}}
 		
 		{~ endif ~}
 		</div>
 		
-	</div>
+	</div>-->
 	
-</div>

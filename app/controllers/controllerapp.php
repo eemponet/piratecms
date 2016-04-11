@@ -76,6 +76,8 @@ class ControllerApp extends Controller{
 		
 		parent::beforeroute();
 		
+		$this->setNoPage($this->action,$this->controller); //nao criar pagina em paginas que nao sao publicas!
+		
 		$page_id = '/'.$this->controller.'/'.$this->action;
 		
 		$page = $this->Configs->getPage($page_id);
@@ -215,8 +217,22 @@ class ControllerApp extends Controller{
 				return true;
 			}
 		}
+		
+		
 		// return true;
 		return false;
+	}
+	
+	function setNoPage($controller,$action){
+		if(isset($this->acl["guest"][$controller])){
+			if (!is_array($this->acl["guest"][$controller])){
+				return;
+			}
+			if(isset($this->acl["guest"][$controller][$action]) && $this->acl["guest"][$controller][$action]){
+				return;
+			}
+		}
+		$this->f3->set('nopage',true);
 	}
 	
 	function msg($msg){

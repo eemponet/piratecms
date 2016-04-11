@@ -30,39 +30,29 @@
         					</a>
         					<div class="article-body">
         						{~ if(!empty(@item.featured_image)): ~}
-        					<!--<div class="col-md-4">-->
+        					<div class="col-md-4">
         						<img class="img-responsive" src="{{@item.featured_image}}">
-        					<!--</div>-->
+        					</div>
         				{~ endif ~}
-        					{{ @item.description | raw }} 
         					
+        					{{ @item.description | raw }} 
         				
         					</div>
         					
         					
-        					<a href="{{@item.link}}"> > Read more </a>&nbsp;&nbsp;&nbsp;&nbsp;
-        					<a href="/expando/add/index.htm?u={{@item.link}}&t={{@item.enctitle | raw}}" target='blank'> > Share</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        					{{\App\Plugins\html::link(@item.link,'_read_more')}}<br>
+        					<a href="{{@item.share_url}}">{{\App\Plugins\html::i18n('_share')}}</a><br>
+        					{{ \App\Plugins\html::link('/live/delete/'.@item.id,'_hide') }}
         					
-        					{{ \App\Plugins\html::link('/live/delete/'.@item.id,'> Hide') }}
-        					{~ if( empty(@hideshare) && false ): ~}
-        							<iframe src="/expando/add/index.htm?u={{@item.link}}&{{urlencode(@item.title)}}" frameborder=0 frametransparency=1 scrolling=no height=30 width=100%></iframe>
-        							
-        					{~ else: ~}
+        					
+        					
+        				
+        				
+        				
         						
-        					{~ endif ~}
-        					<hr>
-        					
-        				
-        				
-        				
-        						<div class="article-options">
-        							{~ if(!empty(@SESSION.user) && (@SESSION.user.id == @item.member_id || @SESSION.user.is_admin == 1) ): ~}
-        							{{ \App\Plugins\html::link('/live/delete/'.@item.id,'hide') }}
-        						{~ endif ~}
-        						</div>
         						</div>
 					</div>
-					
+					<hr>
         		{~ endforeach ~}
         		
         		

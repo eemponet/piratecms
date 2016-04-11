@@ -15,21 +15,22 @@
         				    {~ foreach( @actions.results as @key => @item): ~}
         				    <tr class="odd">
         				    	<td>
-        				    		{{ !empty(@item.link) ? '<a href="'.@item.link.'">': ''}}
-        				    			
-        				    		{{fdate(@item.when)}} {{!empty(@item.until) ? ' até '.fdate(@item.until) : '' }}
-        				    		
-        				    		
-        				    		
-        				    	</td>
-        				    	<td>
-        				    		{{@item.where}}
-        				    	</td>
-        				    	<td>
-        				    	{{ !empty(@item.link) ? '<a href="'.@item.link.'">': ''}}
         				    	
+        				    		{{ \App\Plugins\html::link('actions/view/'.@item.slug, !empty(@item.until) ? fdate(@item.when).' até '.fdate(@item.until) : fdate(@item.when)) }}
+        				    		
+        				    			
+        				    		
+        				    		
+        				    		
+        				    		
+        				    	</td>
+        				    	<td>
+        				    		{{ \App\Plugins\html::link('actions/etapa/'.@item.slug,@item.where) }}
+        				    	</td>
+        				    	<td>
+        				    	<a href="{{ \App\Plugins\html::getlink('actions/view/'.@item.slug.'') }}">
         				    		{{@item.details | raw}}
-        				    	{{ !empty(@item.link) ? '</a>': ''}}
+        				    	</a>
         				    		<br>
         				    	</td>
         				    	<td>
