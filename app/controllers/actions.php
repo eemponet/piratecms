@@ -242,7 +242,7 @@ class Actions extends ControllerApp{
 			$this->reroute('actions','view/'.$event['slug']);
 		}
 		if(!empty($event['img'])){
-			$this->f3->set('meta.image',$event['img']);
+			$this->f3->set('meta.image',$this->f3->get('url').'/'.$event['img']);
 		}
 		
 		// $event['share_url'] = '/expando/add/index.htm?u='.$this->f3->get('url').'/actions/view/'.$event['id'].'&t='.urlencode($event['name']);
