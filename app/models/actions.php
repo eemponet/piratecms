@@ -118,7 +118,7 @@ class Actions extends Model {
 				$rows[$key]['share_url'] = '/expando/add/index.htm?u='.$this->f3->get('url').'/campaigns/view/'.$rows[$key]['id'].'&t='.urlencode($rows[$key]['name']);
 			}
 			if(isset($rows[$key]['details'])){
-				$rows[$key]['summary'] = getSummary($rows[$key]['details'],200);
+				$rows[$key]['summary'] = getSummary($rows[$key]['details'],155);
 			}
 			$rows[$key]['tempo_intervalo'] = fdate($rows[$key]['when']).(!empty($rows[$key]['until']) ? ' até '.fdate($rows[$key]['until']) : '');
 			

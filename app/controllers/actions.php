@@ -248,7 +248,7 @@ class Actions extends ControllerApp{
 		// $event['share_url'] = '/expando/add/index.htm?u='.$this->f3->get('url').'/actions/view/'.$event['id'].'&t='.urlencode($event['name']);
 		$action_id = $event['id'];
 		$this->f3->set('aggregations_action',$this->Aggregator->getTwits(1,"aggregator.action_id = ".$action_id));
-		
+		$this->title = $event['summary'];
 		$this->f3->set('event',$event);
 		
 		$this->f3->set('event.translated',$this->Actions->getTranslatedLangs($event['id']));
