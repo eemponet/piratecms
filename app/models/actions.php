@@ -21,7 +21,7 @@ class Actions extends Model {
 				// array('author_name' => array('required' => true, 'minlength' => 10)),
 				// array('author_email' => array('required' => true,'email' => true)),
 				// array('name' => array('required' => true, 'minlength' => 5)),
-				array('details' => array('required' => true, 'minwords' => 2, 'maxwords' => 50,'maxlength' => 200)),
+				array('details' => array('required' => true, 'minwords' => 2, 'maxwords' => 200,'maxlength' => 500)),
 				// array('author_img' => array('image' => true, 'filesize' => 500000)),
 				array('img' => array('image' => true, 'filesize' => 500000)),
 				// array('url' => array('url' => true)),

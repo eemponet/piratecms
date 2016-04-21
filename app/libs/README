@@ -6,5 +6,8 @@ git clone https://github.com/bcosca/fatfree.git
 twitter api:
 git clone https://github.com/J7mbo/twitter-api-php.git
 
+simplepie:
+git clone https://github.com/simplepie/simplepie.git
+
 to add expando.. run  ( on the root folder) 
 git clone https://github.com/expando/expando.github.com.git
