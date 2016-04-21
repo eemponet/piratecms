@@ -241,6 +241,10 @@ class Actions extends ControllerApp{
 			$event = $this->Actions->getRow("WHERE id = ".$slug."");
 			$this->reroute('actions','view/'.$event['slug']);
 		}
+		if(!empty($event['img'])){
+			$this->f3->set('meta.image',$event['img']);
+		}
+		
 		// $event['share_url'] = '/expando/add/index.htm?u='.$this->f3->get('url').'/actions/view/'.$event['id'].'&t='.urlencode($event['name']);
 		$action_id = $event['id'];
 		$this->f3->set('aggregations_action',$this->Aggregator->getTwits(1,"aggregator.action_id = ".$action_id));
