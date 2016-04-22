@@ -1,6 +1,5 @@
 {~ if(!empty(@SESSION.user) && @SESSION.user.is_admin == 1): ~}
-      	<div class="containing">
-      	<b>Moderator options</b>
+      
       		<p>
       		{~ if(@member.activated == 0): ~}
         							 
@@ -22,11 +21,11 @@
       		</p>
       		
       	
-      		</div>
+      		
       		<br/>
       	{~ elseif (!empty(@SESSION.user) && @SESSION.user.id == @member.id): ~}
-      		<div class="containing">
+      		
       			<p> 
       			{{ \App\Plugins\html::link('coalition/edit/'.@member.id,'Edit my info') }}</p>
-      		</div>
+      		
       	{~ endif ~}

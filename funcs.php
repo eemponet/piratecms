@@ -63,7 +63,7 @@ function getSummary($html,$size){
 	return $rawtext;
 }
 
-function fdate($date,$format = '%e/%h'){ // %A,, %H:%M
+function fdate($date,$format = '%e/%B'){ // %A,, %H:%M
 	
 	return utf8_encode(strftime($format,strtotime($date)));
 }

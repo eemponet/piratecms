@@ -115,7 +115,7 @@ class Actions extends Model {
 		$rows = parent::getRows($conds,$select,$showQuery);
 		foreach($rows as $key => $valu){
 			if(isset($rows[$key]['id']) && isset($rows[$key]['name'])){
-				$rows[$key]['share_url'] = '/expando/add/index.htm?u='.$this->f3->get('url').'/campaigns/view/'.$rows[$key]['id'].'&t='.urlencode($rows[$key]['name']);
+				$rows[$key]['share_url'] = '/expando/add/index.htm?u='.$this->f3->get('url').'/actions/view/'.$rows[$key]['id'].'&t='.urlencode($rows[$key]['name']);
 			}
 			if(isset($rows[$key]['details'])){
 				$rows[$key]['summary'] = getSummary($rows[$key]['details'],155);

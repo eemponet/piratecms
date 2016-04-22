@@ -47,7 +47,9 @@
 		
 						</div>
 						{~ endif ~}
-						Fonte: {{ App\Plugins\html::link(@event.link,@event.link)}}
+						{~ if(!empty(@event.link)): ~}
+							Fonte: {{ App\Plugins\html::link(@event.link,@event.link)}}
+						{~ endif ~}
 				
 					</div>
 						<!--<div class="col-md-2">
@@ -72,10 +74,13 @@
       	<div class="row">
       	
 		<div class="col-md-3">
-      		{{\App\Plugins\html::link(@event.link,'_read_more')}}
+				{~ if(!empty(@event.link)): ~}
+								Fonte: {{ App\Plugins\html::link(@event.link,_read_more)}}
+				{~ endif ~}
+      		
       			<br>
       			{{\App\Plugins\html::link(@event.share_url,'_share')}}
-      	<p>
+      			<p>
 				
 				<!--{{\App\Plugins\html::link('page/lang/'.@event.original_language,'> '.@available_langs[@event.original_language].' (Original)')}}-->
 				

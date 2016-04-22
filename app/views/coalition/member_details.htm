@@ -7,6 +7,8 @@
       	<p>{{@member.summary}}</p>
       	
       	{{ !empty(@member.website) ? \App\Plugins\html::link(@member.website,'_visit',array('target' => '_blank')) : ''}}
+      	
+      	{{ Template::render('coalition/member_options.htm')}}
       	</div>
       	<div class="col-md-6">
       	
@@ -33,6 +35,8 @@
       		{{ \App\Plugins\html::link(@member.facebook_account,'facebook') }}
       	{~ endif ~}
       	</p>
+      	
+      	
       	</div>
       	
       	
