@@ -256,6 +256,17 @@ class Actions extends Model {
 		
 		//AND `when` >= (NOW() - interval 1 day) OR until >= NOW()
 	}
+	
+	function upcoming(){
+		$sql_pub = "published = 1";
+		// if($this->Members->isAdmin()){
+		// 	$sql_pub = "1";
+		// }
+		
+		$actions = $this->paginate($this->f3->get('PARAMS.p1'),40,'`when`','ASC',"WHERE $sql_pub AND (`when` > NOW() OR `until` > NOW()) ");
+		
+		return $actions;
+	}
 }
 
 

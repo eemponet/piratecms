@@ -5,7 +5,7 @@ namespace App\Controllers;
 class Coalition extends ControllerApp{
 	
 	public $translate = true;
-	protected $models = array("Members","MembersSocial","Aggregator","Configs","Members");
+	protected $models = array("Members","MembersSocial","Aggregator","Configs","Members","Actions");
 	
 	// protected $models = array("Configs","Members");
 
@@ -58,6 +58,10 @@ class Coalition extends ControllerApp{
 		$this->title = 'Manifesto';
 		$this->f3->set('page',$this->Configs->getPage('manifesto'));
 		$this->f3->set('show_banner',true);
+		
+		$this->f3->set('aggregations',$this->Aggregator->getRss());
+		$this->f3->set('actions',$this->Actions->upcoming());
+		
 	}
 	
 	function index2()

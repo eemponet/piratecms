@@ -40,12 +40,7 @@ class Actions extends ControllerApp{
 	
 	function upcoming()
 	{
-		$sql_pub = "published = 1";
-		if($this->Members->isAdmin()){
-			$sql_pub = "1";
-		}
-		
-		$actions = $this->Actions->paginate($this->f3->get('PARAMS.p1'),40,'`when`','ASC',"WHERE $sql_pub AND (`when` > NOW() OR `until` > NOW()) ");
+		$actions = $this->Actions->upcoming();
 		
 		$this->f3->set('actions',$actions);
 		$this->f3->set('map_users',json_encode($this->Actions->getMap($actions)));
@@ -232,6 +227,7 @@ class Actions extends ControllerApp{
 	
 	function view()
 	{
+		$this->f3->set('nopage',true);
 		
 		$slug = $this->f3->get('PARAMS.p1');
 		
