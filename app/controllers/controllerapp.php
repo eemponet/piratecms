@@ -72,8 +72,6 @@ class ControllerApp extends Controller{
 		$this->Configs = new \App\Models\Configs();
 		
 		
-		
-		
 		parent::beforeroute();
 		
 		$this->setNoPage($this->action,$this->controller); //nao criar pagina em paginas que nao sao publicas!
