@@ -1,0 +1,37 @@
+<div class="agenda-frackoff">
+
+        			
+        			
+        					
+        				    {~ if(count(@actions.results) > 0): ~}
+        				    {~ foreach( @actions.results as @key => @item): ~}
+        				    <br>
+        				    		Quando?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ \App\Plugins\html::link('actions/view/'.@item.slug, !empty(@item.until) ? fdate(@item.when).' até '.fdate(@item.until) : fdate(@item.when)) }}
+        				    		
+        				    			<br>
+        				    		Onde?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ \App\Plugins\html::link('actions/view/'.@item.slug,@item.where) }}
+        				    	<br>
+        				    	O quê?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ \App\Plugins\html::getlink('actions/view/'.@item.slug.'') }}">
+        				    		{{@item.details | raw}}
+        				    	</a>
+        				    	<br>
+        				    	<hr>
+        				    	
+        				   	{~ endforeach ~}
+        				   	{~ endif ~}
+        			  
+        			{~ if(count(@actions.results) > 0): ~}
+        				    {~ foreach( @actions.results as @key => @item): ~}
+        				     {~ if(!empty(@item.img)): ~}
+        				    	<div class="image_link">
+        				    		<span class="image_desc">
+        				    		{{fdate(@item.when)}} {{!empty(@item.until) ? ' até '.fdate(@item.until) : '' }}
+        				    		</span>
+        				    		<a href="{{ \App\Plugins\html::getlink('actions/view/'.@item.slug) }}">
+        				    		{{\App\Plugins\html::img(@item.img) }}
+        				    		
+        				    		</a>
+        				    	</div>
+        				    {~ endif ~}
+        					{~ endforeach ~}
+        			{~ endif ~}
