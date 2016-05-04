@@ -39,7 +39,7 @@ class Members extends Model {
 		
 		$this->saveFile('avatar','jpg',300,300);
 		
-		return true;
+		// return true;
 		$passwd = $this->f3->get('POST.password');
 		if(empty($passwd) && $this->isAuthenticated()){
 			$this->f3->clear('POST.password');
